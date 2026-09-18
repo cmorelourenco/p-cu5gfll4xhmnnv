@@ -1,0 +1,26 @@
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import { bunny } from 'laravel-vite-plugin/fonts';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/css/app.css', 'resources/js/app.js'],
+            refresh: true,
+            fonts: [
+                // Figtree — the C-MORE brand typeface (Brand Manual p.19).
+                // Five weights: Light / Regular / Medium / Semibold / Bold.
+                bunny('Figtree', {
+                    weights: [300, 400, 500, 600, 700],
+                }),
+            ],
+        }),
+        tailwindcss(),
+    ],
+    server: {
+        watch: {
+            ignored: ['**/storage/framework/views/**'],
+        },
+    },
+});
