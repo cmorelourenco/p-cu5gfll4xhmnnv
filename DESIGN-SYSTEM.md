@@ -95,9 +95,22 @@ darks read as brand rather than generic charcoal. **`sand-950` is Deep Blue.**
 | Mid Blue on Light Beige | 2.4:1 | **Decoration only** |
 | **White on Lime** | **1.2:1** | **Never. Illegible.** |
 
-Dark mode is not an inversion. Deep Blue is the backdrop "for much of the brand",
-so dark is the brand at rest — and there Lime becomes the accent, because lime on
-deep blue *is* the pairing.
+### Appearance
+
+**The page always opens light.** Flux's own default is `system`, which turns the
+page navy on a dark-mode machine — the wrong first impression for a brand whose
+layouts are 50% warm neutral. The layout overrides that default; a visitor's own
+choice, made with the toggle in the header, is remembered and wins on return.
+
+Dark mode itself is not an inversion. Deep Blue is the backdrop "for much of the
+brand", so dark is the brand at rest — and there Lime becomes the accent, because
+lime on deep blue *is* the pairing.
+
+Building the toggle turns up a trap: `@fluxAppearance` defines a small
+`window.Flux` shim with `applyAppearance()`, and then `flux.js` **replaces that
+object entirely**. By the time anyone clicks, `applyAppearance` is gone. The real
+object exposes a `dark` boolean setter (and an `appearance` string), which also
+persists the choice — so the toggle is `window.Flux.dark = !window.Flux.dark`.
 
 ---
 

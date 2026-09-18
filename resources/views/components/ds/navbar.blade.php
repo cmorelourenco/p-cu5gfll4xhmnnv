@@ -13,6 +13,17 @@
         </nav>
 
         <div class="flex items-center gap-3">
+            {{-- Appearance toggle. flux.js replaces the small `window.Flux` shim
+                 that @fluxAppearance defines, so applyAppearance() is gone by the
+                 time anyone clicks — the real object exposes a `dark` setter,
+                 which also persists the choice. Works in the static export too.
+                 Both icons ship; CSS picks one. --}}
+            <flux:button variant="ghost" size="sm" aria-label="Toggle dark mode"
+                onclick="window.Flux.dark = !window.Flux.dark">
+                <flux:icon name="moon" variant="outline" class="size-5 icon-brand dark:hidden" />
+                <flux:icon name="sun" variant="outline" class="size-5 icon-brand hidden dark:block" />
+            </flux:button>
+
             <flux:button href="#" variant="ghost" size="sm" class="hidden sm:inline-flex">
                 Secondary
             </flux:button>

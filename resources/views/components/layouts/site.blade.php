@@ -13,6 +13,12 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @fluxAppearance
+    {{-- Default to light. Flux's own default is 'system', which turns the page
+         navy on a dark-mode machine — wrong first impression for a brand whose
+         layouts are 50% warm neutral. A visitor's own choice still wins. --}}
+    <script>
+        window.Flux.applyAppearance(window.localStorage.getItem('flux.appearance') || 'light')
+    </script>
     {{-- No @wireUiStyles: WireUI 2.6 ships no dist/wireui.css and the route
          500s on the missing file. Its styles come from Tailwind scanning the
          package instead — see the @source lines in resources/css/app.css. --}}
