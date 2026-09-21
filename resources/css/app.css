@@ -108,31 +108,35 @@
      lime at 13.8:1, which cleared everything. Coral is a far darker accent,
      and none of the obvious foregrounds clears AA on it:
 
-         Light Beige #F2F1ED   2.60:1   <- current
+         Light Beige #F2F1ED   2.60:1
          White       #FFFFFF   2.94:1
-         Graphite    #343434   4.24:1   (AA-large)
+         Graphite    #343434   4.24:1   (AA-large)  <- the label
          #2B2B2B               4.82:1   (AA)
 
-     The light label is the specified treatment and is the LEAST legible of
-     the four. It is below AA-large, so it does not pass at any text size.
-     Two ways back if that matters: --color-activation-foreground: #2b2b2b,
-     or lighten the coral itself to #F57D62.
+     The label and the mark are inverted relative to each other, and the
+     label holds the better of the two. Graphite on the coral is 4.24:1 —
+     AA-large, so it carries button labels but never body copy. The icon and
+     the pixel arrow take the light --color-activation-mark at 2.60:1, below
+     the 3:1 non-text floor: it is a shape beside a word, not the thing
+     carrying the meaning, so it is the safer half to spend.
 
-     The icon and the arrow do NOT take the label colour — they hold
-     --color-activation-mark (graphite, 4.24:1) so the mark stays legible and
-     reads as distinct from the label. */
-  /* Whatever sits on a SOLID brand fill — the coral or the graphite. Button
-     labels, the activated icon plate. One token, so they stay in step.
+     This is the better way round. The reverse put the text at 2.60 and the
+     arrow at 4.24, which spent the legibility on the decoration. If AA
+     proper is needed on the label, --color-activation-foreground: #2b2b2b
+     gives 4.82, or lightening the coral to #F57D62 gives 4.74. */
+  /* The secondary, wherever it sits on a solid brand fill: the graphite
+     button's label, the activated card's text, and the coral button's MARK.
+     One token, so they stay in step.
 
-     On buttons the mark (icon, pixel arrow) takes the OTHER brand colour
-     instead, which is what separates it from the label: graphite on the
-     coral button, coral on the graphite one. */
+     Note the coral button and the graphite button are mirror images rather
+     than the same recipe — each puts the other brand colour on its label and
+     this one on whichever part is left. */
   --color-brand-label:           var(--color-light-beige);
 
   --color-activation:            var(--color-coral);
   --color-activation-hover:      var(--color-coral-deep);
-  --color-activation-foreground: var(--color-brand-label);  /* 2.60:1 — see note */
-  --color-activation-mark:       var(--color-graphite);    /* icons and the arrow */
+  --color-activation-foreground: var(--color-graphite);     /* 4.24:1 — the label */
+  --color-activation-mark:       var(--color-brand-label);  /* 2.60:1 — icon and arrow */
   --color-activation-subtle:     var(--color-coral-tint);
 
   /* Surfaces, in the order a page stacks them */
@@ -508,9 +512,9 @@
   background-color: var(--color-activation-hover);
   box-shadow: var(--shadow-activate);
 }
-/* The label is light, the mark is dark. Icons and the pixel arrow both take
+/* The label is dark, the mark is light. Icons and the pixel arrow both take
    currentColor, so they have to be re-coloured explicitly or they would
-   follow the label and vanish into the coral. */
+   follow the label instead. */
 .btn-activate[data-flux-button] [data-flux-icon],
 .btn-activate[data-flux-button] .px {
   color: var(--color-activation-mark);

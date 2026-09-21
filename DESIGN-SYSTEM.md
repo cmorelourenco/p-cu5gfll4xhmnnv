@@ -140,28 +140,35 @@ it and now takes `--color-accent`, which is where focus belongs.
 | White on Graphite | 12.5:1 | Anything |
 | Blue on Light Beige | 5.3:1 | AA body text |
 | Sand 600 on Off White | 4.9:1 | AA body text — the lightest that passes |
-| **Light Beige on Coral** | **2.60:1** | **The shipped button label. Below AA-large — fails at every text size.** |
-| Graphite on Coral | 4.24:1 | The icon and arrow colour. Large or bold only. |
+| Graphite on Coral | 4.24:1 | **The button label.** AA-large: button labels yes, body copy no. |
+| **Light Beige on Coral** | **2.60:1** | The button's icon and arrow, and the activated card's text. Below the 3:1 non-text floor. |
 | Coral on Graphite | 4.24:1 | Same pair inverted — dark-mode accent |
 | Coral on Light Beige | 2.6:1 | **Decoration only** |
 | Mid Blue on Light Beige | 2.4:1 | **Decoration only** |
 | **White on Coral** | **2.94:1** | **Never.** |
 
-**The signature pairing lost its headroom, and the current label gives it
-away entirely.** It used to be near-black on lime at 13.8:1. Coral is a far
-darker accent, so nothing obvious clears AA on it — Graphite 4.24, white 2.94,
-Light Beige 2.60. The shipped label is the Light Beige, the lowest of the
-three: it is below AA-large, so it does not pass at any text size. The button
-is currently legible mainly by shape and by the dark arrow beside the words.
+**The signature pairing lost its headroom.** It used to be near-black on lime
+at 13.8:1. Coral is a far darker accent, so nothing obvious clears AA on it —
+Graphite 4.24, white 2.94, Light Beige 2.60.
 
-This is a deliberate choice, recorded here rather than silently corrected.
-Three ways back, each one line:
+The button spends the better half on the label: **Graphite at 4.24:1**, which
+is AA-large, so it carries button labels but never body copy. The icon and
+pixel arrow take the light mark at 2.60:1, under the 3:1 non-text floor — a
+shape beside a word rather than the thing carrying the meaning, so it is the
+safer half to lose. Inverting the two would put the text at 2.60 and the
+decoration at 4.24, which is the wrong way round.
+
+If AA proper is needed on the label, either is one line:
 
 | Change | Ratio |
 |---|---|
 | `--color-activation-foreground: #2b2b2b` | 4.82 — AA |
-| `--color-activation-foreground: var(--color-graphite)` | 4.24 — AA-large |
 | Lighten the coral to `#F57D62`, keep a dark label | 4.74 — AA |
+
+**The coral button and the activated card disagree.** The button now puts
+Graphite on the coral; the card still puts Light Beige on it. Two coral
+surfaces, two text treatments. The card's is the weaker of the two and it
+carries the most text, so if one of them should move it is that one.
 
 **The accent and the danger colour are now 14° apart in hue.** Coral sits at
 hue 11°, Flux's `danger` red at 357°, so the primary and the destructive
@@ -317,10 +324,15 @@ does not accept is a dictionary somebody has to maintain.
 | `variant="outline"` + `.btn-outline` | The supporting action beside a primary. Safe to use more than once. |
 | `variant="filled"` + `.btn-filled` | Quiet but still a button: toolbars, filter chips, anywhere a border would be noise. |
 
-**Solid buttons: light label, brand mark.** Both solid variants take
-`--color-brand-label` (Light Beige) for the words, and put the *other* brand
-colour on the icon and pixel arrow — graphite on the coral button, coral on
-the graphite one. One token keeps the pair in step.
+**The two solid buttons are mirror images.** Each puts one brand colour on
+its label and the other on its mark:
+
+| | Fill | Label | Icon / arrow |
+|---|---|---|---|
+| `primary` | Coral | Graphite — 4.24:1 | Light Beige — 2.60:1 |
+| `filled` | Graphite | Light Beige — 10.96:1 | Coral — 4.24:1 |
+
+Both draw the light half from `--color-brand-label`, so they stay in step.
 
 `.btn-filled` used to label in coral, which spent the activation colour on
 every button in the sizes and states rows: the 15% going to the quietest
