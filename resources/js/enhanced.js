@@ -1,47 +1,3 @@
-// Tabs for the enhanced layer. Progressive: without JS both panels stay
-// visible, which is a worse layout but never a broken one.
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('[data-enh-tabs]').forEach(function (bar) {
-    var tabs = Array.prototype.slice.call(bar.querySelectorAll('[role="tab"]'));
-    if (!tabs.length) return;
-
-    function panelOf(tab) {
-      return document.getElementById(tab.getAttribute('aria-controls'));
-    }
-
-    function select(tab) {
-      tabs.forEach(function (t) {
-        var on = t === tab;
-        t.setAttribute('aria-selected', on ? 'true' : 'false');
-        t.tabIndex = on ? 0 : -1;
-        var panel = panelOf(t);
-        if (panel) panel.hidden = !on;
-      });
-    }
-
-    tabs.forEach(function (tab, i) {
-      tab.addEventListener('click', function () {
-        select(tab);
-      });
-      tab.addEventListener('keydown', function (e) {
-        var step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-        if (!step) return;
-        e.preventDefault();
-        var next = tabs[(i + step + tabs.length) % tabs.length];
-        next.focus();
-        select(next);
-      });
-    });
-
-    // Honour whichever tab the markup marked selected.
-    var initial =
-      tabs.filter(function (t) {
-        return t.getAttribute('aria-selected') === 'true';
-      })[0] || tabs[0];
-    select(initial);
-  });
-});
-
 // Section rail. Built from the DOM rather than hand-listed, so it stays in
 // sync as headings are added or removed.
 document.addEventListener('DOMContentLoaded', function () {
@@ -88,14 +44,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!target) return;
     e.preventDefault();
 
-    // A heading can live in the tab panel that is currently hidden — show it
-    // first, otherwise the jump lands on nothing.
-    var panel = target.closest('.enh-tabpanel');
-    if (panel && panel.hidden) {
-      var tab = document.getElementById(panel.getAttribute('aria-labelledby'));
-      if (tab) tab.click();
-    }
-
     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     history.replaceState(null, '', '#' + target.id);
   });
@@ -108,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function () {
     ticking = false;
     var best = null;
     targets.forEach(function (t) {
-      if (t.heading.offsetParent === null) return; // inside a hidden panel
       if (t.heading.getBoundingClientRect().top <= 140) best = t;
     });
     if (best === current) return;

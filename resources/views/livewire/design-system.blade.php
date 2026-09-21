@@ -31,189 +31,111 @@
         {{-- ─────────────────────────── COLOUR ─────────────────────────── --}}
         <x-ds.section surface="surface" id="colour">
             <x-ds.eyebrow>Colour</x-ds.eyebrow>
+            <x-ds.display size="md" class="mt-5">Primitives</x-ds.display>
+            <p class="mt-4 max-w-2xl text-sm text-ink-muted">
+                Verbatim from p.17. Always 100% solid &mdash; tints need C-MORE Marketing sign-off.
+            </p>
 
-            {{-- Current / Alternatives.
+            <h3 class="mt-12 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">The brand colours</h3>
+            <p class="mt-3 max-w-2xl text-sm text-ink-muted">
+                Three: the main identifies, the secondary is the ground almost everything
+                sits on, the accent activates. They map onto the 50/35/15 rule exactly,
+                though not in this order — the ground is the 50%.
+            </p>
+            <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <x-ds.swatch name="Graphite — main"         hex="#343434" note="35%. Identifies: structure, type, chrome." />
+                <x-ds.swatch name="Light Beige — secondary" hex="#F2F1ED" ring note="50%. The page ground, and the label on every solid brand button." />
+                <x-ds.swatch name="Coral — accent"          hex="#F46D4F" note="15%. Activates. Only large or bold text on it — 4.24:1." />
+            </div>
 
-                 The split exists so nothing experimental can be mistaken for
-                 approved palette: Current is the manual verbatim, Alternatives
-                 is everything proposed since.
+            <h3 class="mt-14 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">Supporting</h3>
+            <p class="mt-3 max-w-2xl text-sm text-ink-muted">
+                To communicate ALMA.
+            </p>
+            <p class="mt-2 max-w-2xl text-xs text-ink-subtle">
+                Not wired to anything yet — no token reads them, so changing one changes
+                nothing. Names are provisional.
+            </p>
+            <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <x-ds.swatch name="Taupe"    hex="#D6D4CA" ring note="Unassigned." />
+                <x-ds.swatch name="Mid Blue" hex="#909DB6" pms="PMS 535C" note="Unassigned here — but still the live value behind --color-line-strong." />
+                <x-ds.swatch name="Gold"     hex="#DBC67E" note="Unassigned." />
+            </div>
 
-                 wire:ignore because the panels are static markup and the tab
-                 state lives in the DOM (enhanced.js sets `hidden`). Without it
-                 the first wire:model.live round trip from the Forms group would
-                 morph the open tab shut. --}}
-            <div wire:ignore>
-                <div class="enh-tabs" role="tablist" aria-label="Colour palette view" data-enh-tabs>
-                    <button type="button" class="enh-tab" role="tab" id="colour-tab-current"
-                            aria-controls="colour-panel-current" aria-selected="true">Current</button>
-                    <button type="button" class="enh-tab" role="tab" id="colour-tab-alt"
-                            aria-controls="colour-panel-alt" aria-selected="false" tabindex="-1">Alternatives</button>
-                </div>
+            <h3 class="mt-14 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">Activation family &mdash; in use</h3>
+            <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <x-ds.swatch name="Coral Deep" hex="#F44E29" note="The coral's hover state." />
+                <x-ds.swatch name="Coral Tint" hex="#F9E7E3" note="Activation, quietly — icon plates and subtle fills." />
+            </div>
 
-                <div id="colour-panel-current" class="enh-tabpanel" role="tabpanel" aria-labelledby="colour-tab-current">
-                    <x-ds.display size="md" class="mt-5">Primitives</x-ds.display>
-                    <p class="mt-4 max-w-2xl text-sm text-ink-muted">
-                        Verbatim from p.17. Always 100% solid &mdash; tints need C-MORE Marketing sign-off.
-                    </p>
+            <div class="mt-8 max-w-2xl rounded-xl border border-line bg-surface-sunken p-5">
+                <p class="text-sm font-semibold">Loose end: Blue #4E638B left the palette but not the code</p>
+                <p class="mt-2 text-sm leading-relaxed text-ink-muted">
+                    It is no longer a supporting colour, yet it is still the value behind
+                    <code class="font-mono">--color-ink-muted</code> &mdash; every piece of secondary
+                    copy on this page, including this sentence. Same for
+                    <code class="font-mono">--color-line-strong</code>, which is Mid Blue. Until those two
+                    tokens are pointed somewhere else, the blues are still doing the work.
+                </p>
+            </div>
 
-                    <h3 class="mt-12 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">The brand colours</h3>
-                    <p class="mt-3 max-w-2xl text-sm text-ink-muted">
-                        Three: the main identifies, the secondary is the ground almost everything
-                        sits on, the accent activates. They map onto the 50/35/15 rule exactly,
-                        though not in this order — the ground is the 50%.
-                    </p>
-                    <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                        <x-ds.swatch name="Graphite — main"         hex="#343434" note="35%. Identifies: structure, type, chrome." />
-                        <x-ds.swatch name="Light Beige — secondary" hex="#F2F1ED" ring note="50%. The page ground, and the label on every solid brand button." />
-                        <x-ds.swatch name="Coral — accent"          hex="#F46D4F" note="15%. Activates. Only large or bold text on it — 4.24:1." />
+            <h3 class="mt-14 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">Primary neutrals &mdash; 50% of a layout</h3>
+            <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <x-ds.swatch name="Off White"   hex="#FAFAFA" ring />
+                <x-ds.swatch name="Light Beige" hex="#F2F1ED" ring note="The page ground — and the secondary brand colour, above." />
+                <x-ds.swatch name="Mid Beige"   hex="#E9E7E2" ring note="Sunken wells." />
+                <x-ds.swatch name="Dark Beige"  hex="#E0DED7" ring note="Hairlines." />
+            </div>
+
+            <hr class="rule-activate my-16">
+
+            <x-ds.display size="md">Sand &mdash; the neutral ramp</x-ds.display>
+            <p class="mt-4 max-w-2xl text-sm text-ink-muted">
+                Stock components default to a cold grey. They are re-pointed at this warm
+                ramp, and re-skin themselves. 50&ndash;300 are the manual's neutrals
+                untouched; 950 is the main colour.
+            </p>
+            <div class="mt-8 flex overflow-hidden rounded-xl ring-1 ring-inset ring-line">
+                @foreach(['50'=>'#FAFAFA','100'=>'#F2F1ED','200'=>'#E9E7E2','300'=>'#E0DED7','400'=>'#C3C0B8','500'=>'#96958E','600'=>'#6E6E6A','700'=>'#5F5F5C','800'=>'#50504E','900'=>'#424240','950'=>'#343434'] as $step => $hex)
+                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: {{ $hex }}">
+                        <span class="font-mono text-[10px] {{ (int)$step >= 500 ? 'text-off-white/80' : 'text-ink/60' }}">{{ $step }}</span>
                     </div>
+                @endforeach
+            </div>
 
-                    <h3 class="mt-14 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">Supporting</h3>
-                    <p class="mt-3 max-w-2xl text-sm text-ink-muted">
-                        To communicate ALMA.
-                    </p>
-                    <p class="mt-2 max-w-2xl text-xs text-ink-subtle">
-                        Not wired to anything yet — no token reads them, so changing one changes
-                        nothing. Names are provisional.
-                    </p>
-                    <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                        <x-ds.swatch name="Taupe"    hex="#D6D4CA" ring note="Unassigned." />
-                        <x-ds.swatch name="Mid Blue" hex="#909DB6" pms="PMS 535C" note="Unassigned here — but still the live value behind --color-line-strong." />
-                        <x-ds.swatch name="Gold"     hex="#DBC67E" note="Unassigned." />
-                    </div>
+            <hr class="rule-activate my-16">
 
-                    <h3 class="mt-14 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">Activation family &mdash; in use</h3>
-                    <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                        <x-ds.swatch name="Coral Deep" hex="#F44E29" note="The coral's hover state." />
-                        <x-ds.swatch name="Coral Tint" hex="#F9E7E3" note="Activation, quietly — icon plates and subtle fills." />
-                    </div>
-
-                    <div class="mt-8 max-w-2xl rounded-xl border border-line bg-surface-sunken p-5">
-                        <p class="text-sm font-semibold">Loose end: Blue #4E638B left the palette but not the code</p>
-                        <p class="mt-2 text-sm leading-relaxed text-ink-muted">
-                            It is no longer a supporting colour, yet it is still the value behind
-                            <code class="font-mono">--color-ink-muted</code> &mdash; every piece of secondary
-                            copy on this page, including this sentence. Same for
-                            <code class="font-mono">--color-line-strong</code>, which is Mid Blue. Until those two
-                            tokens are pointed somewhere else, the blues are still doing the work.
-                        </p>
-                    </div>
-
-                    <h3 class="mt-14 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">Primary neutrals &mdash; 50% of a layout</h3>
-                    <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                        <x-ds.swatch name="Off White"   hex="#FAFAFA" ring />
-                        <x-ds.swatch name="Light Beige" hex="#F2F1ED" ring note="The page ground — and the secondary brand colour, above." />
-                        <x-ds.swatch name="Mid Beige"   hex="#E9E7E2" ring note="Sunken wells." />
-                        <x-ds.swatch name="Dark Beige"  hex="#E0DED7" ring note="Hairlines." />
-                    </div>
-
-                    <hr class="rule-activate my-16">
-
-                    <x-ds.display size="md">Sand &mdash; the neutral ramp</x-ds.display>
-                    <p class="mt-4 max-w-2xl text-sm text-ink-muted">
-                        Stock components default to a cold grey. They are re-pointed at this warm
-                        ramp, and re-skin themselves. 50&ndash;300 are the manual's neutrals
-                        untouched; 950 is the main colour.
-                    </p>
-                    <div class="mt-8 flex overflow-hidden rounded-xl ring-1 ring-inset ring-line">
-                        @foreach(['50'=>'#FAFAFA','100'=>'#F2F1ED','200'=>'#E9E7E2','300'=>'#E0DED7','400'=>'#C3C0B8','500'=>'#96958E','600'=>'#6E6E6A','700'=>'#5F5F5C','800'=>'#50504E','900'=>'#424240','950'=>'#343434'] as $step => $hex)
-                            <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: {{ $hex }}">
-                                <span class="font-mono text-[10px] {{ (int)$step >= 500 ? 'text-off-white/80' : 'text-ink/60' }}">{{ $step }}</span>
-                            </div>
-                        @endforeach
-                    </div>
-
-                    <hr class="rule-activate my-16">
-
-                    <x-ds.display size="md">Semantic tokens</x-ds.display>
-                    <p class="mt-4 max-w-2xl text-sm text-ink-muted">
-                        What a colour <em>means</em>. Components reference these, never the primitives &mdash;
-                        which is why dark mode works without touching a single component.
-                    </p>
-                    <div class="mt-8 overflow-x-auto">
-                        <table class="w-full min-w-[46rem] text-left text-sm">
-                            <thead class="border-b border-line text-xs uppercase tracking-wider text-ink-subtle">
-                                <tr><th class="py-3 pr-6 font-semibold">Token</th><th class="py-3 pr-6 font-semibold">Light</th><th class="py-3 pr-6 font-semibold">Dark</th><th class="py-3 font-semibold">Use</th></tr>
-                            </thead>
-                            <tbody class="divide-y divide-line">
-                                @foreach([
-                                    ['--color-accent', 'Graphite', 'Coral', 'Primary buttons, links, focus rings. Flux reads this directly.'],
-                                    ['--color-activation', 'Coral', 'Coral', 'The 15%. One moment per viewport, foreground always Graphite — 4.24:1, so large or bold only.'],
-                                    ['--color-ground', 'Light Beige', 'Graphite', 'The page itself.'],
-                                    ['--color-surface', 'White', '#3E3E3E', 'Cards sitting on the ground.'],
-                                    ['--color-surface-sunken', 'Mid Beige', '#2A2A2A', 'Wells and inset panels.'],
-                                    ['--color-ink', 'Graphite', 'Off White', 'Headings and primary copy.'],
-                                    ['--color-ink-muted', 'Blue', 'Mid Blue', 'Secondary copy. 5.3:1 — AA. Not recoloured; see Colour notes.'],
-                                    ['--color-ink-subtle', 'Sand 600', '#A2A2A2', 'Meta and captions. 4.9:1 — AA.'],
-                                    ['--color-line', 'Dark Beige', 'Mid Blue 24%', 'Hairlines. Elevation starts here, not with shadow.'],
-                                ] as [$token, $light, $dark, $use])
-                                    <tr>
-                                        <td class="py-3 pr-6 font-mono text-xs">{{ $token }}</td>
-                                        <td class="py-3 pr-6 text-ink-muted">{{ $light }}</td>
-                                        <td class="py-3 pr-6 text-ink-muted">{{ $dark }}</td>
-                                        <td class="py-3 text-ink-muted">{{ $use }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                {{-- Proposed, not approved. Nothing here has Marketing sign-off. --}}
-                <div id="colour-panel-alt" class="enh-tabpanel" role="tabpanel" aria-labelledby="colour-tab-alt" hidden>
-                    <x-ds.display size="md">What we&rsquo;re trying</x-ds.display>
-
-                    <p class="mt-12 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">Activation hue study</p>
-                    <p class="mt-3 max-w-2xl text-sm text-ink-muted">
-                        Testing a lighter blue against slight variations of the lime. Only the hue moves
-                        &mdash; all three greens sit at the same lightness, so nothing else is changing.
-                    </p>
-                    <div class="hue-study mt-6">
+            <x-ds.display size="md">Semantic tokens</x-ds.display>
+            <p class="mt-4 max-w-2xl text-sm text-ink-muted">
+                What a colour <em>means</em>. Components reference these, never the primitives &mdash;
+                which is why dark mode works without touching a single component.
+            </p>
+            <div class="mt-8 overflow-x-auto">
+                <table class="w-full min-w-[46rem] text-left text-sm">
+                    <thead class="border-b border-line text-xs uppercase tracking-wider text-ink-subtle">
+                        <tr><th class="py-3 pr-6 font-semibold">Token</th><th class="py-3 pr-6 font-semibold">Light</th><th class="py-3 pr-6 font-semibold">Dark</th><th class="py-3 font-semibold">Use</th></tr>
+                    </thead>
+                    <tbody class="divide-y divide-line">
                         @foreach([
-                            ['#DFF000', 'More yellow',    'hue 115&deg;', 'Warmer, closer to acid yellow.'],
-                            ['#C0FA00', 'Lime &mdash; current', 'hue 125&deg;', 'The brand lime, unchanged.'],
-                            ['#9DFF34', 'Less yellow',    'hue 133&deg;', 'Cooler, closer to grass green.'],
-                        ] as [$hex, $name, $hue, $note])
-                            <div class="hue-col" style="--g: {{ $hex }}">
-                                <p class="hue-label"><b>{!! $name !!}</b> &middot; {{ $hex }} &middot; {!! $hue !!}</p>
-                                <div class="pair-panel hue-panel-blue">
-                                    <p>Electric Blue carries the weight.</p>
-                                    <span class="pair-chip">Activate</span>
-                                </div>
-                                <div class="pair-panel hue-panel-green">
-                                    <p>{{ $note }}</p>
-                                    <span class="pair-chip">Secondary</span>
-                                </div>
-                            </div>
+                            ['--color-accent', 'Graphite', 'Coral', 'Primary buttons, links, focus rings. Flux reads this directly.'],
+                            ['--color-activation', 'Coral', 'Coral', 'The 15%. One moment per viewport, foreground always Graphite — 4.24:1, so large or bold only.'],
+                            ['--color-ground', 'Light Beige', 'Graphite', 'The page itself.'],
+                            ['--color-surface', 'White', '#3E3E3E', 'Cards sitting on the ground.'],
+                            ['--color-surface-sunken', 'Mid Beige', '#2A2A2A', 'Wells and inset panels.'],
+                            ['--color-ink', 'Graphite', 'Off White', 'Headings and primary copy.'],
+                            ['--color-ink-muted', 'Blue', 'Mid Blue', 'Secondary copy. 5.3:1 — AA. Not recoloured; see Colour notes.'],
+                            ['--color-ink-subtle', 'Sand 600', '#A2A2A2', 'Meta and captions. 4.9:1 — AA.'],
+                            ['--color-line', 'Dark Beige', 'Mid Blue 24%', 'Hairlines. Elevation starts here, not with shadow.'],
+                        ] as [$token, $light, $dark, $use])
+                            <tr>
+                                <td class="py-3 pr-6 font-mono text-xs">{{ $token }}</td>
+                                <td class="py-3 pr-6 text-ink-muted">{{ $light }}</td>
+                                <td class="py-3 pr-6 text-ink-muted">{{ $dark }}</td>
+                                <td class="py-3 text-ink-muted">{{ $use }}</td>
+                            </tr>
                         @endforeach
-                    </div>
-
-                    <p class="mt-16 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">Acid yellow &amp; greys</p>
-                    <p class="mt-3 max-w-2xl text-sm text-ink-muted">
-                        The acid yellow against three neutral greys instead of a blue. Only the grey
-                        moves. All three clear 4.5:1 on the yellow in both directions, so any of them
-                        can carry it or be carried by it.
-                    </p>
-                    <div class="hue-study mt-6">
-                        @foreach([
-                            ['#1B1B1B', 'Near black'],
-                            ['#383838', 'Charcoal'],
-                            ['#585858', 'Mid grey'],
-                        ] as [$hex, $name])
-                            <div class="hue-col" style="--gy: {{ $hex }}">
-                                <p class="hue-label"><b>{{ $name }}</b> &middot; {{ $hex }}</p>
-                                <div class="pair-panel grey-panel-dark">
-                                    <p>Grey {{ ltrim($hex, '#') }} holds the surface.</p>
-                                    <span class="pair-chip">Activate</span>
-                                </div>
-                                <div class="pair-panel grey-panel-acid">
-                                    <p>Acid yellow holds the surface.</p>
-                                    <span class="pair-chip">Ink</span>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </x-ds.section>
 
@@ -512,7 +434,7 @@
 
             <x-ds.spec>Card &mdash; Flux, on brand tokens</x-ds.spec>
             <div class="mt-5 grid gap-5 md:grid-cols-2">
-                <flux:card class="space-y-4">
+                <flux:card class="card-outline space-y-4">
                     <flux:heading size="lg">Outline</flux:heading>
                     <flux:text>The default. A border, some padding, and the warm ground showing through.</flux:text>
                     <flux:button variant="filled" class="btn-filled" size="sm">Action</flux:button>
@@ -531,10 +453,10 @@
                     <h4 class="mt-5 font-semibold">Standard</h4>
                     <p class="mt-2 text-sm text-ink-muted">Hairline first, shadow second. Lifts 2px on hover.</p>
                 </x-ds.tile>
-                <x-ds.tile interactive>
-                    <x-ds.icon-plate icon="bolt" activate />
-                    <h4 class="mt-5 font-semibold">Activated plate</h4>
-                    <p class="mt-2 text-sm text-ink-muted">Coral Tint fill. Use for the one thing that matters most.</p>
+                <x-ds.tile interactive activate>
+                    <x-ds.icon-plate icon="bolt" />
+                    <h4 class="mt-5 font-semibold">Activated card</h4>
+                    <p class="mt-2 text-sm text-ink-muted">The card carries the accent; the plate goes dark so it stands on it. Use for the one thing that matters most.</p>
                 </x-ds.tile>
                 <x-ds.tile>
                     <x-ds.icon-plate icon="document-check" />

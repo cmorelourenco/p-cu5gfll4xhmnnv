@@ -22,9 +22,8 @@ What came across:
 
 | | |
 |---|---|
-| **Electric Blue** | A secondary colour. Family hue (267°) at roughly double the chroma of the existing blues. Proposed, not approved — it lives behind the Alternatives tab. |
 | **The pixel arrow** | The wordmark's stair, mirrored into a chevron, on the primary button. Marks *forward*. |
-| **Five button variants** | Every name is one Flux actually accepts. `primary` is the lime button. |
+| **Five button variants** | Every name is one Flux actually accepts. `primary` is the accent button. |
 | **Three navigation levels** | Section → group → component, mirroring Flux's own split. The `01–08` numbering is gone. |
 | **Turn** | Progress as ten discrete squares, each turning a quarter as it fills. |
 | **Convergence** | The spinner: four squares leaving the ring and returning. |
@@ -40,7 +39,7 @@ Nothing on the page is a screenshot.
 
 | Section | Contents |
 |---------|----------|
-| Colour | **Current** — 10 brand primitives with Pantone refs, the `sand` ramp, semantic tokens. **Alternatives** — the activation hue study and the acid yellow against three greys. |
+| Colour | The three brand colours, the supporting set, the `sand` ramp and the semantic tokens |
 | Typography | Figtree across the display scale, lead, body and eyebrow |
 | Scales | Elevation and radius |
 | Components → Actions | Buttons, badges, callout, tooltip, spinner, progress, skeleton |

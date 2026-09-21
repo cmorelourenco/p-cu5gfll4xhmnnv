@@ -1,249 +1,16 @@
 /* ==========================================================================
-   C–MORE — enhanced layer
-   Loaded only by enhanced.html, after tokens.css. index.html stays untouched.
-   --------------------------------------------------------------------------
-   ADDITION 01 — Electric Blue, the secondary.
+   C–MORE — brand layer
 
-   Why this colour: every existing blue in the system sits at OKLCH hue
-   262–274°, but at chroma 0.04–0.07 — which is exactly why they read as grey.
-   This holds the family hue (267°, between Blue's 263° and Deep Blue's 271°)
-   and roughly doubles the chroma to 0.138.
+   Everything here is plain, unlayered CSS on the theme tokens, so it outranks
+   Tailwind's utilities and needs no rebuild when a token value changes.
 
-   Deliberately NOT the sRGB edge. An earlier pass ran this at chroma 0.261
-   (#2540F2) and it was genuinely electric; the base is now the dark-mode lift
-   #789AF4 taken down to L 0.48, same hue and same chroma. Calmer, and it
-   reads as the system's blue with conviction rather than a colour shouting.
-
-   Against Lime it still works: 142° apart in hue and far apart in lightness
-   (L 0.48 vs 0.91), so they never vibrate and Lime stays the loudest thing
-   on the page.
+   The file opened life as the "enhanced layer" on a static copy of the
+   published page, and its first 247 lines were the Alternatives tab: Electric
+   Blue as a proposed secondary, an activation hue study, an acid-yellow and
+   greys study, and the tab component that held them. All of it argued about
+   Deep Blue and Lime, neither of which survived the recolour, so it went with
+   the tab. It is in the history if any of it is wanted back.
    ========================================================================== */
-
-:root,
-:host {
-  /* --- Raw palette ------------------------------------------------------ */
-  --color-electric-blue: #3b57ab; /* L .48  C .138  H 267 */
-  --color-electric-deep: #2d4694; /* pressed / hover        */
-  --color-electric-lift: #789af4; /* dark-mode variant, unchanged */
-  --color-electric-subtle: #e8f0ff; /* light tint           */
-
-  /* --- Semantic: secondary ----------------------------------------------
-     Mirrors the shape of the activation family, so components can swap
-     one for the other without knowing which colour they got. */
-  --color-secondary: var(--color-electric-blue);
-  --color-secondary-hover: var(--color-electric-deep);
-  --color-secondary-foreground: #fff; /* 6.79:1 */
-  --color-secondary-subtle: var(--color-electric-subtle);
-}
-
-.dark {
-  /* #3B57AB only reaches 2.6:1 on Deep Blue, so dark mode lifts to L .70.
-     Its foreground flips to Deep Blue, exactly as activation does. */
-  --color-secondary: var(--color-electric-lift);
-  --color-secondary-hover: #9bb6f7;
-  --color-secondary-foreground: var(--color-graphite); /* 6.32:1 */
-  --color-secondary-subtle: #1e2b51;
-}
-
-/* --------------------------------------------------------------------------
-   Panel + chip primitives, used by the activation hue study.
-   Plain CSS on tokens, so no Tailwind rebuild is needed.
-   -------------------------------------------------------------------------- */
-
-.pair-panel {
-  border-radius: var(--radius-card);
-  padding: 1.5rem;
-  min-height: 11rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.25rem;
-  border: 1px solid transparent;
-}
-
-.pair-panel p {
-  font-size: 1.0625rem;
-  line-height: 1.4;
-  letter-spacing: -0.01em;
-  font-weight: 500;
-  text-wrap: balance;
-}
-
-.pair-chip {
-  align-self: flex-start;
-  border-radius: var(--radius-pill);
-  padding: 0.45rem 1rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: -0.005em;
-}
-
-/* --------------------------------------------------------------------------
-   Activation hue study — the same combo at three greens.
-   Each column sets --g; the panels read it, so a variant is one hex change.
-   All three sit at L 0.905–0.912 and 13.6–13.8:1 on Deep Blue, so what you
-   are comparing is hue alone.
-   -------------------------------------------------------------------------- */
-
-.hue-study {
-  display: grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-}
-
-.hue-col {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.hue-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-ink-subtle);
-  font-variant-numeric: tabular-nums;
-}
-.hue-label b {
-  color: var(--color-ink);
-  font-weight: 600;
-}
-
-.hue-study .pair-panel {
-  min-height: 9.5rem;
-  padding: 1.25rem;
-}
-.hue-study .pair-panel p {
-  font-size: 0.9375rem;
-}
-
-.hue-panel-blue {
-  background-color: var(--color-secondary);
-  color: var(--color-secondary-foreground);
-}
-.hue-panel-blue .pair-chip {
-  background-color: var(--g);
-  color: var(--color-graphite);
-}
-
-.hue-panel-green {
-  background-color: var(--g);
-  color: var(--color-graphite);
-}
-.hue-panel-green .pair-chip {
-  background-color: var(--color-secondary);
-  color: var(--color-secondary-foreground);
-}
-
-/* --------------------------------------------------------------------------
-   Tabs — Current vs Alternatives.
-   The indicator is the activation colour: one small moment, doing its job.
-   -------------------------------------------------------------------------- */
-
-.enh-tabs {
-  display: flex;
-  gap: 0.25rem;
-  margin-top: 2rem;
-  border-bottom: 1px solid var(--color-line);
-}
-
-.enh-tab {
-  appearance: none;
-  background: none;
-  border: 0;
-  font: inherit;
-  cursor: pointer;
-  position: relative;
-  padding: 0.65rem 0.9rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: -0.005em;
-  color: var(--color-ink-muted);
-  transition: color var(--duration-quick) var(--ease-brand);
-}
-
-.enh-tab:hover {
-  color: var(--color-ink);
-}
-
-.enh-tab[aria-selected="true"] {
-  color: var(--color-ink);
-}
-
-.enh-tab::after {
-  content: "";
-  position: absolute;
-  inset-inline: 0.55rem;
-  bottom: -1px;
-  height: 2px;
-  border-radius: var(--radius-pill);
-  background-color: var(--color-activation);
-  transform: scaleX(0);
-  transition: transform var(--duration-base) var(--ease-brand);
-}
-
-.enh-tab[aria-selected="true"]::after {
-  transform: scaleX(1);
-}
-
-.enh-tab:focus-visible {
-  outline: 2px solid var(--color-secondary);
-  outline-offset: 2px;
-  border-radius: 0.375rem;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .enh-tab,
-  .enh-tab::after {
-    transition: none;
-  }
-}
-
-/* Both panels lead with an h2, but the one inherited from the original markup
-   carries mt-5 and the new one carries nothing — so switching tabs shifted the
-   heading by 20px. Set the gap on the panel and zero the first child's margin,
-   so the two tabs are identical whatever their first element brings with it. */
-.enh-tabpanel {
-  padding-top: 2.5rem;
-}
-.enh-tabpanel > :first-child {
-  margin-top: 0;
-}
-
-/* --------------------------------------------------------------------------
-   Acid yellow + greys — three pairs, the grey as the variable.
-   Each column sets --gy; the two panels read it, so a variant is one hex.
-
-   The greys span #1B1B1B to #585858, the usable window: below that the grey
-   stops clearing 4.5:1 as text on the yellow, so the reversed panel breaks.
-
-   Note the existing Sand ramp is not actually neutral — warm at the top
-   (hue ~90) and navy at the bottom (hue 271). These are true greys, chroma 0.
-   -------------------------------------------------------------------------- */
-
-:root,
-:host {
-  --color-acid: #dff000; /* L .911  C .206  H 115 */
-}
-
-.grey-panel-dark {
-  background-color: var(--gy);
-  color: #fafafa;
-}
-.grey-panel-dark .pair-chip {
-  background-color: var(--color-acid);
-  color: var(--gy);
-}
-
-.grey-panel-acid {
-  background-color: var(--color-acid);
-  color: var(--gy);
-}
-.grey-panel-acid .pair-chip {
-  background-color: var(--gy);
-  color: var(--color-acid);
-}
 
 /* --------------------------------------------------------------------------
    Section rail — jump straight to any heading.
@@ -323,7 +90,9 @@
 }
 
 .enh-rail a:focus-visible {
-  outline: 2px solid var(--color-secondary);
+  /* Was the proposed Electric Blue. Focus belongs on the accent — the token
+     Flux already drives its own focus rings from. */
+  outline: 2px solid var(--color-accent);
   outline-offset: -2px;
   border-radius: 0.375rem;
 }
@@ -858,6 +627,11 @@ span.type-plate__mark b {
    contract Flux documents, and it outranks the compiled utilities.
    ========================================================================== */
 
+/* Both variants share geometry — radius, padding and border weight — so the
+   only thing that differs between them is which way round the colours go.
+   Flux's own card is 20px radius, 24px padding and a 1px border; a card
+   missing .card-outline falls back to that and sits visibly apart from its
+   pair, which is what happened while only .card-soft was applied. */
 .card-outline[data-flux-card],
 .card-soft[data-flux-card] {
   /* the step the mark is built from; the padding is three of them */
@@ -994,13 +768,19 @@ span.card-mark b:nth-child(2) {
 .tile-interactive.tile-activate:hover {
   border-color: var(--color-graphite);
 }
+/* The secondary, matching the label on every other solid accent fill.
+
+   Measured: 2.60:1 on the coral. That is under AA at any size, and unlike a
+   button label this is a heading and a full sentence of body copy. Graphite
+   would give 4.24:1. The light treatment is the specified one and is used
+   here for consistency with the buttons, but this is the place in the system
+   where it costs the most. */
 .tile-activate h4 {
-  color: var(--color-graphite);
+  color: var(--color-brand-label);
 }
-/* on Lime the muted blue goes muddy, and the bold lead stops leading */
 .tile-activate p,
 .tile-activate p strong {
-  color: var(--color-graphite);
+  color: var(--color-brand-label);
 }
 
 /* --- Static — no hover, so the rule says so ------------------------------ */
@@ -1009,9 +789,14 @@ span.card-mark b:nth-child(2) {
 }
 
 /* --- The plate -----------------------------------------------------------
-   A square, not a rounded patch: 56px of Deep Blue with the icon reversed
-   out of it. The transparent border is load-bearing — it keeps the outlined
-   plate the same 56px box as the filled one instead of 4px larger. */
+   A square, not a rounded patch: 56px of the main colour with the icon
+   reversed out of it. The transparent border is load-bearing — it keeps the
+   outlined plate the same 56px box as the filled one instead of 4px larger.
+
+   These are unlayered and .icon-plate in app.css is in @layer components, so
+   everything here wins inside a tile. Changing the plate means changing it
+   HERE; the app.css rule only governs plates outside a tile, such as the
+   icon gallery. */
 .tile .icon-plate {
   width: 3.5rem;
   height: 3.5rem;
@@ -1022,9 +807,18 @@ span.card-mark b:nth-child(2) {
      flips the two of them */
   color: var(--color-ink-invert);
 }
-/* the plate holds — pinned, because the tile under it is Lime in both
-   themes — and the icon takes the activation colour */
+/* On an activated tile the card is the accent, so the plate is the dark
+   square standing ON it — the inverse of a standard tile, and the reason the
+   accent never appears twice in one card. Pinned to the graphite outright:
+   --color-ink would flip off-white in the dark theme and lose the plate
+   against the coral, which does not flip. */
 .tile-activate .icon-plate {
+  background-color: var(--color-graphite);
+  color: var(--color-activation);
+}
+/* A plate marked .icon-plate-activate inside an activated tile would put the
+   accent on top of the accent. The card already carries it. */
+.tile-activate .icon-plate-activate {
   background-color: var(--color-graphite);
   color: var(--color-activation);
 }

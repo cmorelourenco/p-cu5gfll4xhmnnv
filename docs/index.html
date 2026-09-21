@@ -153,7 +153,7 @@
 .sp-conv{width:calc(var(--spin-size,2.25rem) * 1.4);height:calc(var(--spin-size,2.25rem) * 1.4);color:var(--color-ink);--conv-ease:cubic-bezier(.65, 0, .35, 1)}.sp-conv .conv-rotor{transform-box:view-box;transform-origin:160px 160px;animation:2.8s linear infinite conv-spin}.sp-conv .conv-sq{fill:currentColor;animation:2.8s linear infinite conv-slide,2.8s linear infinite conv-reveal}.sp-conv .conv-notch{animation:2.8s linear infinite conv-reveal}@keyframes conv-reveal{0%,14.9%{opacity:0}15%,85%{opacity:1}85.1%,to{opacity:0}}@keyframes conv-spin{0%,30%{animation-timing-function:cubic-bezier(.65,0,.35,1);transform:rotate(0)}70%,to{transform:rotate(90deg)}}@keyframes conv-slide{0%,15%{animation-timing-function:cubic-bezier(.3,1,.5,1);transform:translate(0)}28%,72%{transform:translate(var(--dx), var(--dy));animation-timing-function:cubic-bezier(.5,0,.7,0)}85%,to{transform:translate(0)}}@media (prefers-reduced-motion:reduce){.sp-conv .conv-rotor,.sp-conv .conv-sq,.sp-conv .conv-notch{animation:none}.sp-conv .conv-sq,.sp-conv .conv-notch{opacity:0}}
 
 /* ---- enhanced.css ---- */
-:root,:host{--color-electric-blue:#3b57ab;--color-electric-deep:#2d4694;--color-electric-lift:#789af4;--color-electric-subtle:#e8f0ff;--color-secondary:var(--color-electric-blue);--color-secondary-hover:var(--color-electric-deep);--color-secondary-foreground:#fff;--color-secondary-subtle:var(--color-electric-subtle)}.dark{--color-secondary:var(--color-electric-lift);--color-secondary-hover:#9bb6f7;--color-secondary-foreground:var(--color-graphite);--color-secondary-subtle:#1e2b51}.pair-panel{border-radius:var(--radius-card);border:1px solid #0000;flex-direction:column;justify-content:space-between;gap:1.25rem;min-height:11rem;padding:1.5rem;display:flex}.pair-panel p{letter-spacing:-.01em;text-wrap:balance;font-size:1.0625rem;font-weight:500;line-height:1.4}.pair-chip{border-radius:var(--radius-pill);letter-spacing:-.005em;align-self:flex-start;padding:.45rem 1rem;font-size:.8125rem;font-weight:600}.hue-study{grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1.25rem;display:grid}.hue-col{flex-direction:column;gap:.75rem;display:flex}.hue-label{letter-spacing:.08em;text-transform:uppercase;color:var(--color-ink-subtle);font-variant-numeric:tabular-nums;font-size:.75rem;font-weight:600}.hue-label b{color:var(--color-ink);font-weight:600}.hue-study .pair-panel{min-height:9.5rem;padding:1.25rem}.hue-study .pair-panel p{font-size:.9375rem}.hue-panel-blue{background-color:var(--color-secondary);color:var(--color-secondary-foreground)}.hue-panel-blue .pair-chip,.hue-panel-green{background-color:var(--g);color:var(--color-graphite)}.hue-panel-green .pair-chip{background-color:var(--color-secondary);color:var(--color-secondary-foreground)}.enh-tabs{border-bottom:1px solid var(--color-line);gap:.25rem;margin-top:2rem;display:flex}.enh-tab{appearance:none;font:inherit;cursor:pointer;letter-spacing:-.005em;color:var(--color-ink-muted);transition:color var(--duration-quick) var(--ease-brand);background:0 0;border:0;padding:.65rem .9rem;font-size:.875rem;font-weight:600;position:relative}.enh-tab:hover,.enh-tab[aria-selected=true]{color:var(--color-ink)}.enh-tab:after{content:"";inset-inline:.55rem;border-radius:var(--radius-pill);background-color:var(--color-activation);height:2px;transition:transform var(--duration-base) var(--ease-brand);position:absolute;bottom:-1px;transform:scaleX(0)}.enh-tab[aria-selected=true]:after{transform:scaleX(1)}.enh-tab:focus-visible{outline:2px solid var(--color-secondary);outline-offset:2px;border-radius:.375rem}@media (prefers-reduced-motion:reduce){.enh-tab,.enh-tab:after{transition:none}}.enh-tabpanel{padding-top:2.5rem}.enh-tabpanel>:first-child{margin-top:0}:root,:host{--color-acid:#dff000}.grey-panel-dark{background-color:var(--gy);color:#fafafa}.grey-panel-dark .pair-chip,.grey-panel-acid{background-color:var(--color-acid);color:var(--gy)}.grey-panel-acid .pair-chip{background-color:var(--gy);color:var(--color-acid)}.enh-rail{z-index:60;overscroll-behavior:contain;background-color:var(--color-surface);border-right:1px solid var(--color-line);width:15rem;padding:1.25rem .85rem 3rem;display:none;position:fixed;inset:0 auto 0 0;overflow-y:auto}@media (width>=1200px){.enh-rail{display:block}body{padding-left:15rem}}.enh-rail__title{letter-spacing:.12em;text-transform:uppercase;color:var(--color-ink-subtle);padding:0 .5rem .75rem;font-size:.6875rem;font-weight:600}.enh-rail__group{margin-bottom:1.15rem}.enh-rail__section{letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink-subtle);padding:.3rem .5rem;font-size:.6875rem;font-weight:600;text-decoration:none;display:block}.enh-rail__section:hover{color:var(--color-ink)}.enh-rail__item{color:var(--color-ink-muted);transition:color var(--duration-quick) var(--ease-brand), background-color var(--duration-quick) var(--ease-brand);border-left:2px solid #0000;border-radius:0 .375rem .375rem 0;padding:.3rem .5rem;font-size:.8125rem;line-height:1.3;text-decoration:none;display:block}.enh-rail__item:hover{color:var(--color-ink);background-color:var(--color-surface-sunken)}.enh-rail__item[aria-current=true]{color:var(--color-ink);border-left-color:var(--color-activation);font-weight:600}.enh-rail a:focus-visible{outline:2px solid var(--color-secondary);outline-offset:-2px;border-radius:.375rem}.sub-label{letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink-subtle);flex-basis:100%;grid-column:1/-1;margin:0 0 .85rem;font-size:.6875rem;font-weight:600}.enh-rail__item--sub{padding-left:1.4rem;font-size:.75rem}section h3[class*=mt-14]{margin-top:3rem;padding-top:0}section h3[class*=mt-14]:first-of-type{margin-top:3.25rem}.sub-box{border:1px solid var(--color-line);border-radius:var(--radius-card);padding:1.15rem 1.35rem 1.4rem}h3+.sub-box,h3+.sub-box--wrap{margin-top:1.5rem}.sub-box>.sub-label{margin-bottom:1rem}.sub-box+.sub-box{margin-top:1rem}.sub-box--wrap{flex-basis:100%;grid-column:1/-1}.sub-box--row{flex-wrap:wrap;align-items:center;gap:2rem;display:flex}.sub-box--row>.sub-label{margin-bottom:0}.btn-outline[data-flux-button]{color:var(--color-ink);border:2px solid var(--color-activation);box-shadow:none;background-color:#0000}.btn-outline[data-flux-button]:hover:not(:disabled){border-color:var(--color-activation-hover);background-color:#0000}.btn-filled[data-flux-button]{background-color:var(--color-graphite);color:var(--color-brand-label);box-shadow:none;border-color:#0000}.btn-filled[data-flux-button] [data-flux-icon],.btn-filled[data-flux-button] .px{color:var(--color-activation)}.btn-filled[data-flux-button]:hover:not(:disabled){background-color:var(--color-sand-900);box-shadow:none}.dark .btn-filled[data-flux-button]{background-color:var(--color-sand-800)}.dark .btn-filled[data-flux-button]:hover:not(:disabled){background-color:var(--color-sand-700)}.btn-ghost[data-flux-button]{color:var(--color-ink);box-shadow:none;background-color:#0000}.btn-ghost[data-flux-button]:hover:not(:disabled){background-color:var(--color-activation-subtle)}[data-flux-button].h-6{font-size:.75rem}[data-flux-button].h-8{font-size:.875rem}[data-flux-button].h-10{font-size:1rem}[data-flux-button].btn-lg{font-size:1.125rem}.btn-filled[data-flux-button]:disabled{color:var(--color-off-white)}.badge-solid[data-flux-badge]{background-color:var(--color-sand-800);color:var(--color-off-white)}.badge-solid[data-flux-badge] [data-flux-icon]{color:inherit}.group-title{margin-top:4rem;margin-bottom:2rem}.group-title:first-of-type{margin-top:1.25rem}.group-title+h3[class*=mt-14],.group-title+p+h3[class*=mt-14]{margin-top:0}.rule-activate{background:linear-gradient(to right, var(--color-coral) 0 2rem, var(--color-line) 2rem 100%);border:0;height:2px}.w-1{width:.25rem}.w-2{width:.5rem}.w-3{width:.75rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-7{width:1.75rem}.w-8{width:2rem}.w-9{width:2.25rem}.w-10{width:2.5rem}.w-11{width:2.75rem}.w-12{width:3rem}.w-14{width:3.5rem}.w-16{width:4rem}.w-20{width:5rem}.w-24{width:6rem}.w-28{width:7rem}.w-32{width:8rem}.w-36{width:9rem}.w-40{width:10rem}.w-44{width:11rem}.w-48{width:12rem}.w-56{width:14rem}.w-64{width:16rem}.w-72{width:18rem}.w-80{width:20rem}.w-96{width:24rem}.w-1\!{width:.25rem!important}.w-2\!{width:.5rem!important}.w-3\!{width:.75rem!important}.w-4\!{width:1rem!important}.w-5\!{width:1.25rem!important}.w-6\!{width:1.5rem!important}.w-7\!{width:1.75rem!important}.w-8\!{width:2rem!important}.w-9\!{width:2.25rem!important}.w-10\!{width:2.5rem!important}.w-11\!{width:2.75rem!important}.w-12\!{width:3rem!important}.w-14\!{width:3.5rem!important}.w-16\!{width:4rem!important}.w-20\!{width:5rem!important}.w-24\!{width:6rem!important}.w-28\!{width:7rem!important}.w-32\!{width:8rem!important}.w-36\!{width:9rem!important}.w-40\!{width:10rem!important}.w-44\!{width:11rem!important}.w-48\!{width:12rem!important}.w-56\!{width:14rem!important}.w-64\!{width:16rem!important}.w-72\!{width:18rem!important}.w-80\!{width:20rem!important}.w-96\!{width:24rem!important}[form-wrapper]>label{background-color:var(--color-surface);height:3.5rem;box-shadow:inset 0 0 0 1px var(--color-mid-beige), 0 1px 2px #0000000d;color:var(--color-sand-700);border-radius:1rem}[form-wrapper]>label svg{color:#d4d4d4}[form-wrapper] div[class*=shadow-lg]{border:0;border-radius:1rem}[form-wrapper] [class*=hover\:bg-primary-500]:hover,[form-wrapper] [class*=focus\:bg-primary-100]:focus{background-color:var(--color-activation-subtle);color:var(--color-ink)}[form-wrapper]>label,[form-wrapper]>label button,[form-wrapper]>label span,[form-wrapper] [class*=hover\:bg-primary-500],[form-wrapper] [class*=hover\:bg-primary-500] span,input[data-flux-control],[data-flux-input]>input,[data-flux-input]>textarea,textarea[data-flux-control],select[data-flux-select-native],[data-flux-label],[form-wrapper] input,[form-wrapper] button,[form-wrapper] span,[form-wrapper] label,[form-wrapper] [class*=hover\:bg-primary-500]{font-size:1rem}.type-plate{--mark-u:28px;--mark-span:calc(var(--mark-u) * 3);background-color:var(--color-surface-invert);color:var(--color-ink-invert);position:relative;overflow:hidden}span.type-plate__mark{--u:var(--mark-u);color:var(--color-activation);position:absolute;top:0;right:0}span.type-plate__mark b{border-radius:0}.type-plate [data-flux-heading]{color:var(--color-off-white)}.type-plate [data-flux-subheading]{color:var(--color-activation)}.type-plate [data-flux-text]{color:var(--color-off-white)}.type-plate [data-flux-text][class*=text-zinc-800]{color:var(--color-off-white);font-weight:600}.type-plate [data-flux-text][class*=text-zinc-400]{color:var(--color-mid-blue)}.type-plate [data-flux-link]{color:var(--color-activation);-webkit-text-decoration-color:var(--color-activation);text-decoration-color:var(--color-activation)}.type-plate__meta{align-items:center;gap:.75rem;display:flex;color:var(--color-mid-blue)!important}.type-plate__meta:before{content:"";background-color:var(--color-activation);border-radius:1px;flex:none;width:.75rem;height:.75rem}.type-plate [data-flux-heading]{font-size:3.75rem;font-weight:700;line-height:1.05}.type-plate [data-flux-subheading]{font-size:1.375rem;line-height:1.3}.type-plate p[data-flux-text],.type-plate p[data-flux-text] [data-flux-text],.type-plate p[data-flux-text] [data-flux-link]{font-size:1rem;line-height:1.6}.type-plate p.type-plate__meta{font-size:.875rem;line-height:1.5}.type-plate{max-width:600px;padding:2.5rem}.type-plate>*+*{margin-top:0!important}.type-plate [data-flux-subheading]{margin-top:1rem!important}.type-plate p[data-flux-text]{margin-top:2.5rem!important}.type-plate p.type-plate__meta{margin-top:2.25rem!important}.type-plate [data-flux-heading]{max-width:min(17.5rem, calc(100% - var(--mark-span) - 1rem))}.type-plate p[data-flux-text]{max-width:calc(100% - 3rem)}.card-outline[data-flux-card],.card-soft[data-flux-card]{--card-u:12px;box-shadow:none;border-radius:.25rem;padding:2.25rem}.card-outline[data-flux-card]{background-color:var(--color-surface);border:2px solid var(--color-ink)}.card-soft[data-flux-card]{background-color:var(--color-graphite);border:2px solid #0000}.dark .card-soft[data-flux-card]{background-color:var(--color-sand-800)}span.card-mark{--u:var(--card-u)}span.card-mark b:nth-child(2){background-color:var(--color-activation)}.card-outline[data-flux-card] span.card-mark{color:var(--color-ink)}.card-soft[data-flux-card] span.card-mark{color:var(--color-off-white)}.card-outline[data-flux-card] [data-flux-heading],.card-soft[data-flux-card] [data-flux-heading]{font-size:1.875rem;font-weight:700;line-height:1.2}.card-outline[data-flux-card] p[data-flux-text],.card-soft[data-flux-card] p[data-flux-text]{font-size:1.125rem;line-height:1.6}.card-outline[data-flux-card] [data-flux-heading]{color:var(--color-ink)}.card-outline[data-flux-card] p[data-flux-text]{color:var(--color-ink-muted)}.card-soft[data-flux-card] [data-flux-heading]{color:var(--color-off-white)}.card-soft[data-flux-card] p[data-flux-text]{color:var(--color-activation-subtle)}.card-outline[data-flux-card]>*,.card-soft[data-flux-card]>*{margin-bottom:0!important}.card-outline[data-flux-card]>*+*,.card-soft[data-flux-card]>*+*{margin-top:1rem!important}.card-outline[data-flux-card]>[data-flux-button],.card-soft[data-flux-card]>[data-flux-button]{margin-top:1.5rem!important}.tile{border-width:2px;border-color:var(--color-ink);border-radius:.25rem;padding:2rem}.tile-interactive:hover{border-color:var(--color-ink)}.tile-activate{background-color:var(--color-activation);border-color:var(--color-graphite)}.tile-interactive.tile-activate:hover{border-color:var(--color-graphite)}.tile-activate h4,.tile-activate p,.tile-activate p strong{color:var(--color-graphite)}.tile:not(.tile-interactive){border-color:var(--color-line-strong)}.tile .icon-plate{background-color:var(--color-ink);width:3.5rem;height:3.5rem;color:var(--color-ink-invert);border:2px solid #0000;border-radius:0}.tile-activate .icon-plate{background-color:var(--color-graphite);color:var(--color-activation)}.tile:not(.tile-interactive) .icon-plate{border-color:var(--color-line-strong);color:var(--color-ink-muted);background-color:#0000}.tile .icon-brand{width:1.5rem;height:1.5rem}.tile h4{margin-top:1.5rem;font-size:1.5rem;font-weight:700;line-height:1.2}.tile p{margin-top:.5rem;font-size:1rem;line-height:1.6}
+.enh-rail{z-index:60;overscroll-behavior:contain;background-color:var(--color-surface);border-right:1px solid var(--color-line);width:15rem;padding:1.25rem .85rem 3rem;display:none;position:fixed;inset:0 auto 0 0;overflow-y:auto}@media (width>=1200px){.enh-rail{display:block}body{padding-left:15rem}}.enh-rail__title{letter-spacing:.12em;text-transform:uppercase;color:var(--color-ink-subtle);padding:0 .5rem .75rem;font-size:.6875rem;font-weight:600}.enh-rail__group{margin-bottom:1.15rem}.enh-rail__section{letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink-subtle);padding:.3rem .5rem;font-size:.6875rem;font-weight:600;text-decoration:none;display:block}.enh-rail__section:hover{color:var(--color-ink)}.enh-rail__item{color:var(--color-ink-muted);transition:color var(--duration-quick) var(--ease-brand), background-color var(--duration-quick) var(--ease-brand);border-left:2px solid #0000;border-radius:0 .375rem .375rem 0;padding:.3rem .5rem;font-size:.8125rem;line-height:1.3;text-decoration:none;display:block}.enh-rail__item:hover{color:var(--color-ink);background-color:var(--color-surface-sunken)}.enh-rail__item[aria-current=true]{color:var(--color-ink);border-left-color:var(--color-activation);font-weight:600}.enh-rail a:focus-visible{outline:2px solid var(--color-accent);outline-offset:-2px;border-radius:.375rem}.sub-label{letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink-subtle);flex-basis:100%;grid-column:1/-1;margin:0 0 .85rem;font-size:.6875rem;font-weight:600}.enh-rail__item--sub{padding-left:1.4rem;font-size:.75rem}section h3[class*=mt-14]{margin-top:3rem;padding-top:0}section h3[class*=mt-14]:first-of-type{margin-top:3.25rem}.sub-box{border:1px solid var(--color-line);border-radius:var(--radius-card);padding:1.15rem 1.35rem 1.4rem}h3+.sub-box,h3+.sub-box--wrap{margin-top:1.5rem}.sub-box>.sub-label{margin-bottom:1rem}.sub-box+.sub-box{margin-top:1rem}.sub-box--wrap{flex-basis:100%;grid-column:1/-1}.sub-box--row{flex-wrap:wrap;align-items:center;gap:2rem;display:flex}.sub-box--row>.sub-label{margin-bottom:0}.btn-outline[data-flux-button]{color:var(--color-ink);border:2px solid var(--color-activation);box-shadow:none;background-color:#0000}.btn-outline[data-flux-button]:hover:not(:disabled){border-color:var(--color-activation-hover);background-color:#0000}.btn-filled[data-flux-button]{background-color:var(--color-graphite);color:var(--color-brand-label);box-shadow:none;border-color:#0000}.btn-filled[data-flux-button] [data-flux-icon],.btn-filled[data-flux-button] .px{color:var(--color-activation)}.btn-filled[data-flux-button]:hover:not(:disabled){background-color:var(--color-sand-900);box-shadow:none}.dark .btn-filled[data-flux-button]{background-color:var(--color-sand-800)}.dark .btn-filled[data-flux-button]:hover:not(:disabled){background-color:var(--color-sand-700)}.btn-ghost[data-flux-button]{color:var(--color-ink);box-shadow:none;background-color:#0000}.btn-ghost[data-flux-button]:hover:not(:disabled){background-color:var(--color-activation-subtle)}[data-flux-button].h-6{font-size:.75rem}[data-flux-button].h-8{font-size:.875rem}[data-flux-button].h-10{font-size:1rem}[data-flux-button].btn-lg{font-size:1.125rem}.btn-filled[data-flux-button]:disabled{color:var(--color-off-white)}.badge-solid[data-flux-badge]{background-color:var(--color-sand-800);color:var(--color-off-white)}.badge-solid[data-flux-badge] [data-flux-icon]{color:inherit}.group-title{margin-top:4rem;margin-bottom:2rem}.group-title:first-of-type{margin-top:1.25rem}.group-title+h3[class*=mt-14],.group-title+p+h3[class*=mt-14]{margin-top:0}.rule-activate{background:linear-gradient(to right, var(--color-coral) 0 2rem, var(--color-line) 2rem 100%);border:0;height:2px}.w-1{width:.25rem}.w-2{width:.5rem}.w-3{width:.75rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-7{width:1.75rem}.w-8{width:2rem}.w-9{width:2.25rem}.w-10{width:2.5rem}.w-11{width:2.75rem}.w-12{width:3rem}.w-14{width:3.5rem}.w-16{width:4rem}.w-20{width:5rem}.w-24{width:6rem}.w-28{width:7rem}.w-32{width:8rem}.w-36{width:9rem}.w-40{width:10rem}.w-44{width:11rem}.w-48{width:12rem}.w-56{width:14rem}.w-64{width:16rem}.w-72{width:18rem}.w-80{width:20rem}.w-96{width:24rem}.w-1\!{width:.25rem!important}.w-2\!{width:.5rem!important}.w-3\!{width:.75rem!important}.w-4\!{width:1rem!important}.w-5\!{width:1.25rem!important}.w-6\!{width:1.5rem!important}.w-7\!{width:1.75rem!important}.w-8\!{width:2rem!important}.w-9\!{width:2.25rem!important}.w-10\!{width:2.5rem!important}.w-11\!{width:2.75rem!important}.w-12\!{width:3rem!important}.w-14\!{width:3.5rem!important}.w-16\!{width:4rem!important}.w-20\!{width:5rem!important}.w-24\!{width:6rem!important}.w-28\!{width:7rem!important}.w-32\!{width:8rem!important}.w-36\!{width:9rem!important}.w-40\!{width:10rem!important}.w-44\!{width:11rem!important}.w-48\!{width:12rem!important}.w-56\!{width:14rem!important}.w-64\!{width:16rem!important}.w-72\!{width:18rem!important}.w-80\!{width:20rem!important}.w-96\!{width:24rem!important}[form-wrapper]>label{background-color:var(--color-surface);height:3.5rem;box-shadow:inset 0 0 0 1px var(--color-mid-beige), 0 1px 2px #0000000d;color:var(--color-sand-700);border-radius:1rem}[form-wrapper]>label svg{color:#d4d4d4}[form-wrapper] div[class*=shadow-lg]{border:0;border-radius:1rem}[form-wrapper] [class*=hover\:bg-primary-500]:hover,[form-wrapper] [class*=focus\:bg-primary-100]:focus{background-color:var(--color-activation-subtle);color:var(--color-ink)}[form-wrapper]>label,[form-wrapper]>label button,[form-wrapper]>label span,[form-wrapper] [class*=hover\:bg-primary-500],[form-wrapper] [class*=hover\:bg-primary-500] span,input[data-flux-control],[data-flux-input]>input,[data-flux-input]>textarea,textarea[data-flux-control],select[data-flux-select-native],[data-flux-label],[form-wrapper] input,[form-wrapper] button,[form-wrapper] span,[form-wrapper] label,[form-wrapper] [class*=hover\:bg-primary-500]{font-size:1rem}.type-plate{--mark-u:28px;--mark-span:calc(var(--mark-u) * 3);background-color:var(--color-surface-invert);color:var(--color-ink-invert);position:relative;overflow:hidden}span.type-plate__mark{--u:var(--mark-u);color:var(--color-activation);position:absolute;top:0;right:0}span.type-plate__mark b{border-radius:0}.type-plate [data-flux-heading]{color:var(--color-off-white)}.type-plate [data-flux-subheading]{color:var(--color-activation)}.type-plate [data-flux-text]{color:var(--color-off-white)}.type-plate [data-flux-text][class*=text-zinc-800]{color:var(--color-off-white);font-weight:600}.type-plate [data-flux-text][class*=text-zinc-400]{color:var(--color-mid-blue)}.type-plate [data-flux-link]{color:var(--color-activation);-webkit-text-decoration-color:var(--color-activation);text-decoration-color:var(--color-activation)}.type-plate__meta{align-items:center;gap:.75rem;display:flex;color:var(--color-mid-blue)!important}.type-plate__meta:before{content:"";background-color:var(--color-activation);border-radius:1px;flex:none;width:.75rem;height:.75rem}.type-plate [data-flux-heading]{font-size:3.75rem;font-weight:700;line-height:1.05}.type-plate [data-flux-subheading]{font-size:1.375rem;line-height:1.3}.type-plate p[data-flux-text],.type-plate p[data-flux-text] [data-flux-text],.type-plate p[data-flux-text] [data-flux-link]{font-size:1rem;line-height:1.6}.type-plate p.type-plate__meta{font-size:.875rem;line-height:1.5}.type-plate{max-width:600px;padding:2.5rem}.type-plate>*+*{margin-top:0!important}.type-plate [data-flux-subheading]{margin-top:1rem!important}.type-plate p[data-flux-text]{margin-top:2.5rem!important}.type-plate p.type-plate__meta{margin-top:2.25rem!important}.type-plate [data-flux-heading]{max-width:min(17.5rem, calc(100% - var(--mark-span) - 1rem))}.type-plate p[data-flux-text]{max-width:calc(100% - 3rem)}.card-outline[data-flux-card],.card-soft[data-flux-card]{--card-u:12px;box-shadow:none;border-radius:.25rem;padding:2.25rem}.card-outline[data-flux-card]{background-color:var(--color-surface);border:2px solid var(--color-ink)}.card-soft[data-flux-card]{background-color:var(--color-graphite);border:2px solid #0000}.dark .card-soft[data-flux-card]{background-color:var(--color-sand-800)}span.card-mark{--u:var(--card-u)}span.card-mark b:nth-child(2){background-color:var(--color-activation)}.card-outline[data-flux-card] span.card-mark{color:var(--color-ink)}.card-soft[data-flux-card] span.card-mark{color:var(--color-off-white)}.card-outline[data-flux-card] [data-flux-heading],.card-soft[data-flux-card] [data-flux-heading]{font-size:1.875rem;font-weight:700;line-height:1.2}.card-outline[data-flux-card] p[data-flux-text],.card-soft[data-flux-card] p[data-flux-text]{font-size:1.125rem;line-height:1.6}.card-outline[data-flux-card] [data-flux-heading]{color:var(--color-ink)}.card-outline[data-flux-card] p[data-flux-text]{color:var(--color-ink-muted)}.card-soft[data-flux-card] [data-flux-heading]{color:var(--color-off-white)}.card-soft[data-flux-card] p[data-flux-text]{color:var(--color-activation-subtle)}.card-outline[data-flux-card]>*,.card-soft[data-flux-card]>*{margin-bottom:0!important}.card-outline[data-flux-card]>*+*,.card-soft[data-flux-card]>*+*{margin-top:1rem!important}.card-outline[data-flux-card]>[data-flux-button],.card-soft[data-flux-card]>[data-flux-button]{margin-top:1.5rem!important}.tile{border-width:2px;border-color:var(--color-ink);border-radius:.25rem;padding:2rem}.tile-interactive:hover{border-color:var(--color-ink)}.tile-activate{background-color:var(--color-activation);border-color:var(--color-graphite)}.tile-interactive.tile-activate:hover{border-color:var(--color-graphite)}.tile-activate h4,.tile-activate p,.tile-activate p strong{color:var(--color-brand-label)}.tile:not(.tile-interactive){border-color:var(--color-line-strong)}.tile .icon-plate{background-color:var(--color-ink);width:3.5rem;height:3.5rem;color:var(--color-ink-invert);border:2px solid #0000;border-radius:0}.tile-activate .icon-plate,.tile-activate .icon-plate-activate{background-color:var(--color-graphite);color:var(--color-activation)}.tile:not(.tile-interactive) .icon-plate{border-color:var(--color-line-strong);color:var(--color-ink-muted);background-color:#0000}.tile .icon-brand{width:1.5rem;height:1.5rem}.tile h4{margin-top:1.5rem;font-size:1.5rem;font-weight:700;line-height:1.2}.tile p{margin-top:.5rem;font-size:1rem;line-height:1.6}
 
 /* ---- arrow.css ---- */
 .px{--u:4px;width:calc(var(--w) * var(--u));height:calc(var(--h) * var(--u));color:inherit;flex:none;display:block;position:relative}.px b{left:calc(var(--c) * var(--u));top:calc(var(--r) * var(--u));width:var(--u);height:var(--u);background-color:currentColor;border-radius:1px;position:absolute}.px-sm{--u:3px}.px-md{--u:4px}.px-lg{--u:5px}.px-display{--u:16px}.px-chev3{--w:2;--h:3}.px-chev3 b:first-child{--c:0;--r:0}.px-chev3 b:nth-child(2){--c:1;--r:1}.px-chev3 b:nth-child(3){--c:0;--r:2}.px-chev5{--w:3;--h:5}.px-chev5 b:first-child{--c:0;--r:0}.px-chev5 b:nth-child(2){--c:1;--r:1}.px-chev5 b:nth-child(3){--c:2;--r:2}.px-chev5 b:nth-child(4){--c:1;--r:3}.px-chev5 b:nth-child(5){--c:0;--r:4}.px-arrow{--w:5;--h:5}.px-arrow b:first-child{--c:0;--r:2}.px-arrow b:nth-child(2){--c:1;--r:2}.px-arrow b:nth-child(3){--c:2;--r:2}.px-arrow b:nth-child(4){--c:3;--r:2}.px-arrow b:nth-child(5){--c:4;--r:2}.px-arrow b:nth-child(6){--c:2;--r:0}.px-arrow b:nth-child(7){--c:3;--r:1}.px-arrow b:nth-child(8){--c:3;--r:3}.px-arrow b:nth-child(9){--c:2;--r:4}.px-stair{--w:3;--h:3}.px-stair b:first-child{--c:0;--r:2}.px-stair b:nth-child(2){--c:1;--r:1}.px-stair b:nth-child(3){--c:2;--r:0}.px-stair2{--w:2;--h:2}.px-stair2 b:first-child{--c:0;--r:1}.px-stair2 b:nth-child(2){--c:1;--r:0}.btn-px-step .px{transition:transform .21s steps(3,start)}.btn-px-step:hover .px{transform:translateX(calc(var(--u) * 3))}@keyframes px-swell{0%,to{transform:scale(1)}40%{transform:scale(1.6)}}.btn-px-cascade:hover .px b{animation:px-swell .5s var(--ease-brand)}.btn-px-cascade:hover .px b:nth-child(2){animation-delay:70ms}.btn-px-cascade:hover .px b:nth-child(3){animation-delay:.14s}.btn-px-build .px b{transition:transform var(--duration-base) var(--ease-brand), opacity var(--duration-quick) var(--ease-brand)}.btn-px-build .px b:first-child{opacity:0;transform:translate(var(--u), var(--u))}.btn-px-build .px b:nth-child(3){opacity:0;transform:translate(var(--u), calc(var(--u) * -1))}.btn-px-build:hover .px b:first-child,.btn-px-build:hover .px b:nth-child(3){opacity:1;transform:translate(0)}.btn-px-build:hover .px b:nth-child(3){transition-delay:50ms}:is(.btn-px-march,.btn-activate,.btn-outline,.btn-filled) .px b{transition:transform .24s var(--ease-brand)}:is(.btn-px-march,.btn-activate,.btn-outline,.btn-filled) .px b:first-child{transition-delay:.14s}:is(.btn-px-march,.btn-activate,.btn-outline,.btn-filled) .px b:nth-child(2){transition-delay:70ms}:is(.btn-px-march,.btn-activate,.btn-outline,.btn-filled) .px b:nth-child(3){transition-delay:0s}:is(.btn-px-march,.btn-activate,.btn-outline,.btn-filled):hover .px b{transform:translateX(calc(var(--u) * 2));transition-duration:.28s}:is(.btn-px-march,.btn-activate,.btn-outline,.btn-filled):hover .px b:first-child{transition-delay:0s}:is(.btn-px-march,.btn-activate,.btn-outline,.btn-filled):hover .px b:nth-child(2){transition-delay:70ms}:is(.btn-px-march,.btn-activate,.btn-outline,.btn-filled):hover .px b:nth-child(3){transition-delay:.14s}:is(.btn-px-march,.btn-activate,.btn-outline,.btn-filled):disabled:hover .px b{transform:none}.btn-cog{--cog-teeth:6}.btn-cog [data-flux-icon]{transition:transform .28s var(--ease-brand)}.btn-cog:hover:not(:disabled) [data-flux-icon]{transform:rotate(calc(360deg / var(--cog-teeth)))}.btn-cog:disabled:hover [data-flux-icon]{transform:none}@keyframes px-march-loop{0%,58%,to{transform:translate(0)}22%,46%{transform:translateX(var(--u))}}.btn-px-turn .px b{transition:transform var(--duration-base) var(--ease-brand)}.btn-px-turn:hover .px b{transform:rotate(45deg)}.btn-px-turn:active .px b{transform:rotate(90deg)}.btn-px-turn .px b:nth-child(2){transition-delay:50ms}.btn-px-turn .px b:nth-child(3){transition-delay:.1s}.btn-px-fire .px{transition:transform .5s var(--ease-brand), opacity .5s var(--ease-brand)}.btn-px-fire:active .px{opacity:0;transition-duration:.12s;transform:translate(1.15rem)}.btn-go .btn-run__working .px{color:var(--color-activation)}.btn-go .btn-run__working .px b{animation:px-march-loop .85s var(--ease-brand) infinite}.btn-go .btn-run__working .px b:nth-child(2){animation-delay:90ms}.btn-go .btn-run__working .px b:nth-child(3){animation-delay:.18s}.px-plot{background-image:linear-gradient(to right, color-mix(in oklab, var(--color-ink) 12%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklab, var(--color-ink) 12%, transparent) 1px, transparent 1px);background-size:var(--u) var(--u);outline:1px solid color-mix(in oklab, var(--color-ink) 12%, transparent);background-position:0 0}.px-stage{min-height:9rem;color:var(--color-ink);justify-content:center;align-items:center;display:flex}.btn-quiet{color:var(--color-ink);box-shadow:inset 0 0 0 1px var(--color-line-strong);background-color:#0000}.btn-bare{height:auto;color:var(--color-ink-muted);background-color:#0000;padding:0}.row-test{flex-wrap:wrap;align-items:center;gap:1.25rem;display:flex}@media (prefers-reduced-motion:reduce){.px,.px b,.btn-cog [data-flux-icon]{transition:none!important;animation:none!important}.btn-cog:hover [data-flux-icon]{transform:none}.btn-px-build .px b{opacity:1;transform:none}}
@@ -241,30 +241,19 @@
     <!--[if BLOCK]><![endif]-->        <span class="inline-block h-1.5 w-1.5 rounded-full bg-coral" aria-hidden="true"></span>
     <!--[if ENDBLOCK]><![endif]-->    Colour
 </p>
+            <h2 class="text-display-md mt-5">Primitives</h2>
+            <p class="mt-4 max-w-2xl text-sm text-ink-muted">
+                Verbatim from p.17. Always 100% solid &mdash; tints need C-MORE Marketing sign-off.
+            </p>
 
-            
-            <div>
-                <div class="enh-tabs" role="tablist" aria-label="Colour palette view" data-enh-tabs>
-                    <button type="button" class="enh-tab" role="tab" id="colour-tab-current"
-                            aria-controls="colour-panel-current" aria-selected="true">Current</button>
-                    <button type="button" class="enh-tab" role="tab" id="colour-tab-alt"
-                            aria-controls="colour-panel-alt" aria-selected="false" tabindex="-1">Alternatives</button>
-                </div>
-
-                <div id="colour-panel-current" class="enh-tabpanel" role="tabpanel" aria-labelledby="colour-tab-current">
-                    <h2 class="text-display-md mt-5">Primitives</h2>
-                    <p class="mt-4 max-w-2xl text-sm text-ink-muted">
-                        Verbatim from p.17. Always 100% solid &mdash; tints need C-MORE Marketing sign-off.
-                    </p>
-
-                    <h3 class="mt-12 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">The brand colours</h3>
-                    <p class="mt-3 max-w-2xl text-sm text-ink-muted">
-                        Three: the main identifies, the secondary is the ground almost everything
-                        sits on, the accent activates. They map onto the 50/35/15 rule exactly,
-                        though not in this order — the ground is the 50%.
-                    </p>
-                    <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                        <div class="flex flex-col gap-3">
+            <h3 class="mt-12 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">The brand colours</h3>
+            <p class="mt-3 max-w-2xl text-sm text-ink-muted">
+                Three: the main identifies, the secondary is the ground almost everything
+                sits on, the accent activates. They map onto the 50/35/15 rule exactly,
+                though not in this order — the ground is the 50%.
+            </p>
+            <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="flex flex-col gap-3">
     <div class="h-24 rounded-xl "
          style="background-color: #343434"></div>
     <div>
@@ -272,7 +261,7 @@
         <p class="mt-0.5 font-mono text-xs uppercase text-ink-subtle">#343434</p>
         <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->        <!--[if BLOCK]><![endif]--><p class="mt-1 text-xs leading-snug text-ink-muted">35%. Identifies: structure, type, chrome.</p><!--[if ENDBLOCK]><![endif]-->    </div>
 </div>
-                        <div class="flex flex-col gap-3">
+                <div class="flex flex-col gap-3">
     <div class="h-24 rounded-xl ring-1 ring-inset ring-line"
          style="background-color: #F2F1ED"></div>
     <div>
@@ -280,7 +269,7 @@
         <p class="mt-0.5 font-mono text-xs uppercase text-ink-subtle">#F2F1ED</p>
         <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->        <!--[if BLOCK]><![endif]--><p class="mt-1 text-xs leading-snug text-ink-muted">50%. The page ground, and the label on every solid brand button.</p><!--[if ENDBLOCK]><![endif]-->    </div>
 </div>
-                        <div class="flex flex-col gap-3">
+                <div class="flex flex-col gap-3">
     <div class="h-24 rounded-xl "
          style="background-color: #F46D4F"></div>
     <div>
@@ -288,18 +277,18 @@
         <p class="mt-0.5 font-mono text-xs uppercase text-ink-subtle">#F46D4F</p>
         <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->        <!--[if BLOCK]><![endif]--><p class="mt-1 text-xs leading-snug text-ink-muted">15%. Activates. Only large or bold text on it — 4.24:1.</p><!--[if ENDBLOCK]><![endif]-->    </div>
 </div>
-                    </div>
+            </div>
 
-                    <h3 class="mt-14 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">Supporting</h3>
-                    <p class="mt-3 max-w-2xl text-sm text-ink-muted">
-                        To communicate ALMA.
-                    </p>
-                    <p class="mt-2 max-w-2xl text-xs text-ink-subtle">
-                        Not wired to anything yet — no token reads them, so changing one changes
-                        nothing. Names are provisional.
-                    </p>
-                    <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                        <div class="flex flex-col gap-3">
+            <h3 class="mt-14 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">Supporting</h3>
+            <p class="mt-3 max-w-2xl text-sm text-ink-muted">
+                To communicate ALMA.
+            </p>
+            <p class="mt-2 max-w-2xl text-xs text-ink-subtle">
+                Not wired to anything yet — no token reads them, so changing one changes
+                nothing. Names are provisional.
+            </p>
+            <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="flex flex-col gap-3">
     <div class="h-24 rounded-xl ring-1 ring-inset ring-line"
          style="background-color: #D6D4CA"></div>
     <div>
@@ -307,7 +296,7 @@
         <p class="mt-0.5 font-mono text-xs uppercase text-ink-subtle">#D6D4CA</p>
         <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->        <!--[if BLOCK]><![endif]--><p class="mt-1 text-xs leading-snug text-ink-muted">Unassigned.</p><!--[if ENDBLOCK]><![endif]-->    </div>
 </div>
-                        <div class="flex flex-col gap-3">
+                <div class="flex flex-col gap-3">
     <div class="h-24 rounded-xl "
          style="background-color: #909DB6"></div>
     <div>
@@ -315,7 +304,7 @@
         <p class="mt-0.5 font-mono text-xs uppercase text-ink-subtle">#909DB6</p>
         <!--[if BLOCK]><![endif]--><p class="font-mono text-xs text-ink-subtle">PMS 535C</p><!--[if ENDBLOCK]><![endif]-->        <!--[if BLOCK]><![endif]--><p class="mt-1 text-xs leading-snug text-ink-muted">Unassigned here — but still the live value behind --color-line-strong.</p><!--[if ENDBLOCK]><![endif]-->    </div>
 </div>
-                        <div class="flex flex-col gap-3">
+                <div class="flex flex-col gap-3">
     <div class="h-24 rounded-xl "
          style="background-color: #DBC67E"></div>
     <div>
@@ -323,11 +312,11 @@
         <p class="mt-0.5 font-mono text-xs uppercase text-ink-subtle">#DBC67E</p>
         <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->        <!--[if BLOCK]><![endif]--><p class="mt-1 text-xs leading-snug text-ink-muted">Unassigned.</p><!--[if ENDBLOCK]><![endif]-->    </div>
 </div>
-                    </div>
+            </div>
 
-                    <h3 class="mt-14 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">Activation family &mdash; in use</h3>
-                    <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                        <div class="flex flex-col gap-3">
+            <h3 class="mt-14 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">Activation family &mdash; in use</h3>
+            <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="flex flex-col gap-3">
     <div class="h-24 rounded-xl "
          style="background-color: #F44E29"></div>
     <div>
@@ -335,7 +324,7 @@
         <p class="mt-0.5 font-mono text-xs uppercase text-ink-subtle">#F44E29</p>
         <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->        <!--[if BLOCK]><![endif]--><p class="mt-1 text-xs leading-snug text-ink-muted">The coral&#039;s hover state.</p><!--[if ENDBLOCK]><![endif]-->    </div>
 </div>
-                        <div class="flex flex-col gap-3">
+                <div class="flex flex-col gap-3">
     <div class="h-24 rounded-xl "
          style="background-color: #F9E7E3"></div>
     <div>
@@ -343,22 +332,22 @@
         <p class="mt-0.5 font-mono text-xs uppercase text-ink-subtle">#F9E7E3</p>
         <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->        <!--[if BLOCK]><![endif]--><p class="mt-1 text-xs leading-snug text-ink-muted">Activation, quietly — icon plates and subtle fills.</p><!--[if ENDBLOCK]><![endif]-->    </div>
 </div>
-                    </div>
+            </div>
 
-                    <div class="mt-8 max-w-2xl rounded-xl border border-line bg-surface-sunken p-5">
-                        <p class="text-sm font-semibold">Loose end: Blue #4E638B left the palette but not the code</p>
-                        <p class="mt-2 text-sm leading-relaxed text-ink-muted">
-                            It is no longer a supporting colour, yet it is still the value behind
-                            <code class="font-mono">--color-ink-muted</code> &mdash; every piece of secondary
-                            copy on this page, including this sentence. Same for
-                            <code class="font-mono">--color-line-strong</code>, which is Mid Blue. Until those two
-                            tokens are pointed somewhere else, the blues are still doing the work.
-                        </p>
-                    </div>
+            <div class="mt-8 max-w-2xl rounded-xl border border-line bg-surface-sunken p-5">
+                <p class="text-sm font-semibold">Loose end: Blue #4E638B left the palette but not the code</p>
+                <p class="mt-2 text-sm leading-relaxed text-ink-muted">
+                    It is no longer a supporting colour, yet it is still the value behind
+                    <code class="font-mono">--color-ink-muted</code> &mdash; every piece of secondary
+                    copy on this page, including this sentence. Same for
+                    <code class="font-mono">--color-line-strong</code>, which is Mid Blue. Until those two
+                    tokens are pointed somewhere else, the blues are still doing the work.
+                </p>
+            </div>
 
-                    <h3 class="mt-14 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">Primary neutrals &mdash; 50% of a layout</h3>
-                    <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                        <div class="flex flex-col gap-3">
+            <h3 class="mt-14 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">Primary neutrals &mdash; 50% of a layout</h3>
+            <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="flex flex-col gap-3">
     <div class="h-24 rounded-xl ring-1 ring-inset ring-line"
          style="background-color: #FAFAFA"></div>
     <div>
@@ -366,7 +355,7 @@
         <p class="mt-0.5 font-mono text-xs uppercase text-ink-subtle">#FAFAFA</p>
         <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->        <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->    </div>
 </div>
-                        <div class="flex flex-col gap-3">
+                <div class="flex flex-col gap-3">
     <div class="h-24 rounded-xl ring-1 ring-inset ring-line"
          style="background-color: #F2F1ED"></div>
     <div>
@@ -374,7 +363,7 @@
         <p class="mt-0.5 font-mono text-xs uppercase text-ink-subtle">#F2F1ED</p>
         <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->        <!--[if BLOCK]><![endif]--><p class="mt-1 text-xs leading-snug text-ink-muted">The page ground — and the secondary brand colour, above.</p><!--[if ENDBLOCK]><![endif]-->    </div>
 </div>
-                        <div class="flex flex-col gap-3">
+                <div class="flex flex-col gap-3">
     <div class="h-24 rounded-xl ring-1 ring-inset ring-line"
          style="background-color: #E9E7E2"></div>
     <div>
@@ -382,7 +371,7 @@
         <p class="mt-0.5 font-mono text-xs uppercase text-ink-subtle">#E9E7E2</p>
         <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->        <!--[if BLOCK]><![endif]--><p class="mt-1 text-xs leading-snug text-ink-muted">Sunken wells.</p><!--[if ENDBLOCK]><![endif]-->    </div>
 </div>
-                        <div class="flex flex-col gap-3">
+                <div class="flex flex-col gap-3">
     <div class="h-24 rounded-xl ring-1 ring-inset ring-line"
          style="background-color: #E0DED7"></div>
     <div>
@@ -390,211 +379,121 @@
         <p class="mt-0.5 font-mono text-xs uppercase text-ink-subtle">#E0DED7</p>
         <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->        <!--[if BLOCK]><![endif]--><p class="mt-1 text-xs leading-snug text-ink-muted">Hairlines.</p><!--[if ENDBLOCK]><![endif]-->    </div>
 </div>
+            </div>
+
+            <hr class="rule-activate my-16">
+
+            <h2 class="text-display-md">Sand &mdash; the neutral ramp</h2>
+            <p class="mt-4 max-w-2xl text-sm text-ink-muted">
+                Stock components default to a cold grey. They are re-pointed at this warm
+                ramp, and re-skin themselves. 50&ndash;300 are the manual's neutrals
+                untouched; 950 is the main colour.
+            </p>
+            <div class="mt-8 flex overflow-hidden rounded-xl ring-1 ring-inset ring-line">
+                <!--[if BLOCK]><![endif]-->                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #FAFAFA">
+                        <span class="font-mono text-[10px] text-ink/60">50</span>
                     </div>
-
-                    <hr class="rule-activate my-16">
-
-                    <h2 class="text-display-md">Sand &mdash; the neutral ramp</h2>
-                    <p class="mt-4 max-w-2xl text-sm text-ink-muted">
-                        Stock components default to a cold grey. They are re-pointed at this warm
-                        ramp, and re-skin themselves. 50&ndash;300 are the manual's neutrals
-                        untouched; 950 is the main colour.
-                    </p>
-                    <div class="mt-8 flex overflow-hidden rounded-xl ring-1 ring-inset ring-line">
-                        <!--[if BLOCK]><![endif]-->                            <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #FAFAFA">
-                                <span class="font-mono text-[10px] text-ink/60">50</span>
-                            </div>
-                                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #F2F1ED">
-                                <span class="font-mono text-[10px] text-ink/60">100</span>
-                            </div>
-                                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #E9E7E2">
-                                <span class="font-mono text-[10px] text-ink/60">200</span>
-                            </div>
-                                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #E0DED7">
-                                <span class="font-mono text-[10px] text-ink/60">300</span>
-                            </div>
-                                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #C3C0B8">
-                                <span class="font-mono text-[10px] text-ink/60">400</span>
-                            </div>
-                                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #96958E">
-                                <span class="font-mono text-[10px] text-off-white/80">500</span>
-                            </div>
-                                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #6E6E6A">
-                                <span class="font-mono text-[10px] text-off-white/80">600</span>
-                            </div>
-                                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #5F5F5C">
-                                <span class="font-mono text-[10px] text-off-white/80">700</span>
-                            </div>
-                                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #50504E">
-                                <span class="font-mono text-[10px] text-off-white/80">800</span>
-                            </div>
-                                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #424240">
-                                <span class="font-mono text-[10px] text-off-white/80">900</span>
-                            </div>
-                                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #343434">
-                                <span class="font-mono text-[10px] text-off-white/80">950</span>
-                            </div>
-                        <!--[if ENDBLOCK]><![endif]-->                    </div>
-
-                    <hr class="rule-activate my-16">
-
-                    <h2 class="text-display-md">Semantic tokens</h2>
-                    <p class="mt-4 max-w-2xl text-sm text-ink-muted">
-                        What a colour <em>means</em>. Components reference these, never the primitives &mdash;
-                        which is why dark mode works without touching a single component.
-                    </p>
-                    <div class="mt-8 overflow-x-auto">
-                        <table class="w-full min-w-[46rem] text-left text-sm">
-                            <thead class="border-b border-line text-xs uppercase tracking-wider text-ink-subtle">
-                                <tr><th class="py-3 pr-6 font-semibold">Token</th><th class="py-3 pr-6 font-semibold">Light</th><th class="py-3 pr-6 font-semibold">Dark</th><th class="py-3 font-semibold">Use</th></tr>
-                            </thead>
-                            <tbody class="divide-y divide-line">
-                                <!--[if BLOCK]><![endif]-->                                    <tr>
-                                        <td class="py-3 pr-6 font-mono text-xs">--color-accent</td>
-                                        <td class="py-3 pr-6 text-ink-muted">Graphite</td>
-                                        <td class="py-3 pr-6 text-ink-muted">Coral</td>
-                                        <td class="py-3 text-ink-muted">Primary buttons, links, focus rings. Flux reads this directly.</td>
-                                    </tr>
-                                                                    <tr>
-                                        <td class="py-3 pr-6 font-mono text-xs">--color-activation</td>
-                                        <td class="py-3 pr-6 text-ink-muted">Coral</td>
-                                        <td class="py-3 pr-6 text-ink-muted">Coral</td>
-                                        <td class="py-3 text-ink-muted">The 15%. One moment per viewport, foreground always Graphite — 4.24:1, so large or bold only.</td>
-                                    </tr>
-                                                                    <tr>
-                                        <td class="py-3 pr-6 font-mono text-xs">--color-ground</td>
-                                        <td class="py-3 pr-6 text-ink-muted">Light Beige</td>
-                                        <td class="py-3 pr-6 text-ink-muted">Graphite</td>
-                                        <td class="py-3 text-ink-muted">The page itself.</td>
-                                    </tr>
-                                                                    <tr>
-                                        <td class="py-3 pr-6 font-mono text-xs">--color-surface</td>
-                                        <td class="py-3 pr-6 text-ink-muted">White</td>
-                                        <td class="py-3 pr-6 text-ink-muted">#3E3E3E</td>
-                                        <td class="py-3 text-ink-muted">Cards sitting on the ground.</td>
-                                    </tr>
-                                                                    <tr>
-                                        <td class="py-3 pr-6 font-mono text-xs">--color-surface-sunken</td>
-                                        <td class="py-3 pr-6 text-ink-muted">Mid Beige</td>
-                                        <td class="py-3 pr-6 text-ink-muted">#2A2A2A</td>
-                                        <td class="py-3 text-ink-muted">Wells and inset panels.</td>
-                                    </tr>
-                                                                    <tr>
-                                        <td class="py-3 pr-6 font-mono text-xs">--color-ink</td>
-                                        <td class="py-3 pr-6 text-ink-muted">Graphite</td>
-                                        <td class="py-3 pr-6 text-ink-muted">Off White</td>
-                                        <td class="py-3 text-ink-muted">Headings and primary copy.</td>
-                                    </tr>
-                                                                    <tr>
-                                        <td class="py-3 pr-6 font-mono text-xs">--color-ink-muted</td>
-                                        <td class="py-3 pr-6 text-ink-muted">Blue</td>
-                                        <td class="py-3 pr-6 text-ink-muted">Mid Blue</td>
-                                        <td class="py-3 text-ink-muted">Secondary copy. 5.3:1 — AA. Not recoloured; see Colour notes.</td>
-                                    </tr>
-                                                                    <tr>
-                                        <td class="py-3 pr-6 font-mono text-xs">--color-ink-subtle</td>
-                                        <td class="py-3 pr-6 text-ink-muted">Sand 600</td>
-                                        <td class="py-3 pr-6 text-ink-muted">#A2A2A2</td>
-                                        <td class="py-3 text-ink-muted">Meta and captions. 4.9:1 — AA.</td>
-                                    </tr>
-                                                                    <tr>
-                                        <td class="py-3 pr-6 font-mono text-xs">--color-line</td>
-                                        <td class="py-3 pr-6 text-ink-muted">Dark Beige</td>
-                                        <td class="py-3 pr-6 text-ink-muted">Mid Blue 24%</td>
-                                        <td class="py-3 text-ink-muted">Hairlines. Elevation starts here, not with shadow.</td>
-                                    </tr>
-                                <!--[if ENDBLOCK]><![endif]-->                            </tbody>
-                        </table>
+                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #F2F1ED">
+                        <span class="font-mono text-[10px] text-ink/60">100</span>
                     </div>
-                </div>
+                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #E9E7E2">
+                        <span class="font-mono text-[10px] text-ink/60">200</span>
+                    </div>
+                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #E0DED7">
+                        <span class="font-mono text-[10px] text-ink/60">300</span>
+                    </div>
+                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #C3C0B8">
+                        <span class="font-mono text-[10px] text-ink/60">400</span>
+                    </div>
+                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #96958E">
+                        <span class="font-mono text-[10px] text-off-white/80">500</span>
+                    </div>
+                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #6E6E6A">
+                        <span class="font-mono text-[10px] text-off-white/80">600</span>
+                    </div>
+                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #5F5F5C">
+                        <span class="font-mono text-[10px] text-off-white/80">700</span>
+                    </div>
+                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #50504E">
+                        <span class="font-mono text-[10px] text-off-white/80">800</span>
+                    </div>
+                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #424240">
+                        <span class="font-mono text-[10px] text-off-white/80">900</span>
+                    </div>
+                                    <div class="flex h-24 flex-1 items-end justify-center pb-2" style="background-color: #343434">
+                        <span class="font-mono text-[10px] text-off-white/80">950</span>
+                    </div>
+                <!--[if ENDBLOCK]><![endif]-->            </div>
 
-                
-                <div id="colour-panel-alt" class="enh-tabpanel" role="tabpanel" aria-labelledby="colour-tab-alt" hidden>
-                    <h2 class="text-display-md">What we&rsquo;re trying</h2>
+            <hr class="rule-activate my-16">
 
-                    <p class="mt-12 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">Activation hue study</p>
-                    <p class="mt-3 max-w-2xl text-sm text-ink-muted">
-                        Testing a lighter blue against slight variations of the lime. Only the hue moves
-                        &mdash; all three greens sit at the same lightness, so nothing else is changing.
-                    </p>
-                    <div class="hue-study mt-6">
-                        <!--[if BLOCK]><![endif]-->                            <div class="hue-col" style="--g: #DFF000">
-                                <p class="hue-label"><b>More yellow</b> &middot; #DFF000 &middot; hue 115&deg;</p>
-                                <div class="pair-panel hue-panel-blue">
-                                    <p>Electric Blue carries the weight.</p>
-                                    <span class="pair-chip">Activate</span>
-                                </div>
-                                <div class="pair-panel hue-panel-green">
-                                    <p>Warmer, closer to acid yellow.</p>
-                                    <span class="pair-chip">Secondary</span>
-                                </div>
-                            </div>
-                                                    <div class="hue-col" style="--g: #C0FA00">
-                                <p class="hue-label"><b>Lime &mdash; current</b> &middot; #C0FA00 &middot; hue 125&deg;</p>
-                                <div class="pair-panel hue-panel-blue">
-                                    <p>Electric Blue carries the weight.</p>
-                                    <span class="pair-chip">Activate</span>
-                                </div>
-                                <div class="pair-panel hue-panel-green">
-                                    <p>The brand lime, unchanged.</p>
-                                    <span class="pair-chip">Secondary</span>
-                                </div>
-                            </div>
-                                                    <div class="hue-col" style="--g: #9DFF34">
-                                <p class="hue-label"><b>Less yellow</b> &middot; #9DFF34 &middot; hue 133&deg;</p>
-                                <div class="pair-panel hue-panel-blue">
-                                    <p>Electric Blue carries the weight.</p>
-                                    <span class="pair-chip">Activate</span>
-                                </div>
-                                <div class="pair-panel hue-panel-green">
-                                    <p>Cooler, closer to grass green.</p>
-                                    <span class="pair-chip">Secondary</span>
-                                </div>
-                            </div>
-                        <!--[if ENDBLOCK]><![endif]-->                    </div>
-
-                    <p class="mt-16 text-sm font-semibold uppercase tracking-[0.1em] text-ink-subtle">Acid yellow &amp; greys</p>
-                    <p class="mt-3 max-w-2xl text-sm text-ink-muted">
-                        The acid yellow against three neutral greys instead of a blue. Only the grey
-                        moves. All three clear 4.5:1 on the yellow in both directions, so any of them
-                        can carry it or be carried by it.
-                    </p>
-                    <div class="hue-study mt-6">
-                        <!--[if BLOCK]><![endif]-->                            <div class="hue-col" style="--gy: #1B1B1B">
-                                <p class="hue-label"><b>Near black</b> &middot; #1B1B1B</p>
-                                <div class="pair-panel grey-panel-dark">
-                                    <p>Grey 1B1B1B holds the surface.</p>
-                                    <span class="pair-chip">Activate</span>
-                                </div>
-                                <div class="pair-panel grey-panel-acid">
-                                    <p>Acid yellow holds the surface.</p>
-                                    <span class="pair-chip">Ink</span>
-                                </div>
-                            </div>
-                                                    <div class="hue-col" style="--gy: #383838">
-                                <p class="hue-label"><b>Charcoal</b> &middot; #383838</p>
-                                <div class="pair-panel grey-panel-dark">
-                                    <p>Grey 383838 holds the surface.</p>
-                                    <span class="pair-chip">Activate</span>
-                                </div>
-                                <div class="pair-panel grey-panel-acid">
-                                    <p>Acid yellow holds the surface.</p>
-                                    <span class="pair-chip">Ink</span>
-                                </div>
-                            </div>
-                                                    <div class="hue-col" style="--gy: #585858">
-                                <p class="hue-label"><b>Mid grey</b> &middot; #585858</p>
-                                <div class="pair-panel grey-panel-dark">
-                                    <p>Grey 585858 holds the surface.</p>
-                                    <span class="pair-chip">Activate</span>
-                                </div>
-                                <div class="pair-panel grey-panel-acid">
-                                    <p>Acid yellow holds the surface.</p>
-                                    <span class="pair-chip">Ink</span>
-                                </div>
-                            </div>
-                        <!--[if ENDBLOCK]><![endif]-->                    </div>
-                </div>
+            <h2 class="text-display-md">Semantic tokens</h2>
+            <p class="mt-4 max-w-2xl text-sm text-ink-muted">
+                What a colour <em>means</em>. Components reference these, never the primitives &mdash;
+                which is why dark mode works without touching a single component.
+            </p>
+            <div class="mt-8 overflow-x-auto">
+                <table class="w-full min-w-[46rem] text-left text-sm">
+                    <thead class="border-b border-line text-xs uppercase tracking-wider text-ink-subtle">
+                        <tr><th class="py-3 pr-6 font-semibold">Token</th><th class="py-3 pr-6 font-semibold">Light</th><th class="py-3 pr-6 font-semibold">Dark</th><th class="py-3 font-semibold">Use</th></tr>
+                    </thead>
+                    <tbody class="divide-y divide-line">
+                        <!--[if BLOCK]><![endif]-->                            <tr>
+                                <td class="py-3 pr-6 font-mono text-xs">--color-accent</td>
+                                <td class="py-3 pr-6 text-ink-muted">Graphite</td>
+                                <td class="py-3 pr-6 text-ink-muted">Coral</td>
+                                <td class="py-3 text-ink-muted">Primary buttons, links, focus rings. Flux reads this directly.</td>
+                            </tr>
+                                                    <tr>
+                                <td class="py-3 pr-6 font-mono text-xs">--color-activation</td>
+                                <td class="py-3 pr-6 text-ink-muted">Coral</td>
+                                <td class="py-3 pr-6 text-ink-muted">Coral</td>
+                                <td class="py-3 text-ink-muted">The 15%. One moment per viewport, foreground always Graphite — 4.24:1, so large or bold only.</td>
+                            </tr>
+                                                    <tr>
+                                <td class="py-3 pr-6 font-mono text-xs">--color-ground</td>
+                                <td class="py-3 pr-6 text-ink-muted">Light Beige</td>
+                                <td class="py-3 pr-6 text-ink-muted">Graphite</td>
+                                <td class="py-3 text-ink-muted">The page itself.</td>
+                            </tr>
+                                                    <tr>
+                                <td class="py-3 pr-6 font-mono text-xs">--color-surface</td>
+                                <td class="py-3 pr-6 text-ink-muted">White</td>
+                                <td class="py-3 pr-6 text-ink-muted">#3E3E3E</td>
+                                <td class="py-3 text-ink-muted">Cards sitting on the ground.</td>
+                            </tr>
+                                                    <tr>
+                                <td class="py-3 pr-6 font-mono text-xs">--color-surface-sunken</td>
+                                <td class="py-3 pr-6 text-ink-muted">Mid Beige</td>
+                                <td class="py-3 pr-6 text-ink-muted">#2A2A2A</td>
+                                <td class="py-3 text-ink-muted">Wells and inset panels.</td>
+                            </tr>
+                                                    <tr>
+                                <td class="py-3 pr-6 font-mono text-xs">--color-ink</td>
+                                <td class="py-3 pr-6 text-ink-muted">Graphite</td>
+                                <td class="py-3 pr-6 text-ink-muted">Off White</td>
+                                <td class="py-3 text-ink-muted">Headings and primary copy.</td>
+                            </tr>
+                                                    <tr>
+                                <td class="py-3 pr-6 font-mono text-xs">--color-ink-muted</td>
+                                <td class="py-3 pr-6 text-ink-muted">Blue</td>
+                                <td class="py-3 pr-6 text-ink-muted">Mid Blue</td>
+                                <td class="py-3 text-ink-muted">Secondary copy. 5.3:1 — AA. Not recoloured; see Colour notes.</td>
+                            </tr>
+                                                    <tr>
+                                <td class="py-3 pr-6 font-mono text-xs">--color-ink-subtle</td>
+                                <td class="py-3 pr-6 text-ink-muted">Sand 600</td>
+                                <td class="py-3 pr-6 text-ink-muted">#A2A2A2</td>
+                                <td class="py-3 text-ink-muted">Meta and captions. 4.9:1 — AA.</td>
+                            </tr>
+                                                    <tr>
+                                <td class="py-3 pr-6 font-mono text-xs">--color-line</td>
+                                <td class="py-3 pr-6 text-ink-muted">Dark Beige</td>
+                                <td class="py-3 pr-6 text-ink-muted">Mid Blue 24%</td>
+                                <td class="py-3 text-ink-muted">Hairlines. Elevation starts here, not with shadow.</td>
+                            </tr>
+                        <!--[if ENDBLOCK]><![endif]-->                    </tbody>
+                </table>
             </div>
     </div>
 </section>
@@ -1210,7 +1109,7 @@
     Card &mdash; Flux, on brand tokens
 </h3>
             <div class="mt-5 grid gap-5 md:grid-cols-2">
-                <div class="border [:where(&amp;)]:bg-white [:where(&amp;)]:border-zinc-200 dark:[:where(&amp;)]:bg-white/10 dark:[:where(&amp;)]:border-white/10 [:where(&amp;)]:p-6 [:where(&amp;)]:rounded-xl [--flux-bleed:1.5rem] space-y-4" data-flux-card>
+                <div class="border [:where(&amp;)]:bg-white [:where(&amp;)]:border-zinc-200 dark:[:where(&amp;)]:bg-white/10 dark:[:where(&amp;)]:border-white/10 [:where(&amp;)]:p-6 [:where(&amp;)]:rounded-xl [--flux-bleed:1.5rem] card-outline space-y-4" data-flux-card>
     <div class="font-medium [:where(&amp;)]:text-zinc-800 [:where(&amp;)]:dark:text-white text-base [&amp;:has(+[data-flux-subheading])]:mb-2 [[data-flux-subheading]+&amp;]:mt-2" data-flux-heading>Outline</div>
                     <p class="[:where(&amp;)]:font-normal [:where(&amp;)]:text-sm [:where(&amp;)]:text-zinc-500 [:where(&amp;)]:dark:text-white/70" data-flux-text >The default. A border, some padding, and the warm ground showing through.</p>                    <button type="button" class="relative items-center font-medium justify-center whitespace-nowrap disabled:opacity-50 dark:disabled:opacity-50 disabled:cursor-default disabled:pointer-events-none disabled:shadow-none justify-center h-8 text-sm rounded-md gap-2 ps-3 pe-3 inline-flex  bg-zinc-800/5 hover:bg-zinc-800/10 dark:bg-white/10 dark:hover:bg-white/20 text-zinc-800 dark:text-white   [[data-flux-button-group]_&amp;]:border-e [:is([data-flux-button-group]&gt;&amp;:last-child,_[data-flux-button-group]_:last-child&gt;&amp;)]:border-e-0 [[data-flux-button-group]_&amp;]:border-zinc-200/80 dark:[[data-flux-button-group]_&amp;]:border-zinc-900/50    btn-filled" data-flux-button="data-flux-button" data-flux-group-target="data-flux-group-target">
         Action
@@ -1238,15 +1137,15 @@
                     <h4 class="mt-5 font-semibold">Standard</h4>
                     <p class="mt-2 text-sm text-ink-muted">Hairline first, shadow second. Lifts 2px on hover.</p>
 </div>
-                <div class="tile tile-interactive">
-    <div class="icon-plate icon-plate-activate">
+                <div class="tile tile-interactive tile-activate">
+    <div class="icon-plate">
     <svg class="shrink-0 [:where(&amp;)]:size-6 size-6 icon-brand" data-flux-icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
   <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"/>
 </svg>
 
         </div>
-                    <h4 class="mt-5 font-semibold">Activated plate</h4>
-                    <p class="mt-2 text-sm text-ink-muted">Coral Tint fill. Use for the one thing that matters most.</p>
+                    <h4 class="mt-5 font-semibold">Activated card</h4>
+                    <p class="mt-2 text-sm text-ink-muted">The card carries the accent; the plate goes dark so it stands on it. Use for the one thing that matters most.</p>
 </div>
                 <div class="tile">
     <div class="icon-plate">
@@ -3527,7 +3426,7 @@
     <dialog
         
         class="p-6 [:where(&amp;)]:max-w-xl [:where(&amp;)]:min-w-xs shadow-lg rounded-xl bg-white dark:bg-zinc-800 ring ring-black/5 dark:ring-zinc-700 shadow-lg rounded-xl md:w-[28rem]"
-         data-modal="ds-modal"                                 x-data="fluxModal('ds-modal', 'y2xN53j3dH6EHVv5Mc9v')"
+         data-modal="ds-modal"                                 x-data="fluxModal('ds-modal', 'GuxrVapE63GvX1evjaD4')"
                 x-on:modal-show.document="handleShow($event)"
         x-on:modal-close.document="handleClose($event)"
     >
@@ -3575,7 +3474,7 @@
     <dialog
         
         class="fixed m-0 p-8 max-h-dvh min-h-dvh md:[:where(&amp;)]:min-w-[25rem] overflow-y-auto ml-auto [--flux-flyout-translate:translateX(50px)] border-s rtl:ml-0 rtl:mr-auto rtl:[--flux-flyout-translate:translateX(-50px)] bg-white dark:bg-zinc-800 border-transparent dark:border-zinc-700 space-y-6"
-         data-modal="ds-flyout"          data-flux-flyout                         x-data="fluxModal('ds-flyout', 'y2xN53j3dH6EHVv5Mc9v')"
+         data-modal="ds-flyout"          data-flux-flyout                         x-data="fluxModal('ds-flyout', 'GuxrVapE63GvX1evjaD4')"
                 x-on:modal-show.document="handleShow($event)"
         x-on:modal-close.document="handleClose($event)"
     >
@@ -4045,6 +3944,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
-<script>document.addEventListener(`DOMContentLoaded`,function(){document.querySelectorAll(`[data-enh-tabs]`).forEach(function(e){var t=Array.prototype.slice.call(e.querySelectorAll(`[role="tab"]`));if(!t.length)return;function n(e){return document.getElementById(e.getAttribute(`aria-controls`))}function r(e){t.forEach(function(t){var r=t===e;t.setAttribute(`aria-selected`,r?`true`:`false`),t.tabIndex=r?0:-1;var i=n(t);i&&(i.hidden=!r)})}t.forEach(function(e,n){e.addEventListener(`click`,function(){r(e)}),e.addEventListener(`keydown`,function(e){var i=e.key===`ArrowRight`?1:e.key===`ArrowLeft`?-1:0;if(i){e.preventDefault();var a=t[(n+i+t.length)%t.length];a.focus(),r(a)}})}),r(t.filter(function(e){return e.getAttribute(`aria-selected`)===`true`})[0]||t[0])})}),document.addEventListener(`DOMContentLoaded`,function(){var e=document.querySelector(`[data-enh-rail]`);if(!e)return;var t=[],n=0;document.querySelectorAll(`section[id]`).forEach(function(r){var i=r.querySelector(`.eyebrow`),a=document.createElement(`div`);a.className=`enh-rail__group`;var o=document.createElement(`a`);o.className=`enh-rail__section`,o.href=`#`+r.id,o.textContent=i?i.textContent.trim():r.id,a.appendChild(o),r.querySelectorAll(`h2, h3`).forEach(function(e){e.id||=`h-`+ ++n;var r=document.createElement(`a`);r.className=`enh-rail__item`+(e.tagName===`H3`?` enh-rail__item--sub`:``),r.href=`#`+e.id,r.textContent=e.textContent.replace(/\s+/g,` `).trim(),a.appendChild(r),t.push({heading:e,link:r})}),e.appendChild(a)}),e.addEventListener(`click`,function(e){var t=e.target.closest(`a`);if(t){var n=document.getElementById(t.getAttribute(`href`).slice(1));if(n){e.preventDefault();var r=n.closest(`.enh-tabpanel`);if(r&&r.hidden){var i=document.getElementById(r.getAttribute(`aria-labelledby`));i&&i.click()}n.scrollIntoView({behavior:`smooth`,block:`start`}),history.replaceState(null,``,`#`+n.id)}}});var r=null,i=!1;function a(){i=!1;var n=null;if(t.forEach(function(e){e.heading.offsetParent!==null&&e.heading.getBoundingClientRect().top<=140&&(n=e)}),n!==r&&(r&&r.link.removeAttribute(`aria-current`),r=n,r)){r.link.setAttribute(`aria-current`,`true`);var a=r.link.getBoundingClientRect(),o=e.getBoundingClientRect();(a.top<o.top+40||a.bottom>o.bottom-40)&&r.link.scrollIntoView({block:`center`})}}window.addEventListener(`scroll`,function(){i||(i=!0,requestAnimationFrame(a))},{passive:!0}),a()});</script>
+<script>document.addEventListener(`DOMContentLoaded`,function(){var e=document.querySelector(`[data-enh-rail]`);if(!e)return;var t=[],n=0;document.querySelectorAll(`section[id]`).forEach(function(r){var i=r.querySelector(`.eyebrow`),a=document.createElement(`div`);a.className=`enh-rail__group`;var o=document.createElement(`a`);o.className=`enh-rail__section`,o.href=`#`+r.id,o.textContent=i?i.textContent.trim():r.id,a.appendChild(o),r.querySelectorAll(`h2, h3`).forEach(function(e){e.id||=`h-`+ ++n;var r=document.createElement(`a`);r.className=`enh-rail__item`+(e.tagName===`H3`?` enh-rail__item--sub`:``),r.href=`#`+e.id,r.textContent=e.textContent.replace(/\s+/g,` `).trim(),a.appendChild(r),t.push({heading:e,link:r})}),e.appendChild(a)}),e.addEventListener(`click`,function(e){var t=e.target.closest(`a`);if(t){var n=document.getElementById(t.getAttribute(`href`).slice(1));n&&(e.preventDefault(),n.scrollIntoView({behavior:`smooth`,block:`start`}),history.replaceState(null,``,`#`+n.id))}});var r=null,i=!1;function a(){i=!1;var n=null;if(t.forEach(function(e){e.heading.getBoundingClientRect().top<=140&&(n=e)}),n!==r&&(r&&r.link.removeAttribute(`aria-current`),r=n,r)){r.link.setAttribute(`aria-current`,`true`);var a=r.link.getBoundingClientRect(),o=e.getBoundingClientRect();(a.top<o.top+40||a.bottom>o.bottom-40)&&r.link.scrollIntoView({block:`center`})}}window.addEventListener(`scroll`,function(){i||(i=!0,requestAnimationFrame(a))},{passive:!0}),a()});</script>
 </body>
 </html>

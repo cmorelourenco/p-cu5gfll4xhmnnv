@@ -28,7 +28,7 @@ Everything below exists to make that easy to follow and awkward to break.
 Three layers, in `resources/css/app.css`. Each one only ever reads from the one above.
 
 ```
-1  PRIMITIVES   --color-deep-blue, --color-lime, …   verbatim from p.17, never edited
+1  PRIMITIVES   --color-graphite, --color-coral, …   the three brand colours
 2  SEMANTICS    --color-accent, --color-ground, …    what a colour MEANS
 3  SCALES       radius, type, shadow, motion
 ```
@@ -120,41 +120,17 @@ Neutral equivalents at the same measured ratios are `#636363` (5.32:1) and
 | `--color-ink-subtle` | Sand 600 | `#A2A2A2` | Meta, captions — 4.9:1, AA |
 | `--color-line` | Dark Beige | Mid Blue 24% | Hairlines |
 
-### Secondary — Electric Blue
+### There is no secondary colour token
 
-**Stale, and proposed rather than approved.** It was drawn to sit against Deep
-Blue and Lime, neither of which is in the system any more — its whole argument
-("holds the family hue at double the chroma") was about a blue family that has
-been replaced by a neutral. It still renders on the Alternatives tab; treat it
-as a record of a decision made under the old palette, not a live candidate.
-The same goes for the activation hue study beside it, which tests variants of
-a lime that is gone.
+An Electric Blue was once proposed as one, and a tabbed *Alternatives* panel on
+the colour section carried it alongside two hue studies. All of it argued about
+Deep Blue and Lime, so the recolour left it describing a palette that no longer
+existed, and it has been removed along with the tab.
 
-The original note follows.
-
-**Proposed, not approved.** It sits behind the *Alternatives* tab on the colour
-section for exactly that reason; nothing in the shipped page spends it.
-
-| Token | Light | Dark |
-|---|---|---|
-| `--color-secondary` | `#3B57AB` Electric Blue | `#789AF4` Electric Lift |
-| `--color-secondary-hover` | `#2D4694` Electric Deep | `#9BB6F7` |
-| `--color-secondary-foreground` | White | Deep Blue |
-| `--color-secondary-subtle` | `#E8F0FF` | `#1E2B51` |
-
-Every blue already in the system sits at OKLCH hue 262–274° but at chroma
-0.04–0.07, which is why they read as grey. This holds the family hue (267°,
-between Blue's 263° and Deep Blue's 271°) at roughly double that chroma, 0.138.
-
-It is deliberately **not** at the sRGB edge. An earlier pass ran the base at
-chroma 0.261 (`#2540F2`) and it was genuinely electric. The base is now the
-dark-mode lift `#789AF4` taken down to L 0.48 — same hue, same chroma, darker.
-Light and dark are therefore one colour at two lightnesses rather than two
-separate decisions. Measured: 5.92 on the ground, 6.69 white on it, **5.39 for
-Lime on it**, 6.32 both ways in dark. All AA or better.
-
-`#3B57AB` carries **PMS TBC** — a coated match should be straightforward at this
-chroma, but it has not been checked against a physical guide.
+Note the word "secondary" now means the Light Beige — one of the three brand
+colours, the ground — and not a third accent. The old `--color-secondary`
+token is gone; `.enh-rail`'s focus ring was the only live thing still reading
+it and now takes `--color-accent`, which is where focus belongs.
 
 ### Contrast, measured
 
@@ -321,9 +297,9 @@ section, and each keeps its old id (`#actions`, `#content`, `#forms`, `#data`,
 | `spinner` | Convergence. Needs a document-unique `name` for its mask |
 | `progress-units` | Turn. `value` 0–100, or `demo` to self-cycle (indeterminate). Frontier square takes `--lead-fill` |
 | `lead` | Lead paragraph (Figtree Light) |
-| `eyebrow` | Uppercase label with lime tick |
-| `tile` | Feature card. `interactive` adds hover lift |
-| `icon-plate` | Icon in a tile. `activate` for the Light Lime fill |
+| `eyebrow` | Uppercase label with a coral tick |
+| `tile` | Feature card. `interactive` adds hover lift; `activate` makes the **card** the accent |
+| `icon-plate` | Icon in a tile. `activate` for the quiet Coral Tint fill (standalone plates only) |
 | `stat` | Number + label |
 | `brand` | Wordmark, inherits `currentColor` |
 | `navbar` `footer` `cta` | Page furniture |
@@ -353,8 +329,8 @@ shape, and takes the label from 4.24:1 to 10.96:1.
 | `variant="ghost"` + `.btn-ghost` | No chrome at all. Icon-only buttons and dense rows. |
 | `variant="danger"` | Destructive and irreversible. Left exactly as Flux ships it — the only variant whose meaning comes from outside the brand. |
 
-**`primary` is the lime button.** Flux ships `variant="primary"` reading
-`--color-accent` (Deep Blue in light, Lime in dark). `.btn-activate` overrides
+**`primary` is the accent button.** Flux ships `variant="primary"` reading
+`--color-accent` (Graphite in light, Coral in dark). `.btn-activate` overrides
 that to the activation treatment **on buttons only**: of the 15 elements
 resolving `--color-accent`, 4 are buttons and 11 are form controls — checkbox
 ticks, radio dots, switch fills — which are untouched. So there is one way to
@@ -416,8 +392,8 @@ inputs** — `document.querySelectorAll('input[type=radio]')` returns nothing.
 | Toast | Dispatched from the server | `wire:click="notify(...)"` → `Flux::toast()` |
 | Progress | Value is state | `wire:click="nudgeProgress(...)"` → `--p` on the unit bar |
 
-**The frontier square is lime.** The last square with any fill takes
-`--lead-fill` (which is `--color-activation`, not the lime primitive, so a
+**The frontier square takes the accent.** The last square with any fill uses
+`--lead-fill` (which is `--color-activation`, not the coral primitive, so a
 rebrand moves it along with the primary button). It is picked by arithmetic on
 `--p` and `--n` rather than `:nth-child`, because which square it is moves with
 the value:
@@ -432,11 +408,11 @@ Two half-open tests multiplied: the fill has reached me, and has not yet passed
 me. **The `+ 1` on the second is load-bearing** — it makes that bound inclusive.
 Every nudge is 10, so a driven bar always lands on a multiple of ten, where no
 square is part-turned; without it the controlled bar would never light up at
-all. Mid-cycle the frontier square is both part-turned and lime. An empty bar
-has no frontier, so nothing is lime at 0.
+all. Mid-cycle the frontier square is both part-turned and coral. An empty bar
+has no frontier, so nothing is coloured at 0.
 
 Note this spends activation. If the bar shares a viewport with a primary
-button, that is two lime moments, and the 15% rule says one.
+button, that is two activation moments, and the 15% rule says one.
 
 The gallery shows **two bars**, because one cannot show both things at once: a
 `demo` bar that never stops, and the same component on `$progress` with the

@@ -121,10 +121,12 @@
      The icon and the arrow do NOT take the label colour — they hold
      --color-activation-mark (graphite, 4.24:1) so the mark stays legible and
      reads as distinct from the label. */
-  /* The label on any SOLID brand button — coral-filled or graphite-filled.
-     One token, so the two stay in step. The mark (icon, pixel arrow) takes
-     the other brand colour instead, which is what separates it from the
-     label: graphite on the coral button, coral on the graphite one. */
+  /* Whatever sits on a SOLID brand fill — the coral or the graphite. Button
+     labels, the activated icon plate. One token, so they stay in step.
+
+     On buttons the mark (icon, pixel arrow) takes the OTHER brand colour
+     instead, which is what separates it from the label: graphite on the
+     coral button, coral on the graphite one. */
   --color-brand-label:           var(--color-light-beige);
 
   --color-activation:            var(--color-coral);
@@ -416,6 +418,9 @@
     background-color: var(--color-surface-sunken);
     color: var(--color-ink);
   }
+  /* Quiet activation, for a plate standing on its own. Inside a tile the
+     accent goes on the CARD instead and this is overridden — see
+     .tile-activate in enhanced.css. */
   .icon-plate-activate {
     background-color: var(--color-activation-subtle);
     color: var(--color-graphite);
@@ -425,7 +430,7 @@
     color: var(--color-off-white);
   }
 
-  /* A hairline that carries the lime accent at one end. */
+  /* A hairline that carries the accent at one end. */
   .rule-activate {
     height: 1px;
     border: 0;
