@@ -191,6 +191,34 @@
   transform: none;
 }
 
+/* --- The cogwheel --------------------------------------------------------
+   The same rule as the march, expressed as rotation.
+
+   The arrow's one constraint is that every move starts and ends on a whole
+   unit — it never drifts to 5px and stops. A cog has whole units too: its
+   teeth. cog-6-tooth has six, so one unit is 60 degrees, and turning by
+   exactly that lands the shape back on itself. It reads as a click into
+   place rather than a spin, which is the point — a spin means waiting, and
+   this button is not waiting for anything.
+
+   Same easing and duration as the march, so an icon-only button and a
+   labelled one move at the same speed. Change the tooth count and you must
+   change the angle: --cog-teeth exists so the two cannot drift apart. */
+.btn-cog {
+  --cog-teeth: 6;
+}
+.btn-cog [data-flux-icon] {
+  transition: transform 0.28s var(--ease-brand);
+}
+.btn-cog:hover:not(:disabled) [data-flux-icon] {
+  transform: rotate(calc(360deg / var(--cog-teeth)));
+}
+/* Flux's disabled state kills pointer events, but a disabled button reached
+   by other means should not turn either — same guard as the arrow. */
+.btn-cog:disabled:hover [data-flux-icon] {
+  transform: none;
+}
+
 /* The loop this used to be still exists, but only where a loop is honest —
    the waiting state at the bottom of the page. */
 @keyframes px-march-loop {
@@ -296,9 +324,13 @@
 
 @media (prefers-reduced-motion: reduce) {
   .px,
-  .px b {
+  .px b,
+  .btn-cog [data-flux-icon] {
     transition: none !important;
     animation: none !important;
+  }
+  .btn-cog:hover [data-flux-icon] {
+    transform: none;
   }
   .btn-px-build .px b {
     opacity: 1;

@@ -41,7 +41,7 @@
      Its foreground flips to Deep Blue, exactly as activation does. */
   --color-secondary: var(--color-electric-lift);
   --color-secondary-hover: #9bb6f7;
-  --color-secondary-foreground: var(--color-deep-blue); /* 6.32:1 */
+  --color-secondary-foreground: var(--color-graphite); /* 6.32:1 */
   --color-secondary-subtle: #1e2b51;
 }
 
@@ -124,12 +124,12 @@
 }
 .hue-panel-blue .pair-chip {
   background-color: var(--g);
-  color: var(--color-deep-blue);
+  color: var(--color-graphite);
 }
 
 .hue-panel-green {
   background-color: var(--g);
-  color: var(--color-deep-blue);
+  color: var(--color-graphite);
 }
 .hue-panel-green .pair-chip {
   background-color: var(--color-secondary);
@@ -437,10 +437,20 @@ h3 + .sub-box--wrap {
    Deep Blue ground, lime label. The arrow takes currentColor, so it turns
    lime with the text and needs no rule of its own. */
 .btn-filled[data-flux-button] {
-  background-color: var(--color-deep-blue);
-  color: var(--color-activation);
+  background-color: var(--color-graphite);
+  /* Was the coral. That put the activation colour on every button in the
+     sizes and states rows, which is the 15% spent on the quietest control
+     in the system. The label is the brand label; the coral moves to the
+     mark, where one small shape carries it. */
+  color: var(--color-brand-label);   /* 10.96:1 */
   border-color: transparent;
   box-shadow: none;
+}
+/* Icons and the pixel arrow take the other brand colour, mirroring the
+   primary button where the label is light and the mark is graphite. */
+.btn-filled[data-flux-button] [data-flux-icon],
+.btn-filled[data-flux-button] .px {
+  color: var(--color-activation);    /* 4.24:1 — a mark, not text */
 }
 .btn-filled[data-flux-button]:hover:not(:disabled) {
   background-color: var(--color-sand-900);
@@ -529,7 +539,7 @@ h3 + .sub-box--wrap {
 .rule-activate {
   background: linear-gradient(
     to right,
-    var(--color-lime) 0 2rem,
+    var(--color-coral) 0 2rem,
     var(--color-line) 2rem 100%
   );
   border: 0;
@@ -869,7 +879,7 @@ span.type-plate__mark b {
    this variant, so it is named outright and lifted one step in dark, the
    same move .btn-filled makes for the same reason. */
 .card-soft[data-flux-card] {
-  background-color: var(--color-deep-blue);
+  background-color: var(--color-graphite);
   border: 2px solid transparent;
 }
 .dark .card-soft[data-flux-card] {
@@ -979,18 +989,18 @@ span.card-mark b:nth-child(2) {
    .card-soft uses for the reverse case. */
 .tile-activate {
   background-color: var(--color-activation);
-  border-color: var(--color-deep-blue);
+  border-color: var(--color-graphite);
 }
 .tile-interactive.tile-activate:hover {
-  border-color: var(--color-deep-blue);
+  border-color: var(--color-graphite);
 }
 .tile-activate h4 {
-  color: var(--color-deep-blue);
+  color: var(--color-graphite);
 }
 /* on Lime the muted blue goes muddy, and the bold lead stops leading */
 .tile-activate p,
 .tile-activate p strong {
-  color: var(--color-deep-blue);
+  color: var(--color-graphite);
 }
 
 /* --- Static — no hover, so the rule says so ------------------------------ */
@@ -1015,7 +1025,7 @@ span.card-mark b:nth-child(2) {
 /* the plate holds — pinned, because the tile under it is Lime in both
    themes — and the icon takes the activation colour */
 .tile-activate .icon-plate {
-  background-color: var(--color-deep-blue);
+  background-color: var(--color-graphite);
   color: var(--color-activation);
 }
 /* nothing here is clickable, so nothing here is filled */

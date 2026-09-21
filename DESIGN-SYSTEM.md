@@ -16,8 +16,8 @@ From the manual (p.18), the proportions a C-MORE layout should hold:
 | Share | Role | What it is |
 |------:|------|------------|
 | **50%** | Primary neutrals | Off White and Light Beige. White space is a brand element, not leftover room. |
-| **35%** | Deep Blue **identifies** | Structure, type, chrome. The backdrop, not the paint. |
-| **15%** | Lime **activates** | Select moments only. One per viewport. |
+| **35%** | Graphite **identifies** | Structure, type, chrome. The backdrop, not the paint. |
+| **15%** | Coral **activates** | Select moments only. One per viewport. |
 
 Everything below exists to make that easy to follow and awkward to break.
 
@@ -66,43 +66,71 @@ and alias `zinc` onto it:
 ```
 
 Eleven lines, and every stock component in both libraries re-skins itself. Steps
-50–300 are the manual's four neutrals untouched; 800–950 cool toward Deep Blue so
-darks read as brand rather than generic charcoal. **`sand-950` is Deep Blue.**
+50–300 are the manual's four neutrals untouched; 400–950 run down to the main
+colour. **`sand-950` is Graphite.** Because Graphite is far lighter than the old
+main, 700–950 span a narrower range than they did — the dark steps sit closer
+together than a stock zinc ramp, which is the colour's doing rather than a
+mistake.
 
 ---
 
 ## Colour
 
-### Primitives (p.17 — always 100% solid; tints need Marketing sign-off)
+### Primitives
+
+Three brand colours, listed main / secondary / accent. They map onto the
+50/35/15 rule exactly, though not in that order — the ground is the 50%. The neutrals are
+unchanged (Light Beige is both the secondary and one of the four), and the
+supporting blues were **not** part of the recolour (see the note below).
 
 | Name | Hex | Pantone | Note |
 |------|-----|---------|------|
-| Deep Blue | `#141A32` | 289C | Identifies |
-| Lime | `#C0FA00` | 381 | Activates |
+| Graphite | `#343434` | TBC | **Main.** Identifies |
+| Light Beige | `#F2F1ED` | — | **Secondary.** The ground, and the label on every solid brand button |
+| Coral | `#F46D4F` | TBC | **Accent.** Activates. **Large or bold text only — see contrast.** |
 | Blue | `#4E638B` | 7682C | 5.3:1 on ground — the muted text colour |
 | Mid Blue | `#909DB6` | 535C | 2.4:1 — **borders only, never text** |
-| Green | `#B4EB00` | — | Lime's hover state |
-| Light Lime | `#F1FBD0` | — | Quiet activation |
+| Coral Deep | `#F44E29` | — | The coral's hover state |
+| Coral Tint | `#F9E7E3` | — | Quiet activation |
 | Off White | `#FAFAFA` | — | |
 | Light Beige | `#F2F1ED` | — | The page ground |
 | Mid Beige | `#E9E7E2` | — | Sunken wells |
 | Dark Beige | `#E0DED7` | — | Hairlines |
 
+Both new colours carry **PMS TBC** — neither has been matched against a
+physical guide.
+
+**The supporting blues are still blue.** They were not in the recolour, so
+`#4E638B` and `#909DB6` are the only hue in the system besides the coral, and
+on a neutral main they read as a third colour rather than as quiet text.
+Neutral equivalents at the same measured ratios are `#636363` (5.32:1) and
+`#A8A8A8` (2.10:1); swapping them is two lines in the `@theme` block.
+
 ### Semantics
 
 | Token | Light | Dark | Use |
 |-------|-------|------|-----|
-| `--color-accent` | Deep Blue | Lime | Primary buttons, links, focus. **Flux reads this directly.** |
-| `--color-activation` | Lime | Lime | The 15%. Foreground is *always* Deep Blue. |
-| `--color-ground` | Light Beige | Deep Blue | The page |
-| `--color-surface` | White | `#1B2039` | Cards on the ground |
-| `--color-surface-sunken` | Mid Beige | `#0E1327` | Wells, inset panels |
-| `--color-ink` | Deep Blue | Off White | Headings, primary copy |
+| `--color-accent` | Graphite | Coral | Primary buttons, links, focus. **Flux reads this directly.** |
+| `--color-activation` | Coral | Coral | The 15%. Label is Light Beige (2.60:1); the icon and arrow hold `--color-activation-mark`, Graphite (4.24:1). |
+| `--color-ground` | Light Beige | Graphite | The page |
+| `--color-surface` | White | `#3E3E3E` | Cards on the ground |
+| `--color-surface-sunken` | Mid Beige | `#2A2A2A` | Wells, inset panels |
+| `--color-ink` | Graphite | Off White | Headings, primary copy |
 | `--color-ink-muted` | Blue | Mid Blue | Secondary copy — 5.3:1, AA |
-| `--color-ink-subtle` | Sand 600 | `#7D88A3` | Meta, captions — 4.9:1, AA |
+| `--color-ink-subtle` | Sand 600 | `#A2A2A2` | Meta, captions — 4.9:1, AA |
 | `--color-line` | Dark Beige | Mid Blue 24% | Hairlines |
 
 ### Secondary — Electric Blue
+
+**Stale, and proposed rather than approved.** It was drawn to sit against Deep
+Blue and Lime, neither of which is in the system any more — its whole argument
+("holds the family hue at double the chroma") was about a blue family that has
+been replaced by a neutral. It still renders on the Alternatives tab; treat it
+as a record of a decision made under the old palette, not a live candidate.
+The same goes for the activation hue study beside it, which tests variants of
+a lime that is gone.
+
+The original note follows.
 
 **Proposed, not approved.** It sits behind the *Alternatives* tab on the colour
 section for exactly that reason; nothing in the shipped page spends it.
@@ -132,13 +160,39 @@ chroma, but it has not been checked against a physical guide.
 
 | Pair | Ratio | Verdict |
 |------|-------|---------|
-| Deep Blue on Light Beige | 13.8:1 | Anything |
-| Lime on Deep Blue | 13.8:1 | Anything — the signature pairing |
-| White on Deep Blue | 17.2:1 | Anything |
+| Graphite on Light Beige | 11.0:1 | Anything |
+| White on Graphite | 12.5:1 | Anything |
 | Blue on Light Beige | 5.3:1 | AA body text |
 | Sand 600 on Off White | 4.9:1 | AA body text — the lightest that passes |
+| **Light Beige on Coral** | **2.60:1** | **The shipped button label. Below AA-large — fails at every text size.** |
+| Graphite on Coral | 4.24:1 | The icon and arrow colour. Large or bold only. |
+| Coral on Graphite | 4.24:1 | Same pair inverted — dark-mode accent |
+| Coral on Light Beige | 2.6:1 | **Decoration only** |
 | Mid Blue on Light Beige | 2.4:1 | **Decoration only** |
-| **White on Lime** | **1.2:1** | **Never. Illegible.** |
+| **White on Coral** | **2.94:1** | **Never.** |
+
+**The signature pairing lost its headroom, and the current label gives it
+away entirely.** It used to be near-black on lime at 13.8:1. Coral is a far
+darker accent, so nothing obvious clears AA on it — Graphite 4.24, white 2.94,
+Light Beige 2.60. The shipped label is the Light Beige, the lowest of the
+three: it is below AA-large, so it does not pass at any text size. The button
+is currently legible mainly by shape and by the dark arrow beside the words.
+
+This is a deliberate choice, recorded here rather than silently corrected.
+Three ways back, each one line:
+
+| Change | Ratio |
+|---|---|
+| `--color-activation-foreground: #2b2b2b` | 4.82 — AA |
+| `--color-activation-foreground: var(--color-graphite)` | 4.24 — AA-large |
+| Lighten the coral to `#F57D62`, keep a dark label | 4.74 — AA |
+
+**The accent and the danger colour are now 14° apart in hue.** Coral sits at
+hue 11°, Flux's `danger` red at 357°, so the primary and the destructive
+button read as the same family — visible in the variants row, and worse in
+dark mode. Under the old palette they were 77° apart. Nothing is broken, but
+"the button that does the thing" and "the button that destroys the thing" no
+longer separate on colour alone.
 
 ### Appearance
 
@@ -147,9 +201,10 @@ page navy on a dark-mode machine — the wrong first impression for a brand whos
 layouts are 50% warm neutral. The layout overrides that default; a visitor's own
 choice, made with the toggle in the header, is remembered and wins on return.
 
-Dark mode itself is not an inversion. Deep Blue is the backdrop "for much of the
-brand", so dark is the brand at rest — and there Lime becomes the accent, because
-lime on deep blue *is* the pairing.
+Dark mode itself is not an inversion. Graphite is the backdrop for much of the
+brand, so dark is the brand at rest — and there Coral becomes the accent. Note
+the ground is a mid-dark grey rather than the near-black it used to be, so dark
+mode is a softer, lower-contrast theme than before.
 
 Building the toggle turns up a trap: `@fluxAppearance` defines a small
 `window.Flux` shim with `applyAppearance()`, and then `flux.js` **replaces that
@@ -187,8 +242,8 @@ downstream should set weight or tracking by hand:
   (`card` = 20px). The manual's principle plates (p.12) are markedly rounder
   than Flux ships, which is the main geometric change we make.
 - **Elevation** — the brand is flat. **Hairline first, shadow second.**
-  `hairline` → `raised` → `floating` → `overlay`. Shadows are tinted with Deep
-  Blue rather than black so they never grey the warm ground.
+  `hairline` → `raised` → `floating` → `overlay`. Shadows are tinted with the
+  main colour rather than black so they never grey the warm ground.
 - **Motion** — "Alive: designed with a pulse." `--ease-brand` with
   quick/base/slow durations. Fully disabled under `prefers-reduced-motion`.
 - **Icons** — 32px artboard, 2pt stroke, 45° where possible (p.21) = stroke 1.5
@@ -285,6 +340,16 @@ does not accept is a dictionary somebody has to maintain.
 | `variant="primary"` + `.btn-activate` | The one action of a view. At most one per viewport — that scarcity *is* the 15% rule. |
 | `variant="outline"` + `.btn-outline` | The supporting action beside a primary. Safe to use more than once. |
 | `variant="filled"` + `.btn-filled` | Quiet but still a button: toolbars, filter chips, anywhere a border would be noise. |
+
+**Solid buttons: light label, brand mark.** Both solid variants take
+`--color-brand-label` (Light Beige) for the words, and put the *other* brand
+colour on the icon and pixel arrow — graphite on the coral button, coral on
+the graphite one. One token keeps the pair in step.
+
+`.btn-filled` used to label in coral, which spent the activation colour on
+every button in the sizes and states rows: the 15% going to the quietest
+control in the system. Moving the coral to the mark keeps it to one small
+shape, and takes the label from 4.24:1 to 10.96:1.
 | `variant="ghost"` + `.btn-ghost` | No chrome at all. Icon-only buttons and dense rows. |
 | `variant="danger"` | Destructive and irreversible. Left exactly as Flux ships it — the only variant whose meaning comes from outside the brand. |
 

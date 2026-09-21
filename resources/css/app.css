@@ -29,16 +29,20 @@
      ====================================================================== */
 
   /* Iconic pair */
-  --color-deep-blue: #141a32;   /* PMS 289C · CMYK 100 76 12 70 */
-  --color-lime:      #c0fa00;   /* PMS 381  · CMYK 22 0 100 0   */
+  --color-graphite: #343434;   /* identifies — 35% of a layout */
+  --color-coral:    #f46d4f;   /* activates  — 15%, one moment per view */
 
-  /* Supporting blues */
+  /* Supporting blues.
+     NOT part of the recolour — still the manual's Pantones, and still the
+     only hue in the system besides the coral. On a neutral main they read
+     as a third colour rather than as quiet text. Neutral equivalents at the
+     same ratios are #636363 (5.32:1) and #a8a8a8 (2.10:1) if they should go. */
   --color-blue:      #4e638b;   /* PMS 7682C */
   --color-mid-blue:  #909db6;   /* PMS 535C  */
 
-  /* Supporting greens */
-  --color-green:      #b4eb00;
-  --color-light-lime: #f1fbd0;
+  /* Activation family, derived from the coral */
+  --color-coral-deep: #f44e29;  /* hover / pressed */
+  --color-coral-tint: #f9e7e3;  /* quiet activation — plates, subtle fills */
 
   /* Primary neutrals */
   --color-off-white:  #fafafa;
@@ -53,9 +57,13 @@
      alias zinc onto it below. Every component re-skins itself for free.
 
      50–300 are the manual's four neutrals, untouched.
-     400–700 are interpolated.
-     800–950 cool deliberately toward Deep Blue, so darks read as brand
-     rather than as generic charcoal. 950 IS Deep Blue.
+     400–950 are interpolated down to the main colour. 950 IS the main.
+
+     The dark end is deliberately shallower than it used to be: the old main
+     was near-black (L 10%), this one is a mid-dark grey (L 20%), so 700–950
+     span a narrower range and dark mode is a softer theme than before. That
+     is the colour's doing, not a mistake — but it is why the dark steps sit
+     closer together than a stock zinc ramp.
      ---------------------------------------------------------------------- */
   --color-sand-50:  #fafafa;   /* = Off White    (manual) */
   --color-sand-100: #f2f1ed;   /* = Light Beige  (manual) */
@@ -64,10 +72,10 @@
   --color-sand-400: #c3c0b8;
   --color-sand-500: #96958e;
   --color-sand-600: #6e6e6a;   /* 4.9:1 on sand-50 — lightest AA body text */
-  --color-sand-700: #4f5057;   /* 7.8:1 on sand-50 */
-  --color-sand-800: #343744;
-  --color-sand-900: #21253a;
-  --color-sand-950: #141a32;   /* = Deep Blue    (manual) */
+  --color-sand-700: #5f5f5c;   /* 6.1:1 on sand-50 */
+  --color-sand-800: #50504e;
+  --color-sand-900: #424240;
+  --color-sand-950: #343434;   /* = the main colour */
 
   /* Alias Tailwind's zinc onto sand. This is the single line that makes
      every stock Flux and WireUI component warm instead of cold. */
@@ -88,27 +96,51 @@
      ====================================================================== */
 
   /* ACCENT = Identification. Flux drives primary buttons, links and focus
-     rings from these three. Light mode identifies in Deep Blue. */
-  --color-accent:            var(--color-deep-blue);
-  --color-accent-content:    var(--color-deep-blue);
-  --color-accent-foreground: #ffffff;
+     rings from these three. Light mode identifies in the main colour. */
+  --color-accent:            var(--color-graphite);
+  --color-accent-content:    var(--color-graphite);
+  --color-accent-foreground: #ffffff;   /* 12.45:1 */
 
-  /* ACTIVATION = Lime. Not a synonym for accent — this is the 15%.
-     One activation moment per viewport. Never white text on lime
-     (1.2:1, illegible); the foreground is always Deep Blue (13.8:1). */
-  --color-activation:            var(--color-lime);
-  --color-activation-hover:      var(--color-green);
-  --color-activation-foreground: var(--color-deep-blue);
-  --color-activation-subtle:     var(--color-light-lime);
+  /* ACTIVATION = the coral. Not a synonym for accent — this is the 15%.
+     One activation moment per viewport.
+
+     READ THIS BEFORE SETTING TEXT ON IT. The old pairing was near-black on
+     lime at 13.8:1, which cleared everything. Coral is a far darker accent,
+     and none of the obvious foregrounds clears AA on it:
+
+         Light Beige #F2F1ED   2.60:1   <- current
+         White       #FFFFFF   2.94:1
+         Graphite    #343434   4.24:1   (AA-large)
+         #2B2B2B               4.82:1   (AA)
+
+     The light label is the specified treatment and is the LEAST legible of
+     the four. It is below AA-large, so it does not pass at any text size.
+     Two ways back if that matters: --color-activation-foreground: #2b2b2b,
+     or lighten the coral itself to #F57D62.
+
+     The icon and the arrow do NOT take the label colour — they hold
+     --color-activation-mark (graphite, 4.24:1) so the mark stays legible and
+     reads as distinct from the label. */
+  /* The label on any SOLID brand button — coral-filled or graphite-filled.
+     One token, so the two stay in step. The mark (icon, pixel arrow) takes
+     the other brand colour instead, which is what separates it from the
+     label: graphite on the coral button, coral on the graphite one. */
+  --color-brand-label:           var(--color-light-beige);
+
+  --color-activation:            var(--color-coral);
+  --color-activation-hover:      var(--color-coral-deep);
+  --color-activation-foreground: var(--color-brand-label);  /* 2.60:1 — see note */
+  --color-activation-mark:       var(--color-graphite);    /* icons and the arrow */
+  --color-activation-subtle:     var(--color-coral-tint);
 
   /* Surfaces, in the order a page stacks them */
   --color-ground:         var(--color-light-beige); /* the page itself      */
   --color-surface:        #ffffff;                  /* cards on the ground  */
   --color-surface-sunken: var(--color-mid-beige);   /* wells, inset panels  */
-  --color-surface-invert: var(--color-deep-blue);   /* hero, footer         */
+  --color-surface-invert: var(--color-graphite);   /* hero, footer         */
 
   /* Ink */
-  --color-ink:         var(--color-deep-blue);  /* headings, primary copy   */
+  --color-ink:         var(--color-graphite);  /* headings, primary copy   */
   --color-ink-muted:   var(--color-blue);       /* 5.3:1 on ground — AA     */
   --color-ink-subtle:  var(--color-sand-600);   /* 4.9:1 — meta, captions   */
   --color-ink-invert:  var(--color-off-white);
@@ -122,7 +154,7 @@
      alongside it: greens borrow the brand lime-green, the rest are tuned
      to the same warmth and saturation. */
   --color-positive:         #3f7d2e;
-  --color-positive-subtle:  var(--color-light-lime);
+  --color-positive-subtle:  #e7f2e0;   /* was the lime tint; decoupled, the accent is no longer green */
   --color-caution:          #a8690a;
   --color-caution-subtle:   #fbf0dc;
   --color-critical:         #b3261e;
@@ -190,12 +222,12 @@
      shadow only second, and the shadow is tinted with Deep Blue so it
      never greys the warm ground. */
   --shadow-hairline: 0 0 0 1px var(--color-line);
-  --shadow-raised:   0 1px 2px rgba(20, 26, 50, 0.05),
-                     0 4px 12px -6px rgba(20, 26, 50, 0.12);
-  --shadow-floating: 0 2px 4px rgba(20, 26, 50, 0.05),
-                     0 12px 32px -12px rgba(20, 26, 50, 0.18);
-  --shadow-overlay:  0 24px 64px -24px rgba(20, 26, 50, 0.32);
-  --shadow-activate: 0 8px 28px -10px rgba(192, 250, 0, 0.55);
+  --shadow-raised:   0 1px 2px rgba(52, 52, 52, 0.05),
+                     0 4px 12px -6px rgba(52, 52, 52, 0.12);
+  --shadow-floating: 0 2px 4px rgba(52, 52, 52, 0.05),
+                     0 12px 32px -12px rgba(52, 52, 52, 0.18);
+  --shadow-overlay:  0 24px 64px -24px rgba(52, 52, 52, 0.32);
+  --shadow-activate: 0 8px 28px -10px rgba(244, 109, 79, 0.55);
 
   /* Motion. "Alive: designed with a pulse. Dynamic, quick and responsive." */
   --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
@@ -210,25 +242,25 @@
 
 /* ==========================================================================
    DARK MODE
-   Deep Blue is the backdrop "for much of the brand", so dark is not an
-   inversion — it is the brand at rest. Here Lime takes over as accent,
-   because lime on deep blue IS the signature pairing (13.8:1).
+   The main colour is the backdrop for much of the brand, so dark is not an
+   inversion — it is the brand at rest. Here the coral takes over as accent
+   (4.24:1 on the ground, so headings and chrome, not body copy).
    ========================================================================== */
 @layer theme {
   .dark {
-    --color-accent:            var(--color-lime);
-    --color-accent-content:    var(--color-lime);
-    --color-accent-foreground: var(--color-deep-blue);
+    --color-accent:            var(--color-coral);
+    --color-accent-content:    var(--color-coral);
+    --color-accent-foreground: var(--color-graphite);
 
-    --color-ground:         var(--color-deep-blue);
-    --color-surface:        #1b2039;
-    --color-surface-sunken: #0e1327;
+    --color-ground:         var(--color-graphite);
+    --color-surface:        #3e3e3e;
+    --color-surface-sunken: #2a2a2a;
     --color-surface-invert: var(--color-light-beige);
 
     --color-ink:        var(--color-off-white);
     --color-ink-muted:  var(--color-mid-blue);
-    --color-ink-subtle: #7d88a3;
-    --color-ink-invert: var(--color-deep-blue);
+    --color-ink-subtle: #a2a2a2;   /* 4.88:1 on the ground */
+    --color-ink-invert: var(--color-graphite);
 
     --color-line:        color-mix(in oklab, var(--color-mid-blue) 24%, transparent);
     --color-line-strong: color-mix(in oklab, var(--color-mid-blue) 45%, transparent);
@@ -277,8 +309,8 @@
   }
 
   ::selection {
-    background-color: var(--color-lime);
-    color: var(--color-deep-blue);
+    background-color: var(--color-coral);
+    color: var(--color-graphite);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -319,7 +351,7 @@
 /* Lime underline for a single word inside a display heading — the cheapest
    correct way to spend the 15% activation budget. */
 @utility mark-activate {
-  background-image: linear-gradient(var(--color-lime), var(--color-lime));
+  background-image: linear-gradient(var(--color-coral), var(--color-coral));
   background-repeat: no-repeat;
   background-position: 0 88%;
   background-size: 100% 0.28em;
@@ -386,7 +418,7 @@
   }
   .icon-plate-activate {
     background-color: var(--color-activation-subtle);
-    color: var(--color-deep-blue);
+    color: var(--color-graphite);
   }
   .surface-invert .icon-plate {
     background-color: color-mix(in oklab, var(--color-off-white) 10%, transparent);
@@ -398,12 +430,12 @@
     height: 1px;
     border: 0;
     background: linear-gradient(to right,
-      var(--color-lime) 0 4rem,
+      var(--color-coral) 0 4rem,
       var(--color-line) 4rem 100%);
   }
   .surface-invert .rule-activate {
     background: linear-gradient(to right,
-      var(--color-lime) 0 4rem,
+      var(--color-coral) 0 4rem,
       var(--color-line-invert) 4rem 100%);
   }
 }
@@ -470,4 +502,11 @@
 .btn-activate[data-flux-button]:hover:not(:disabled) {
   background-color: var(--color-activation-hover);
   box-shadow: var(--shadow-activate);
+}
+/* The label is light, the mark is dark. Icons and the pixel arrow both take
+   currentColor, so they have to be re-coloured explicitly or they would
+   follow the label and vanish into the coral. */
+.btn-activate[data-flux-button] [data-flux-icon],
+.btn-activate[data-flux-button] .px {
+  color: var(--color-activation-mark);
 }
