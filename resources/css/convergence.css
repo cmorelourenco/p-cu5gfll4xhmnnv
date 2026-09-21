@@ -1,0 +1,122 @@
+/* ==========================================================================
+   C–MORE — Convergence spinner.
+   Shared by progress.html (the options study) and enhanced.html, so there is
+   one source for it. Sizing follows --spin-size when the page defines one.
+   ========================================================================== */
+
+/* 01 — Convergence. One shape, smoothly animated.
+
+   The insight the stepped version missed: the four squares are not added to
+   the ring, they are already IN it. A 36x36 square sitting flush in the band
+   spans radius 54..90 — exactly the band's thickness — so at rest it is
+   invisible and the ring reads as a plain rounded square (frame 1).
+
+   The notch is just the hole it vacates, so the mask is constant: no opacity
+   tricks, nothing appears or disappears. The squares slide 0 -> 37 and back
+   (frame 2 is +17, frame 3 +27, frame 4 +37), and the assembly turns
+   0 -> 90deg, with frame 5 being the 45deg midpoint. Four-fold symmetry means
+   90deg and 0deg are identical, so the loop has no seam.
+   ========================================================================== */
+.sp-conv {
+  width: calc(var(--spin-size, 2.25rem) * 1.4);
+  height: calc(var(--spin-size, 2.25rem) * 1.4);
+  color: var(--color-ink);
+}
+/* --ease-brand is a strong ease-OUT, right for a UI element entering but
+   wrong for a loop: it puts the squares 86% of the way out in the first
+   17% of the cycle, which reads as a snap. A symmetric in-out keeps the
+   slide and the turn continuous. */
+.sp-conv {
+  --conv-ease: cubic-bezier(0.65, 0, 0.35, 1);
+}
+.sp-conv .conv-rotor {
+  transform-box: view-box;
+  transform-origin: 160px 160px;
+  animation: conv-spin 2.8s linear infinite;
+}
+.sp-conv .conv-sq {
+  fill: currentColor;
+  animation: conv-slide 2.8s linear infinite,
+             conv-reveal 2.8s linear infinite;
+}
+
+/* The notch and its square switch on and off together, at the exact instant
+   the slide begins and ends. Because the square sits perfectly flush at that
+   moment, the switch is invisible — but it means that while merged there is
+   no mask cut and nothing composited over the ring at all.
+
+   This is what fixes it under rotation. Flush geometry is only seamless when
+   the edges are axis-aligned; once the assembly turns, the mask cut and the
+   square edge are diagonal and their antialiasing no longer cancels. Removing
+   both while merged makes the seam impossible rather than small. */
+.sp-conv .conv-notch {
+  animation: conv-reveal 2.8s linear infinite;
+}
+@keyframes conv-reveal {
+  0%,
+  14.9% {
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+  85.1%,
+  100% {
+    opacity: 0;
+  }
+}
+/* --dx/--dy are set inline per square. Not :nth-of-type — that counts every
+   rect sibling, so the ring would be #1 and each square would take the
+   previous one's direction. */
+
+/* The three phases are strictly sequential, never overlapping:
+     0-15%   merged, 0deg
+    15-28%   squares slide out, still square-on at 0deg
+    28-72%   squares held out, assembly turns 0 -> 90deg
+    72-85%   squares slide in, already settled at 90deg
+    85-100%  merged, 90deg — identical to 0deg, so the loop has no seam */
+@keyframes conv-spin {
+  0%,
+  30% {
+    transform: rotate(0deg);
+    animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  70%,
+  100% {
+    transform: rotate(90deg);
+  }
+}
+/* Ease-out leaving, ease-in returning, so the squares do not creep through
+   the 0-8 unit range where they read as a misalignment rather than movement.
+   They sit fully out across the whole rotation phase. */
+@keyframes conv-slide {
+  0%,
+  15% {
+    transform: translate(0, 0);
+    animation-timing-function: cubic-bezier(0.3, 1, 0.5, 1);
+  }
+  28%,
+  72% {
+    transform: translate(var(--dx), var(--dy));
+    animation-timing-function: cubic-bezier(0.5, 0, 0.7, 0);
+  }
+  85%,
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Reduced motion: hold the merged state — a plain rounded square, squares and
+   notches switched off, no turn. */
+@media (prefers-reduced-motion: reduce) {
+  .sp-conv .conv-rotor,
+  .sp-conv .conv-sq,
+  .sp-conv .conv-notch {
+    animation: none;
+  }
+  .sp-conv .conv-sq,
+  .sp-conv .conv-notch {
+    opacity: 0;
+  }
+}

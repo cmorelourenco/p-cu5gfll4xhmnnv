@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "landing",
+      "name": "designsystem2",
       "runtimeExecutable": "/opt/homebrew/bin/php",
-      "runtimeArgs": ["artisan", "serve", "--port=8099"],
-      "port": 8099
+      "runtimeArgs": ["artisan", "serve", "--port=8098"],
+      "port": 8098
     }
   ]
 }

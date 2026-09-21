@@ -11,7 +11,19 @@
          Semibold 600 / Bold 700. --}}
     @fonts
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- Order is the cascade. app.css carries the Tailwind theme; the four
+         after it are plain unlayered CSS on those tokens, so they outrank
+         every Tailwind layer and the later file wins. arrow.css binds to
+         .btn-activate, defined in app.css, so it stays last. --}}
+    @vite([
+        'resources/css/app.css',
+        'resources/css/turn.css',
+        'resources/css/convergence.css',
+        'resources/css/enhanced.css',
+        'resources/css/arrow.css',
+        'resources/js/app.js',
+        'resources/js/enhanced.js',
+    ])
     @fluxAppearance
     {{-- Default to light. Flux's own default is 'system', which turns the page
          navy on a dark-mode machine — wrong first impression for a brand whose
@@ -24,6 +36,13 @@
          package instead — see the @source lines in resources/css/app.css. --}}
 </head>
 <body class="min-h-screen antialiased">
+    {{-- The section rail is built from the DOM by enhanced.js. It sits here,
+         outside the Livewire root, so a wire:model.live round trip cannot
+         morph it away. --}}
+    <nav class="enh-rail" aria-label="Sections" data-enh-rail>
+        <p class="enh-rail__title">Jump to</p>
+    </nav>
+
     {{ $slot }}
 
     {{-- One toast container per page; components dispatch into it. --}}

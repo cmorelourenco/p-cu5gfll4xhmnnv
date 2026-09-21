@@ -1,0 +1,307 @@
+/* ==========================================================================
+   C–MORE — Step, the pixel arrow.
+
+   The mark's device is a stair: equal squares, each one unit right and one
+   unit up from the last, touching corner to corner, never overlapping. In
+   the logo it runs from the C's mouth into the stem of the m — two squares
+   and then the letter itself, three steps.
+
+   Turn that stair back on itself and you get a chevron, which is the only
+   arrow this brand needs. Nothing here is drawn; every square sits at a
+   whole multiple of --u, so the shape stays on the grid at any size, and
+   the motion below moves in whole units rather than sliding between them.
+
+   Set --u to resize. Everything else follows.
+   ========================================================================== */
+
+.px {
+  --u: 4px;
+  position: relative;
+  display: block;
+  flex: none;
+  width: calc(var(--w) * var(--u));
+  height: calc(var(--h) * var(--u));
+  color: inherit;
+}
+
+.px b {
+  position: absolute;
+  left: calc(var(--c) * var(--u));
+  top: calc(var(--r) * var(--u));
+  width: var(--u);
+  height: var(--u);
+  /* fixed, not proportional — a pixel stays crisp at every size */
+  border-radius: 1px;
+  background-color: currentColor;
+}
+
+/* --- Sizes --------------------------------------------------------------
+   One step of --u per button size, so the arrow grows with the label rather
+   than floating at a fixed weight. px-display is the specimen size, for
+   showing the construction rather than using it. */
+.px-sm { --u: 3px; }   /* 24 and 32px buttons, and bare text links */
+.px-md { --u: 4px; }   /* the 40px default */
+.px-lg { --u: 5px; }   /* the 52px large */
+.px-display { --u: 16px; }
+
+/* --- A · Chevron, three squares -----------------------------------------
+   The mark's own step count, mirrored about the tip. 2 × 3 units, so at
+   --u 4px it is 8 × 12 — optically the same weight as a 15px label. */
+.px-chev3 { --w: 2; --h: 3; }
+.px-chev3 b:nth-child(1) { --c: 0; --r: 0; }
+.px-chev3 b:nth-child(2) { --c: 1; --r: 1; }
+.px-chev3 b:nth-child(3) { --c: 0; --r: 2; }
+
+/* --- B · Chevron, five squares ------------------------------------------
+   Same construction, one step longer each way. Reads more clearly as an
+   arrow and less clearly as part of the wordmark. */
+.px-chev5 { --w: 3; --h: 5; }
+.px-chev5 b:nth-child(1) { --c: 0; --r: 0; }
+.px-chev5 b:nth-child(2) { --c: 1; --r: 1; }
+.px-chev5 b:nth-child(3) { --c: 2; --r: 2; }
+.px-chev5 b:nth-child(4) { --c: 1; --r: 3; }
+.px-chev5 b:nth-child(5) { --c: 0; --r: 4; }
+
+/* --- C · Arrow, nine squares --------------------------------------------
+   Shaft plus head. Unambiguous, and the only one that survives at 12px,
+   but it is pixel-art before it is C–MORE. */
+.px-arrow { --w: 5; --h: 5; }
+.px-arrow b:nth-child(1) { --c: 0; --r: 2; }
+.px-arrow b:nth-child(2) { --c: 1; --r: 2; }
+.px-arrow b:nth-child(3) { --c: 2; --r: 2; }
+.px-arrow b:nth-child(4) { --c: 3; --r: 2; }
+.px-arrow b:nth-child(5) { --c: 4; --r: 2; }
+.px-arrow b:nth-child(6) { --c: 2; --r: 0; }
+.px-arrow b:nth-child(7) { --c: 3; --r: 1; }
+.px-arrow b:nth-child(8) { --c: 3; --r: 3; }
+.px-arrow b:nth-child(9) { --c: 2; --r: 4; }
+
+/* --- D · Stair, three squares -------------------------------------------
+   The logo lifted straight out, unmirrored. Points up and to the right,
+   which is a direction but not a destination — it says "more", not "next". */
+.px-stair { --w: 3; --h: 3; }
+.px-stair b:nth-child(1) { --c: 0; --r: 2; }
+.px-stair b:nth-child(2) { --c: 1; --r: 1; }
+.px-stair b:nth-child(3) { --c: 2; --r: 0; }
+
+/* Two steps rather than three — the stair cropped to its shortest legible
+   form. It marks a card the way the three-step version marks a plate: the
+   same device, one unit of the logo instead of two. */
+.px-stair2 { --w: 2; --h: 2; }
+.px-stair2 b:nth-child(1) { --c: 0; --r: 1; }
+.px-stair2 b:nth-child(2) { --c: 1; --r: 0; }
+
+/* ==========================================================================
+   Motion
+
+   One rule holds all of it: every move starts and ends on a whole unit.
+   Nothing drifts to 5px and stops. Some of it jumps between those positions
+   (Step) and some of it glides (March) — the constraint is the destination,
+   not the path.
+   ========================================================================== */
+
+/* --- 01 Step -------------------------------------------------------------
+   The arrow advances three units on hover, in three visible jumps. steps()
+   quantises the transition itself, so there is no in-between frame to see. */
+.btn-px-step .px {
+  transition: transform 0.21s steps(3, jump-start);
+}
+.btn-px-step:hover .px {
+  transform: translateX(calc(var(--u) * 3));
+}
+
+/* --- 02 Cascade ----------------------------------------------------------
+   Nothing travels; a swell runs along the stair instead, tail to tip. The
+   button's footprint never changes, so it is safe in a dense row. */
+@keyframes px-swell {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.6);
+  }
+}
+.btn-px-cascade:hover .px b {
+  animation: px-swell 0.5s var(--ease-brand);
+}
+.btn-px-cascade:hover .px b:nth-child(2) { animation-delay: 0.07s; }
+.btn-px-cascade:hover .px b:nth-child(3) { animation-delay: 0.14s; }
+
+/* --- 03 Build ------------------------------------------------------------
+   At rest the arrow is a single square — the Emit square the system already
+   uses. On hover the other two step out of it and the chevron exists. */
+.btn-px-build .px b {
+  transition: transform var(--duration-base) var(--ease-brand),
+    opacity var(--duration-quick) var(--ease-brand);
+}
+.btn-px-build .px b:nth-child(1) {
+  opacity: 0;
+  transform: translate(var(--u), var(--u));
+}
+.btn-px-build .px b:nth-child(3) {
+  opacity: 0;
+  transform: translate(var(--u), calc(var(--u) * -1));
+}
+.btn-px-build:hover .px b:nth-child(1),
+.btn-px-build:hover .px b:nth-child(3) {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+.btn-px-build:hover .px b:nth-child(3) { transition-delay: 0.05s; }
+
+/* --- 04 March ------------------------------------------------------------
+   A one-way advance, not a loop. Each square glides two units right,
+   staggered down the stair, and holds there for as long as the pointer
+   stays. It only comes back on mouse-out.
+
+   Smooth, unlike Step — but it still starts and ends on a whole unit, so
+   the grid is where the arrow rests rather than how it travels. The brand
+   ease does the work: fast out of the gate, long settle, which is what
+   makes a 8px move read as deliberate rather than twitchy.
+
+   The stagger is mirrored rather than repeated: going out the top square
+   leads and the bottom follows, coming back the bottom leads and the top
+   follows. The arrow unfurls forward and gathers back the same way round,
+   which is what stops the return reading as a second, unasked-for animation.
+
+   .btn-activate is in the selector list on purpose. This is the shipped
+   behaviour of the primary button, not a variant to opt into — any
+   .btn-activate that contains a .px arrow marches, and adding the arrow is
+   the only decision left to make in the markup. */
+:is(.btn-px-march, .btn-activate, .btn-outline, .btn-filled) .px b {
+  transition: transform 0.24s var(--ease-brand);
+}
+/* mouse-out — reversed order, the square that left first returns last */
+:is(.btn-px-march, .btn-activate, .btn-outline, .btn-filled) .px b:nth-child(1) { transition-delay: 0.14s; }
+:is(.btn-px-march, .btn-activate, .btn-outline, .btn-filled) .px b:nth-child(2) { transition-delay: 0.07s; }
+:is(.btn-px-march, .btn-activate, .btn-outline, .btn-filled) .px b:nth-child(3) { transition-delay: 0s; }
+
+:is(.btn-px-march, .btn-activate, .btn-outline, .btn-filled):hover .px b {
+  transform: translateX(calc(var(--u) * 2));
+  transition-duration: 0.28s;
+}
+:is(.btn-px-march, .btn-activate, .btn-outline, .btn-filled):hover .px b:nth-child(1) { transition-delay: 0s; }
+:is(.btn-px-march, .btn-activate, .btn-outline, .btn-filled):hover .px b:nth-child(2) { transition-delay: 0.07s; }
+:is(.btn-px-march, .btn-activate, .btn-outline, .btn-filled):hover .px b:nth-child(3) { transition-delay: 0.14s; }
+
+/* Flux's disabled state kills pointer events, but a disabled button reached
+   by other means should not advance either. */
+:is(.btn-px-march, .btn-activate, .btn-outline, .btn-filled):disabled:hover .px b {
+  transform: none;
+}
+
+/* The loop this used to be still exists, but only where a loop is honest —
+   the waiting state at the bottom of the page. */
+@keyframes px-march-loop {
+  0%,
+  58%,
+  100% {
+    transform: translateX(0);
+  }
+  22%,
+  46% {
+    transform: translateX(var(--u));
+  }
+}
+
+/* --- 05 Turn -------------------------------------------------------------
+   The progress bar's quarter, applied to the arrow: 45° on hover — where a
+   square is a diamond and the chevron comes apart — and 90° on press, where
+   it is a square again and the arrow is back. */
+.btn-px-turn .px b {
+  transition: transform var(--duration-base) var(--ease-brand);
+}
+.btn-px-turn:hover .px b { transform: rotate(45deg); }
+.btn-px-turn:active .px b { transform: rotate(90deg); }
+.btn-px-turn .px b:nth-child(2) { transition-delay: 0.05s; }
+.btn-px-turn .px b:nth-child(3) { transition-delay: 0.1s; }
+
+/* --- 06 Fire -------------------------------------------------------------
+   Press only, so it fires on touch too. The arrow leaves fast and comes
+   back slowly — the asymmetry is what makes it read as launched rather
+   than nudged. */
+.btn-px-fire .px {
+  transition: transform 0.5s var(--ease-brand), opacity 0.5s var(--ease-brand);
+}
+.btn-px-fire:active .px {
+  transition-duration: 0.12s;
+  transform: translateX(1.15rem);
+  opacity: 0;
+}
+
+/* --- 07 Go ---------------------------------------------------------------
+   The arrow is also the waiting state: it marches in place while the work
+   happens, then the button says Done. Reuses .btn-run's state machine, so
+   there is one async button in the system rather than two. */
+.btn-go .btn-run__working .px {
+  /* lime, not the off-white label colour — the progress bar's squares are
+     lime while they wait, and these are the same squares. */
+  color: var(--color-activation);
+}
+.btn-go .btn-run__working .px b {
+  animation: px-march-loop 0.85s var(--ease-brand) infinite;
+}
+.btn-go .btn-run__working .px b:nth-child(2) { animation-delay: 0.09s; }
+.btn-go .btn-run__working .px b:nth-child(3) { animation-delay: 0.18s; }
+
+/* ==========================================================================
+   Page scaffolding — the plot, and the two quieter buttons used in the
+   row test so the arrow can be judged on currentColor rather than on lime.
+   ========================================================================== */
+
+.px-plot {
+  background-image: linear-gradient(
+      to right,
+      color-mix(in oklab, var(--color-ink) 12%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--color-ink) 12%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: var(--u) var(--u);
+  background-position: 0 0;
+  outline: 1px solid color-mix(in oklab, var(--color-ink) 12%, transparent);
+}
+
+.px-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 9rem;
+  color: var(--color-ink);
+}
+
+.btn-quiet {
+  background-color: transparent;
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px var(--color-line-strong);
+}
+
+.btn-bare {
+  height: auto;
+  padding: 0;
+  background-color: transparent;
+  color: var(--color-ink-muted);
+}
+
+.row-test {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .px,
+  .px b {
+    transition: none !important;
+    animation: none !important;
+  }
+  .btn-px-build .px b {
+    opacity: 1;
+    transform: none;
+  }
+}

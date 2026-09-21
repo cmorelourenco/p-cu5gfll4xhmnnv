@@ -16,7 +16,7 @@ import sys
 
 ROOT = pathlib.Path(__file__).parent
 OUT = ROOT / "dist" / "index.html"
-SRC = "http://localhost:8099/"
+SRC = "http://localhost:8098/"
 
 
 def fetch(url: str) -> str:
@@ -27,8 +27,18 @@ def main() -> None:
     html = fetch(SRC)
 
     # ---- CSS, with the Figtree faces inlined as data URIs -----------------
-    css_path = sorted((ROOT / "public/build/assets").glob("app-*.css"))[-1]
-    css = css_path.read_text()
+    # All five sheets, in cascade order. They are unlayered and later wins, so
+    # concatenating in the wrong order silently changes the page — see
+    # DESIGN-SYSTEM.md, "Cascade". arrow.css binds to .btn-activate, which
+    # app.css defines, so it stays last.
+    SHEETS = ["app", "turn", "convergence", "enhanced", "arrow"]
+    parts = []
+    for stem in SHEETS:
+        matches = sorted((ROOT / "public/build/assets").glob(f"{stem}-*.css"))
+        if not matches:
+            raise SystemExit(f"{stem}-*.css missing from public/build/assets — run npm run build")
+        parts.append(f"/* ---- {stem}.css ---- */\n" + matches[-1].read_text())
+    css = "\n".join(parts)
 
     def inline_font(m: re.Match) -> str:
         name = pathlib.Path(m.group(1)).name
@@ -48,6 +58,27 @@ def main() -> None:
     wireui_js = fetch(SRC + "wireui/assets/scripts")
     # Alpine normally arrives bundled inside livewire.js; WireUI needs it.
     alpine_js = pathlib.Path("/tmp/alpine.js").read_text()
+    # The colour tabs and the section rail are page behaviour and work without
+    # a server, so they ship with the export.
+    enhanced_matches = sorted((ROOT / "public/build/assets").glob("enhanced-*.js"))
+    if not enhanced_matches:
+        raise SystemExit("enhanced-*.js missing from public/build/assets — run npm run build")
+    enhanced_js = enhanced_matches[-1].read_text()
+
+    # ---- Flags: fetch and inline ------------------------------------------
+    # Flux serves these from a route, so the export was shipping
+    # src="http://localhost:PORT/flux/flags/PT" — five broken images on the
+    # published page, since nobody else is running the app. They are ~500 byte
+    # SVGs, so they inline as data URIs the same way the fonts do.
+    def inline_flag(m: re.Match) -> str:
+        try:
+            svg = fetch(m.group(1))
+        except subprocess.CalledProcessError:
+            return m.group(0)
+        b64 = base64.b64encode(svg.encode()).decode()
+        return f'src="data:image/svg+xml;base64,{b64}"'
+
+    html = re.sub(r'src="(' + re.escape(SRC.rstrip("/")) + r'/flux/flags/[^"]*)"', inline_flag, html)
 
     # ---- Strip everything that needs a server -----------------------------
     html = re.sub(r'<link[^>]*rel="(modulepreload|preload)"[^>]*>\s*', "", html)
@@ -102,6 +133,11 @@ def main() -> None:
         f"<script>{wireui_js}</script>\n"
         f"<script>{alpine_js}</script>\n"
         f"<script>{STATIC_BEHAVIOUR}</script>\n"
+        # enhanced.js listens for DOMContentLoaded. This block is injected
+        # inside <body>, so it runs during parsing and the listeners are
+        # registered before the real event — no re-dispatch, which would run
+        # them twice and build the rail twice.
+        f"<script>{enhanced_js}</script>\n"
     )
     html = html.replace("</head>", head_add + "</head>", 1)
     html = html.replace("</body>", body_add + "</body>", 1)

@@ -1,0 +1,108 @@
+/* ==========================================================================
+   C–MORE — Turn, the progress bar.
+   Shared by progress.html (the options study) and enhanced.html, so there is
+   one source for it.
+
+   Ten squares. Each turns a quarter — the mark's own 90 degrees — as it
+   fills, and the leading square carries the fractional part, so the bar is
+   countable and exact at the same time.
+
+   Worth knowing: a square at 90 degrees is identical to a square at 0. The
+   turn reads as MOTION; standing still it is the part-turned leading square
+   that shows the fraction, and colour that separates done from not.
+
+   Set --p (0-100) on the .pb-units element.
+   ========================================================================== */
+
+/* Registering --p makes it animatable: an unregistered custom property is
+   a string to the engine and jumps rather than interpolates. */
+@property --p {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+.pb {
+  width: 100%;
+}
+
+.pb-units {
+  /* local defaults so the bar is self-contained on any page */
+  --track: color-mix(in oklab, var(--color-ink) 12%, transparent);
+  /* The frontier square. Activation, not the lime primitive — the same token
+     the primary button spends, so a rebrand moves both. */
+  --lead-fill: var(--color-activation);
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.pb-units i {
+  /* how full this square is, 0 to 1 — ten squares, so square n covers
+     the range n*10 to (n+1)*10 */
+  --f: clamp(0, (var(--p) - var(--n) * 10) / 10, 1);
+
+  /* Is this the frontier — the last square with any fill?
+
+     Maths rather than :nth-child, because which square it is moves with --p.
+     Two half-open tests multiplied: fill has reached me, and has not yet
+     passed me. The ×1000 turns each into a step; the +1 on the second makes
+     its upper bound INCLUSIVE, which is the whole reason this is not simply
+     "the square mid-rotation". Every nudge is 10, so the value always lands
+     on a multiple of ten, where no square is part-turned — without the +1 the
+     controlled bar would never light up at all. Mid-cycle it does both: the
+     frontier square is part-turned AND lime. */
+  --lead-from: clamp(0, calc((var(--p) - var(--n) * 10) * 1000), 1);
+  --lead-to: clamp(0, calc(((var(--n) + 1) * 10 - var(--p)) * 1000 + 1), 1);
+  --lead: calc(var(--lead-from) * var(--lead-to));
+
+  position: relative;
+  flex: 1;
+  aspect-ratio: 1;
+  max-width: 1.6rem;
+  border-radius: 2px;
+  /* Lime laid over the ordinary track→ink fill, by how much this square is
+     the frontier. An empty bar has no frontier, so nothing is lime at 0. */
+  background-color: color-mix(
+    in oklab,
+    var(--lead-fill) calc(var(--lead) * 100%),
+    color-mix(in oklab, var(--color-ink) calc(var(--f) * 100%), var(--track))
+  );
+  transform: rotate(calc(var(--f) * 90deg));
+  transition: transform var(--duration-base) var(--ease-brand),
+    background-color var(--duration-base) var(--ease-brand);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pb-units i {
+    transition: none;
+  }
+}
+
+/* Self-cycling demo, for showing the bar where there is no control to drive
+   it. Fills, holds, then resets — the per-square transitions smooth the
+   reset so it reads as a rewind rather than a jump. */
+.pb-units--demo {
+  animation: pb-demo 6s linear infinite;
+}
+
+@keyframes pb-demo {
+  0%,
+  8% {
+    --p: 0;
+  }
+  72%,
+  90% {
+    --p: 100;
+  }
+  100% {
+    --p: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pb-units--demo {
+    animation: none;
+    --p: 64;
+  }
+}

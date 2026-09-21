@@ -1,0 +1,149 @@
+// Tabs for the enhanced layer. Progressive: without JS both panels stay
+// visible, which is a worse layout but never a broken one.
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('[data-enh-tabs]').forEach(function (bar) {
+    var tabs = Array.prototype.slice.call(bar.querySelectorAll('[role="tab"]'));
+    if (!tabs.length) return;
+
+    function panelOf(tab) {
+      return document.getElementById(tab.getAttribute('aria-controls'));
+    }
+
+    function select(tab) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        var panel = panelOf(t);
+        if (panel) panel.hidden = !on;
+      });
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () {
+        select(tab);
+      });
+      tab.addEventListener('keydown', function (e) {
+        var step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!step) return;
+        e.preventDefault();
+        var next = tabs[(i + step + tabs.length) % tabs.length];
+        next.focus();
+        select(next);
+      });
+    });
+
+    // Honour whichever tab the markup marked selected.
+    var initial =
+      tabs.filter(function (t) {
+        return t.getAttribute('aria-selected') === 'true';
+      })[0] || tabs[0];
+    select(initial);
+  });
+});
+
+// Section rail. Built from the DOM rather than hand-listed, so it stays in
+// sync as headings are added or removed.
+document.addEventListener('DOMContentLoaded', function () {
+  var rail = document.querySelector('[data-enh-rail]');
+  if (!rail) return;
+
+  var targets = [];
+  var seq = 0;
+
+  document.querySelectorAll('section[id]').forEach(function (section) {
+    var eyebrow = section.querySelector('.eyebrow');
+    var group = document.createElement('div');
+    group.className = 'enh-rail__group';
+
+    var head = document.createElement('a');
+    head.className = 'enh-rail__section';
+    head.href = '#' + section.id;
+    head.textContent = eyebrow ? eyebrow.textContent.trim() : section.id;
+    group.appendChild(head);
+
+    // h2 and h3 only. h4s exist inside some subsections (Sizes, Status,
+    // Spinner, Bar…) and are page labels, not rail destinations — three
+    // levels is the whole structure: section, group, component.
+    section.querySelectorAll('h2, h3').forEach(function (heading) {
+      if (!heading.id) heading.id = 'h-' + ++seq;
+      var link = document.createElement('a');
+      // Three levels: h2 is a group inside the section, h3 a component
+      // inside that group, h4 a label inside a component.
+      link.className =
+        'enh-rail__item' + (heading.tagName === 'H3' ? ' enh-rail__item--sub' : '');
+      link.href = '#' + heading.id;
+      link.textContent = heading.textContent.replace(/\s+/g, ' ').trim();
+      group.appendChild(link);
+      targets.push({ heading: heading, link: link });
+    });
+
+    rail.appendChild(group);
+  });
+
+  rail.addEventListener('click', function (e) {
+    var link = e.target.closest('a');
+    if (!link) return;
+    var target = document.getElementById(link.getAttribute('href').slice(1));
+    if (!target) return;
+    e.preventDefault();
+
+    // A heading can live in the tab panel that is currently hidden — show it
+    // first, otherwise the jump lands on nothing.
+    var panel = target.closest('.enh-tabpanel');
+    if (panel && panel.hidden) {
+      var tab = document.getElementById(panel.getAttribute('aria-labelledby'));
+      if (tab) tab.click();
+    }
+
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    history.replaceState(null, '', '#' + target.id);
+  });
+
+  // Highlight whichever heading the reader is currently under.
+  var current = null;
+  var ticking = false;
+
+  function sync() {
+    ticking = false;
+    var best = null;
+    targets.forEach(function (t) {
+      if (t.heading.offsetParent === null) return; // inside a hidden panel
+      if (t.heading.getBoundingClientRect().top <= 140) best = t;
+    });
+    if (best === current) return;
+    if (current) current.link.removeAttribute('aria-current');
+    current = best;
+    if (!current) return;
+    current.link.setAttribute('aria-current', 'true');
+
+    var box = current.link.getBoundingClientRect();
+    var rb = rail.getBoundingClientRect();
+    if (box.top < rb.top + 40 || box.bottom > rb.bottom - 40) {
+      current.link.scrollIntoView({ block: 'center' });
+    }
+  }
+
+  window.addEventListener(
+    'scroll',
+    function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(sync);
+    },
+    { passive: true }
+  );
+  sync();
+});
+
+// The sub-section boxes are NOT built here.
+//
+// On the static page a fourth block walked every `.sub-label`, created a
+// `.sub-box` wrapper and moved the following `data-sub-span` siblings into
+// it. That cannot survive Livewire: a `wire:model.live` round trip morphs the
+// component against the server's HTML, which has no wrapper, so every box
+// would be torn out on the first keystroke in a form field.
+//
+// Blade renders `<x-ds.sub-box>` directly instead, which is where the
+// boundary belonged anyway — `data-sub-span` was only ever a way of writing
+// the wrapper down in markup that could not nest it.

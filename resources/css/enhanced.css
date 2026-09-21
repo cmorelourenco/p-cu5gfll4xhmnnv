@@ -1,0 +1,1048 @@
+/* ==========================================================================
+   C–MORE — enhanced layer
+   Loaded only by enhanced.html, after tokens.css. index.html stays untouched.
+   --------------------------------------------------------------------------
+   ADDITION 01 — Electric Blue, the secondary.
+
+   Why this colour: every existing blue in the system sits at OKLCH hue
+   262–274°, but at chroma 0.04–0.07 — which is exactly why they read as grey.
+   This holds the family hue (267°, between Blue's 263° and Deep Blue's 271°)
+   and roughly doubles the chroma to 0.138.
+
+   Deliberately NOT the sRGB edge. An earlier pass ran this at chroma 0.261
+   (#2540F2) and it was genuinely electric; the base is now the dark-mode lift
+   #789AF4 taken down to L 0.48, same hue and same chroma. Calmer, and it
+   reads as the system's blue with conviction rather than a colour shouting.
+
+   Against Lime it still works: 142° apart in hue and far apart in lightness
+   (L 0.48 vs 0.91), so they never vibrate and Lime stays the loudest thing
+   on the page.
+   ========================================================================== */
+
+:root,
+:host {
+  /* --- Raw palette ------------------------------------------------------ */
+  --color-electric-blue: #3b57ab; /* L .48  C .138  H 267 */
+  --color-electric-deep: #2d4694; /* pressed / hover        */
+  --color-electric-lift: #789af4; /* dark-mode variant, unchanged */
+  --color-electric-subtle: #e8f0ff; /* light tint           */
+
+  /* --- Semantic: secondary ----------------------------------------------
+     Mirrors the shape of the activation family, so components can swap
+     one for the other without knowing which colour they got. */
+  --color-secondary: var(--color-electric-blue);
+  --color-secondary-hover: var(--color-electric-deep);
+  --color-secondary-foreground: #fff; /* 6.79:1 */
+  --color-secondary-subtle: var(--color-electric-subtle);
+}
+
+.dark {
+  /* #3B57AB only reaches 2.6:1 on Deep Blue, so dark mode lifts to L .70.
+     Its foreground flips to Deep Blue, exactly as activation does. */
+  --color-secondary: var(--color-electric-lift);
+  --color-secondary-hover: #9bb6f7;
+  --color-secondary-foreground: var(--color-deep-blue); /* 6.32:1 */
+  --color-secondary-subtle: #1e2b51;
+}
+
+/* --------------------------------------------------------------------------
+   Panel + chip primitives, used by the activation hue study.
+   Plain CSS on tokens, so no Tailwind rebuild is needed.
+   -------------------------------------------------------------------------- */
+
+.pair-panel {
+  border-radius: var(--radius-card);
+  padding: 1.5rem;
+  min-height: 11rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  border: 1px solid transparent;
+}
+
+.pair-panel p {
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+  text-wrap: balance;
+}
+
+.pair-chip {
+  align-self: flex-start;
+  border-radius: var(--radius-pill);
+  padding: 0.45rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+/* --------------------------------------------------------------------------
+   Activation hue study — the same combo at three greens.
+   Each column sets --g; the panels read it, so a variant is one hex change.
+   All three sit at L 0.905–0.912 and 13.6–13.8:1 on Deep Blue, so what you
+   are comparing is hue alone.
+   -------------------------------------------------------------------------- */
+
+.hue-study {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.hue-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.hue-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-subtle);
+  font-variant-numeric: tabular-nums;
+}
+.hue-label b {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.hue-study .pair-panel {
+  min-height: 9.5rem;
+  padding: 1.25rem;
+}
+.hue-study .pair-panel p {
+  font-size: 0.9375rem;
+}
+
+.hue-panel-blue {
+  background-color: var(--color-secondary);
+  color: var(--color-secondary-foreground);
+}
+.hue-panel-blue .pair-chip {
+  background-color: var(--g);
+  color: var(--color-deep-blue);
+}
+
+.hue-panel-green {
+  background-color: var(--g);
+  color: var(--color-deep-blue);
+}
+.hue-panel-green .pair-chip {
+  background-color: var(--color-secondary);
+  color: var(--color-secondary-foreground);
+}
+
+/* --------------------------------------------------------------------------
+   Tabs — Current vs Alternatives.
+   The indicator is the activation colour: one small moment, doing its job.
+   -------------------------------------------------------------------------- */
+
+.enh-tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 2rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.enh-tab {
+  appearance: none;
+  background: none;
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+  position: relative;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--color-ink-muted);
+  transition: color var(--duration-quick) var(--ease-brand);
+}
+
+.enh-tab:hover {
+  color: var(--color-ink);
+}
+
+.enh-tab[aria-selected="true"] {
+  color: var(--color-ink);
+}
+
+.enh-tab::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0.55rem;
+  bottom: -1px;
+  height: 2px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-activation);
+  transform: scaleX(0);
+  transition: transform var(--duration-base) var(--ease-brand);
+}
+
+.enh-tab[aria-selected="true"]::after {
+  transform: scaleX(1);
+}
+
+.enh-tab:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+  border-radius: 0.375rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enh-tab,
+  .enh-tab::after {
+    transition: none;
+  }
+}
+
+/* Both panels lead with an h2, but the one inherited from the original markup
+   carries mt-5 and the new one carries nothing — so switching tabs shifted the
+   heading by 20px. Set the gap on the panel and zero the first child's margin,
+   so the two tabs are identical whatever their first element brings with it. */
+.enh-tabpanel {
+  padding-top: 2.5rem;
+}
+.enh-tabpanel > :first-child {
+  margin-top: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Acid yellow + greys — three pairs, the grey as the variable.
+   Each column sets --gy; the two panels read it, so a variant is one hex.
+
+   The greys span #1B1B1B to #585858, the usable window: below that the grey
+   stops clearing 4.5:1 as text on the yellow, so the reversed panel breaks.
+
+   Note the existing Sand ramp is not actually neutral — warm at the top
+   (hue ~90) and navy at the bottom (hue 271). These are true greys, chroma 0.
+   -------------------------------------------------------------------------- */
+
+:root,
+:host {
+  --color-acid: #dff000; /* L .911  C .206  H 115 */
+}
+
+.grey-panel-dark {
+  background-color: var(--gy);
+  color: #fafafa;
+}
+.grey-panel-dark .pair-chip {
+  background-color: var(--color-acid);
+  color: var(--gy);
+}
+
+.grey-panel-acid {
+  background-color: var(--color-acid);
+  color: var(--gy);
+}
+.grey-panel-acid .pair-chip {
+  background-color: var(--gy);
+  color: var(--color-acid);
+}
+
+/* --------------------------------------------------------------------------
+   Section rail — jump straight to any heading.
+   Only appears where there is room beside the 78rem container; below that the
+   header nav is still the way around.
+   -------------------------------------------------------------------------- */
+
+.enh-rail {
+  display: none;
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 15rem;
+  z-index: 60;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1.25rem 0.85rem 3rem;
+  background-color: var(--color-surface);
+  border-right: 1px solid var(--color-line);
+}
+
+@media (min-width: 1200px) {
+  .enh-rail {
+    display: block;
+  }
+  body {
+    padding-left: 15rem;
+  }
+}
+
+.enh-rail__title {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-subtle);
+  padding: 0 0.5rem 0.75rem;
+}
+
+.enh-rail__group {
+  margin-bottom: 1.15rem;
+}
+
+.enh-rail__section {
+  display: block;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-subtle);
+  text-decoration: none;
+}
+.enh-rail__section:hover {
+  color: var(--color-ink);
+}
+
+.enh-rail__item {
+  display: block;
+  padding: 0.3rem 0.5rem;
+  border-left: 2px solid transparent;
+  border-radius: 0 0.375rem 0.375rem 0;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  color: var(--color-ink-muted);
+  text-decoration: none;
+  transition: color var(--duration-quick) var(--ease-brand),
+    background-color var(--duration-quick) var(--ease-brand);
+}
+.enh-rail__item:hover {
+  color: var(--color-ink);
+  background-color: var(--color-surface-sunken);
+}
+.enh-rail__item[aria-current="true"] {
+  color: var(--color-ink);
+  font-weight: 600;
+  border-left-color: var(--color-activation);
+}
+
+.enh-rail a:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: -2px;
+  border-radius: 0.375rem;
+}
+
+/* Sub-labels inside an h3 group. Negative bottom margin pulls the label onto
+   the item it names, since the surrounding grids space children with gap. */
+.sub-label {
+  /* Forces its own line in a flex-wrap row and a full-width row in a grid,
+     so it can be dropped into either kind of demo container. */
+  flex-basis: 100%;
+  grid-column: 1 / -1;
+  /* Positive, not negative. A negative pull worked in the wide-gap grids but
+     collided inside space-y-4 and ui-field, where nothing adds space back. */
+  margin: 0 0 0.85rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-subtle);
+}
+
+.enh-rail__item--sub {
+  padding-left: 1.4rem;
+  font-size: 0.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   Each h3 group gets real air above it. Space alone does the separating —
+   the boxes already draw their own edges, so a rule as well was one line too
+   many.
+   -------------------------------------------------------------------------- */
+
+section h3[class*="mt-14"] {
+  margin-top: 3rem;
+  padding-top: 0;
+}
+
+/* The first group in a section already sits under the h2 and its intro. */
+section h3[class*="mt-14"]:first-of-type {
+  margin-top: 3.25rem;
+}
+
+/* A box per sub-section. Transparent rather than filled, so it reads the same
+   on the bg-surface and bg-ground sections. */
+.sub-box {
+  padding: 1.15rem 1.35rem 1.4rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+}
+
+/* The component heading needs air under it — sitting tight to the box made
+   the label read as part of the box's own chrome rather than as its title. */
+h3 + .sub-box,
+h3 + .sub-box--wrap {
+  margin-top: 1.5rem;
+}
+
+.sub-box > .sub-label {
+  margin-bottom: 1rem;
+}
+
+/* space-y stacks add margin to every child after the first; the box is now
+   that first child, so restore the rhythm between boxes. */
+.sub-box + .sub-box {
+  margin-top: 1rem;
+}
+
+/* Only boxes we inserted need to claim a full row — containers that were
+   already grid or flex children keep the placement they had. */
+.sub-box--wrap {
+  flex-basis: 100%;
+  grid-column: 1 / -1;
+}
+
+/* A wrapped run of several items no longer inherits its old parent's gap. */
+.sub-box--row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+}
+.sub-box--row > .sub-label {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Button variants — the four that are ours.
+
+   Primary is the reference: lime fill, Deep Blue label, the pixel arrow.
+   The rest are drawn from it rather than invented separately, so the set
+   reads as one family. Danger is left exactly as Flux ships it — it is the
+   only variant whose meaning comes from outside the brand.
+
+   These override Flux's compiled utilities, hence the attribute qualifier:
+   [data-flux-button] is the styling contract Flux documents.
+   ========================================================================== */
+
+/* --- Outline — primary drawn rather than filled ------------------------- */
+.btn-outline[data-flux-button] {
+  background-color: transparent;
+  color: var(--color-ink);
+  border: 2px solid var(--color-activation);
+  box-shadow: none;
+}
+.btn-outline[data-flux-button]:hover:not(:disabled) {
+  background-color: transparent;
+  border-color: var(--color-activation-hover);
+}
+
+/* --- Filled — primary inverted ------------------------------------------
+   Deep Blue ground, lime label. The arrow takes currentColor, so it turns
+   lime with the text and needs no rule of its own. */
+.btn-filled[data-flux-button] {
+  background-color: var(--color-deep-blue);
+  color: var(--color-activation);
+  border-color: transparent;
+  box-shadow: none;
+}
+.btn-filled[data-flux-button]:hover:not(:disabled) {
+  background-color: var(--color-sand-900);
+  box-shadow: none;
+}
+/* Deep Blue on a Deep Blue page disappears, so dark mode lifts the ground
+   one step rather than inverting a second time. */
+.dark .btn-filled[data-flux-button] {
+  background-color: var(--color-sand-800);
+}
+.dark .btn-filled[data-flux-button]:hover:not(:disabled) {
+  background-color: var(--color-sand-700);
+}
+
+/* --- Ghost — primary's label, nothing else ------------------------------- */
+.btn-ghost[data-flux-button] {
+  background-color: transparent;
+  color: var(--color-ink);
+  box-shadow: none;
+}
+.btn-ghost[data-flux-button]:hover:not(:disabled) {
+  /* the activation colour at its quietest — already a brand token, and it
+     flips to a dark green in the dark theme without a second rule */
+  background-color: var(--color-activation-subtle);
+}
+
+/* --- Button type scale ---------------------------------------------------
+   Base is 16px. Flux ships 14px there and 14px at the small size too, so
+   two of the four sizes read identically until you measure the pill. One
+   step per size instead:
+
+       24px button  12px label
+       32px button  14px label
+       40px button  16px label   ← base
+       52px button  18px label
+
+   Keyed on the height utility rather than on a class of ours, so every
+   button on the page moves, not just the ones in the specimen row.
+   ========================================================================== */
+[data-flux-button].h-6  { font-size: 0.75rem; }
+[data-flux-button].h-8  { font-size: 0.875rem; }
+[data-flux-button].h-10 { font-size: 1rem; }
+[data-flux-button].btn-lg { font-size: 1.125rem; }
+
+/* Disabled drops the lime and the arrow. Lime is the activation colour, and
+   a button that cannot be activated has no business wearing it; the arrow
+   marks forward, and this one goes nowhere. */
+.btn-filled[data-flux-button]:disabled {
+  color: var(--color-off-white);
+}
+
+/* One treatment across the badge specimen row, so size and icon are the only
+   things varying — the same reasoning as the button row. Sand 800 rather than
+   the 600 Flux ships, which was light enough that white on it read as washed. */
+.badge-solid[data-flux-badge] {
+  background-color: var(--color-sand-800);
+  color: var(--color-off-white);
+}
+/* the check glyph rides the label colour rather than its own */
+.badge-solid[data-flux-badge] [data-flux-icon] {
+  color: inherit;
+}
+
+/* --- Group headings inside Components ------------------------------------
+   Actions, Content, Forms, Data display, Navigation. Each opens a new family,
+   so it wants clear air above it and to sit close to the first component it
+   names — the reverse of what the inherited spacing did. Actions is the first
+   in the section and keeps its own rhythm under the eyebrow.
+   ========================================================================== */
+.group-title {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
+/* the first group opens the section and already sits under the eyebrow */
+.group-title:first-of-type {
+  margin-top: 1.25rem;
+}
+/* the heading owns the gap below it, so the first component drops its own */
+.group-title + h3[class*="mt-14"],
+.group-title + p + h3[class*="mt-14"] {
+  margin-top: 0;
+}
+
+/* The activated hairline: lime for its first 2rem, then the line colour.
+   Overrides the compiled rule, which ran the lime to 4rem at 1px. */
+.rule-activate {
+  background: linear-gradient(
+    to right,
+    var(--color-lime) 0 2rem,
+    var(--color-line) 2rem 100%
+  );
+  border: 0;
+  height: 2px;
+}
+
+
+/* ==========================================================================
+   Width ramp
+   --------------------------------------------------------------------------
+   app.css is compiled output: it only carries the utilities the original
+   build happened to use. w-8 is in there, w-10 is not — so writing w-10 in
+   the markup does nothing at all, silently, and the element falls back to its
+   natural width.
+
+   This fills the ramp on Tailwind's own scale (n x 0.25rem), so every value
+   here is identical to what a rebuild would emit — nothing is invented and
+   nothing already working is changed. Both the plain and the !-important
+   forms, because the compiled markup uses both.
+   ========================================================================== */
+.w-1 { width: 0.25rem; }
+.w-2 { width: 0.5rem; }
+.w-3 { width: 0.75rem; }
+.w-4 { width: 1rem; }
+.w-5 { width: 1.25rem; }
+.w-6 { width: 1.5rem; }
+.w-7 { width: 1.75rem; }
+.w-8 { width: 2rem; }
+.w-9 { width: 2.25rem; }
+.w-10 { width: 2.5rem; }
+.w-11 { width: 2.75rem; }
+.w-12 { width: 3rem; }
+.w-14 { width: 3.5rem; }
+.w-16 { width: 4rem; }
+.w-20 { width: 5rem; }
+.w-24 { width: 6rem; }
+.w-28 { width: 7rem; }
+.w-32 { width: 8rem; }
+.w-36 { width: 9rem; }
+.w-40 { width: 10rem; }
+.w-44 { width: 11rem; }
+.w-48 { width: 12rem; }
+.w-56 { width: 14rem; }
+.w-64 { width: 16rem; }
+.w-72 { width: 18rem; }
+.w-80 { width: 20rem; }
+.w-96 { width: 24rem; }
+
+.w-1\! { width: 0.25rem !important; }
+.w-2\! { width: 0.5rem !important; }
+.w-3\! { width: 0.75rem !important; }
+.w-4\! { width: 1rem !important; }
+.w-5\! { width: 1.25rem !important; }
+.w-6\! { width: 1.5rem !important; }
+.w-7\! { width: 1.75rem !important; }
+.w-8\! { width: 2rem !important; }
+.w-9\! { width: 2.25rem !important; }
+.w-10\! { width: 2.5rem !important; }
+.w-11\! { width: 2.75rem !important; }
+.w-12\! { width: 3rem !important; }
+.w-14\! { width: 3.5rem !important; }
+.w-16\! { width: 4rem !important; }
+.w-20\! { width: 5rem !important; }
+.w-24\! { width: 6rem !important; }
+.w-28\! { width: 7rem !important; }
+.w-32\! { width: 8rem !important; }
+.w-36\! { width: 9rem !important; }
+.w-40\! { width: 10rem !important; }
+.w-44\! { width: 11rem !important; }
+.w-48\! { width: 12rem !important; }
+.w-56\! { width: 14rem !important; }
+.w-64\! { width: 16rem !important; }
+.w-72\! { width: 18rem !important; }
+.w-80\! { width: 20rem !important; }
+.w-96\! { width: 24rem !important; }
+
+/* WireUI's date picker and select draw their box on a wrapping <label> that
+   carries no height class, so the h-14 swap on the Flux inputs never reached
+   them. [form-wrapper] is WireUI's own hook and covers both. */
+[form-wrapper] > label {
+  height: 3.5rem;
+}
+
+/* --- One input surface ---------------------------------------------------
+   The WireUI date picker and select drew their box transparent with an inset
+   ring, while every Flux input is a white field with a border. A form mixing
+   them read as two components. Flux's is the one: white fill, hairline
+   border, the same 16px corner.
+   ========================================================================== */
+[form-wrapper] > label {
+  background-color: var(--color-surface);
+  border-radius: 1rem;
+  /* the hairline, then Flux's own shadow-xs so the lift matches too */
+  box-shadow: inset 0 0 0 1px var(--color-mid-beige), 0 1px 2px rgb(0 0 0 / 0.05);
+}
+
+/* The chosen value. The WireUI trigger inherits Deep Blue, so a selected
+   option read darker than the same value in a Flux input. Sand 700 is what
+   Flux paints its input text. The placeholder keeps its own lighter colour. */
+[form-wrapper] > label {
+  color: var(--color-sand-700);
+}
+
+/* Trigger icons only — the chevron and the calendar. Flux draws its native
+   select chevron as a #d4d4d4 background SVG; these were inheriting Deep Blue
+   and reading twice as heavy. Icons inside the open panel are left alone. */
+[form-wrapper] > label svg {
+  color: #d4d4d4;
+}
+
+/* The dropdown panel is a continuation of the field it opens from, so it
+   takes the field's corner rather than its own. The border goes: it resolved
+   to a dark outline that framed the panel like a dialog, and the shadow
+   already separates it from the page. */
+[form-wrapper] div[class*="shadow-lg"] {
+  border-radius: 1rem;
+  border: 0;
+}
+
+/* Dropdown options. WireUI pairs hover:text-white with hover:bg-primary-500,
+   and primary-500 does not resolve in this build — so the row kept its white
+   text and lost its background, and the option vanished on hover. Light lime
+   ground, ink text, same as the ghost button's hover. */
+[form-wrapper] [class*="hover\:bg-primary-500"]:hover,
+[form-wrapper] [class*="focus\:bg-primary-100"]:focus {
+  background-color: var(--color-activation-subtle);
+  color: var(--color-ink);
+}
+
+/* --- Input text size -----------------------------------------------------
+   Every Flux input renders its value at 16px. WireUI's trigger and its
+   dropdown rows sat at 14px, so the same word changed size between a field
+   and the list it came from. One size across the control.
+   ========================================================================== */
+[form-wrapper] > label,
+[form-wrapper] > label button,
+[form-wrapper] > label span,
+[form-wrapper] [class*="hover\:bg-primary-500"],
+[form-wrapper] [class*="hover\:bg-primary-500"] span {
+  font-size: 1rem;
+}
+
+/* --- 16px, every field, every width -------------------------------------
+   Both libraries ship `text-base sm:text-sm`: 16px on a phone, 14px from
+   640px up. So a form was 16px only on mobile and 14px on every desktop.
+   These selectors carry a type or attribute so they outrank the .sm:text-sm
+   utility inside its media query.
+   ========================================================================== */
+input[data-flux-control],
+[data-flux-input] > input,
+[data-flux-input] > textarea,
+textarea[data-flux-control],
+select[data-flux-select-native],
+[data-flux-label],
+[form-wrapper] input,
+[form-wrapper] button,
+[form-wrapper] span,
+[form-wrapper] label,
+[form-wrapper] [class*="hover\:bg-primary-500"] {
+  font-size: 1rem;
+}
+
+/* ==========================================================================
+   Type plate
+   --------------------------------------------------------------------------
+   The type specimen reversed onto Deep Blue, so the scale is read the way the
+   brand actually uses it: Deep Blue identifies, Lime activates, white space
+   does the rest. The stair sits in the corner, flush to two edges, cropped by
+   the plate — the mark behaving like a mark rather than a logo pasted on.
+   ========================================================================== */
+.type-plate {
+  /* the step size lives on the plate, so the mark's footprint — three steps
+     wide — derives from it rather than being restated. It can't be called
+     --u here: .px sets its own --u on the element, which beats inheritance. */
+  --mark-u: 28px;
+  --mark-span: calc(var(--mark-u) * 3);
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-surface-invert);
+  color: var(--color-ink-invert);
+}
+
+/* span. qualifies it past `.px { color: inherit }`, which loads later */
+span.type-plate__mark {
+  --u: var(--mark-u);
+  position: absolute;
+  top: 0;
+  /* flush to the corner: the top step meets both edges rather than running
+     off them, so the stair reads as three whole pixels */
+  right: 0;
+  color: var(--color-activation);
+}
+/* pixels, not rounded rectangles, at this size */
+span.type-plate__mark b {
+  border-radius: 0;
+}
+
+/* Flux paints these from its own zinc scale, which is invisible on the dark
+   ground. The specimen is about the scale, so only the colour changes. */
+.type-plate [data-flux-heading] {
+  color: var(--color-off-white);
+}
+.type-plate [data-flux-subheading] {
+  color: var(--color-activation);
+}
+.type-plate [data-flux-text] {
+  color: var(--color-off-white);
+}
+/* Flux marks emphasis with zinc-800 and the quiet span with zinc-400 — both
+   invisible here, and both were collapsing to one colour. */
+.type-plate [data-flux-text][class*="text-zinc-800"] {
+  color: var(--color-off-white);
+  font-weight: 600;
+}
+.type-plate [data-flux-text][class*="text-zinc-400"] {
+  color: var(--color-mid-blue);
+}
+.type-plate [data-flux-link] {
+  color: var(--color-activation);
+  text-decoration-color: var(--color-activation);
+}
+
+/* the caption keeps a lime square in front of it, the smallest the mark gets */
+.type-plate__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-mid-blue) !important;
+}
+.type-plate__meta::before {
+  content: "";
+  flex: none;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 1px;
+  background-color: var(--color-activation);
+}
+
+/* The specimen sizes. The plate is a 600px column, so the scale is set as a
+   proportion of that column rather than of the page: the heading takes just
+   under a tenth of the plate's width, and everything else steps down from it.
+   Flux's own zinc defaults are ignored here — only the colour is inherited. */
+.type-plate [data-flux-heading] {
+  font-size: 3.75rem;
+  line-height: 1.05;
+  /* Flux ships this as font-medium. On the plate the heading is the whole
+     statement, so it carries the weight the brand uses for display type. */
+  font-weight: 700;
+}
+.type-plate [data-flux-subheading] {
+  font-size: 1.375rem;
+  line-height: 1.3;
+}
+.type-plate p[data-flux-text],
+.type-plate p[data-flux-text] [data-flux-text],
+.type-plate p[data-flux-text] [data-flux-link] {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+/* p. qualifies it past `.type-plate p[data-flux-text]` above, which the
+   caption also matches */
+.type-plate p.type-plate__meta {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* A 600px column, left-aligned in the page's 1120px measure. The specimen is
+   read as a block of type, not as a full-bleed banner — at page width the
+   body copy ran to 90 characters and the heading floated in empty space. */
+.type-plate {
+  max-width: 600px;
+  padding: 2.5rem;
+}
+
+/* The specimen breathes: each block is a separate statement, not a stack of
+   lines. space-y-4 put 16px between a 60px heading and its subheading. */
+.type-plate > * + * {
+  margin-top: 0 !important;
+}
+/* these have to carry !important too, or the reset above outranks them */
+.type-plate [data-flux-subheading] {
+  margin-top: 1rem !important;
+}
+.type-plate p[data-flux-text] {
+  margin-top: 2.5rem !important;
+}
+.type-plate p.type-plate__meta {
+  margin-top: 2.25rem !important;
+}
+/* The heading breaks after "Heading," — a display line is a shape, not a
+   sentence, and at full column width it ran on past the mark. The measure is
+   held below the full string and above the first word, and never wider than
+   the space the mark leaves. */
+.type-plate [data-flux-heading] {
+  max-width: min(17.5rem, calc(100% - var(--mark-span) - 1rem));
+}
+/* Body copy keeps a measure too — the full column put 75 characters on a
+   line, which is a paragraph, not a specimen. */
+.type-plate p[data-flux-text] {
+  max-width: calc(100% - 3rem);
+}
+
+/* ==========================================================================
+   Card — the two that are ours.
+
+   Flux ships cards as a hairline and a tint. Neither is a brand statement:
+   the hairline disappears against the warm ground and the tint reads as an
+   absence rather than a choice. These two are drawn instead.
+
+   Outline is the page's own colours held inside a 2px rule — the border is
+   the card. Soft is the same card reversed onto Deep Blue, the treatment the
+   type plate uses, at card scale. Both carry the two-step stair, so a card
+   is marked the way every other brand surface is.
+
+   Same attribute qualifier as the buttons: [data-flux-card] is the styling
+   contract Flux documents, and it outranks the compiled utilities.
+   ========================================================================== */
+
+.card-outline[data-flux-card],
+.card-soft[data-flux-card] {
+  /* the step the mark is built from; the padding is three of them */
+  --card-u: 12px;
+  border-radius: 0.25rem;
+  padding: 2.25rem;
+  box-shadow: none;
+}
+
+/* --- Outline — the border is the card ------------------------------------ */
+.card-outline[data-flux-card] {
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-ink);
+}
+
+/* --- Soft — the same card reversed --------------------------------------
+   Not --color-surface-invert: that token flips to beige in the dark theme,
+   which would leave light lime on light beige. Deep Blue is the point of
+   this variant, so it is named outright and lifted one step in dark, the
+   same move .btn-filled makes for the same reason. */
+.card-soft[data-flux-card] {
+  background-color: var(--color-deep-blue);
+  border: 2px solid transparent;
+}
+.dark .card-soft[data-flux-card] {
+  background-color: var(--color-sand-800);
+}
+
+/* --- The mark ------------------------------------------------------------
+   Two squares, corner to corner: the lower one takes the card's own text
+   colour, the upper one activates. Sized off --card-u so the mark and the
+   padding stay on one grid. */
+span.card-mark {
+  --u: var(--card-u);
+}
+span.card-mark b:nth-child(2) {
+  background-color: var(--color-activation);
+}
+.card-outline[data-flux-card] span.card-mark {
+  color: var(--color-ink);
+}
+.card-soft[data-flux-card] span.card-mark {
+  color: var(--color-off-white);
+}
+
+/* --- Type ---------------------------------------------------------------
+   Flux sets the card heading at 16px medium, which is body copy in bold.
+   A card leads with a statement, so the heading carries display weight and
+   the copy sits one step above Flux's 14px. */
+.card-outline[data-flux-card] [data-flux-heading],
+.card-soft[data-flux-card] [data-flux-heading] {
+  font-size: 1.875rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+.card-outline[data-flux-card] p[data-flux-text],
+.card-soft[data-flux-card] p[data-flux-text] {
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+.card-outline[data-flux-card] [data-flux-heading] {
+  color: var(--color-ink);
+}
+.card-outline[data-flux-card] p[data-flux-text] {
+  color: var(--color-ink-muted);
+}
+.card-soft[data-flux-card] [data-flux-heading] {
+  color: var(--color-off-white);
+}
+/* light lime rather than white: the copy is quieter than the heading, and
+   on Deep Blue the activation tint is how this brand says quiet */
+.card-soft[data-flux-card] p[data-flux-text] {
+  color: var(--color-activation-subtle);
+}
+
+/* --- Rhythm --------------------------------------------------------------
+   space-y-4 put one gap between all four blocks, which made the action read
+   as another paragraph. The action gets its own step away from the copy.
+
+   space-y-4 sets a bottom margin as well as a top one. Between block
+   children those collapse and the gap is right; the button is inline-flex,
+   so nothing collapses against it and the two margins added up. One margin
+   carries the rhythm, hence the reset. */
+.card-outline[data-flux-card] > *,
+.card-soft[data-flux-card] > * {
+  margin-bottom: 0 !important;
+}
+.card-outline[data-flux-card] > * + *,
+.card-soft[data-flux-card] > * + * {
+  margin-top: 1rem !important;
+}
+.card-outline[data-flux-card] > [data-flux-button],
+.card-soft[data-flux-card] > [data-flux-button] {
+  margin-top: 1.5rem !important;
+}
+
+/* ==========================================================================
+   Tile — the three that are ours.
+
+   Flux's tile is a hairline, a soft grey plate and a 12px radius: three
+   quiet decisions that add up to no decision. These are drawn the way the
+   cards are — a 2px rule, a 4px corner, and a plate that is a square of
+   Deep Blue rather than a rounded patch of beige.
+
+   The three states are not three components. Standard is the tile. Activate
+   takes the whole tile lime rather than tinting the plate, because a tint on
+   a 56px square is not enough signal for "the one thing that matters most".
+   Static is simply a tile that is not interactive, and says so with a
+   softer rule — which is why it is selected that way rather than by a class
+   of its own: a tile without the hover behaviour gets the look for free.
+   ========================================================================== */
+
+.tile {
+  border-width: 2px;
+  border-color: var(--color-ink);
+  border-radius: 0.25rem;
+  padding: 2rem;
+}
+/* the hover already lifts and casts; softening the rule at the same time
+   pulled in two directions at once */
+.tile-interactive:hover {
+  border-color: var(--color-ink);
+}
+
+/* --- Activate — the tile, not the plate ----------------------------------
+   Lime does not flip between themes, so nothing sitting on it may either:
+   --color-ink would turn off-white in the dark theme and leave the heading
+   on Lime. Everything here is named Deep Blue outright, the same reasoning
+   .card-soft uses for the reverse case. */
+.tile-activate {
+  background-color: var(--color-activation);
+  border-color: var(--color-deep-blue);
+}
+.tile-interactive.tile-activate:hover {
+  border-color: var(--color-deep-blue);
+}
+.tile-activate h4 {
+  color: var(--color-deep-blue);
+}
+/* on Lime the muted blue goes muddy, and the bold lead stops leading */
+.tile-activate p,
+.tile-activate p strong {
+  color: var(--color-deep-blue);
+}
+
+/* --- Static — no hover, so the rule says so ------------------------------ */
+.tile:not(.tile-interactive) {
+  border-color: var(--color-line-strong);
+}
+
+/* --- The plate -----------------------------------------------------------
+   A square, not a rounded patch: 56px of Deep Blue with the icon reversed
+   out of it. The transparent border is load-bearing — it keeps the outlined
+   plate the same 56px box as the filled one instead of 4px larger. */
+.tile .icon-plate {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0;
+  border: 2px solid transparent;
+  background-color: var(--color-ink);
+  /* the pair, not the pigment: ink/ink-invert stays legible after the theme
+     flips the two of them */
+  color: var(--color-ink-invert);
+}
+/* the plate holds — pinned, because the tile under it is Lime in both
+   themes — and the icon takes the activation colour */
+.tile-activate .icon-plate {
+  background-color: var(--color-deep-blue);
+  color: var(--color-activation);
+}
+/* nothing here is clickable, so nothing here is filled */
+.tile:not(.tile-interactive) .icon-plate {
+  background-color: transparent;
+  border-color: var(--color-line-strong);
+  color: var(--color-ink-muted);
+}
+.tile .icon-brand {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* --- Type ---------------------------------------------------------------
+   Flux leaves the tile heading at body size in semibold. A tile is a
+   headline and a caption, so the heading takes the same display weight the
+   cards use, one step down for the narrower column. */
+.tile h4 {
+  margin-top: 1.5rem;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  font-weight: 700;
+  /* no colour: the heading inherits the tile's, which is what lets
+     .tile-activate recolour it without having to outrank this rule */
+}
+.tile p {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}

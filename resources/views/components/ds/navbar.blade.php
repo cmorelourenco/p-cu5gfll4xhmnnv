@@ -27,9 +27,12 @@
             <flux:button href="#" variant="ghost" size="sm" class="hidden sm:inline-flex">
                 Secondary
             </flux:button>
-            {{-- The single activation moment in the chrome. --}}
-            <flux:button href="#" size="sm" class="btn-activate">
+            {{-- The single activation moment in the chrome. Flux primary +
+                 .btn-activate + the arrow is the one way to make a primary
+                 button; there is no second recipe. --}}
+            <flux:button href="#" variant="primary" size="sm" class="btn-activate">
                 Primary action
+                <x-ds.px size="sm" />
             </flux:button>
         </div>
     </div>
