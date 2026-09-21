@@ -380,7 +380,9 @@ second animation.
 shipped behaviour of the primary button rather than a variant to opt into.
 
 **The arrow marks *forward*.** Drop it when the button does not move you forward
-(Save, Apply), and never put it on the one that cancels.
+(Save, Apply), and never put it on the one that cancels. The *Without an icon*
+row under Buttons shows the same five variants with the mark gone; dropping it
+is a markup decision, since `arrow.css` only animates a `.px` that is present.
 
 ---
 

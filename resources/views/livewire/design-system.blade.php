@@ -276,6 +276,33 @@
                 </div>
             </x-ds.sub-box>
 
+            {{-- The same five with the mark dropped.
+
+                 The arrow marks FORWARD, so it comes off any button that
+                 does not move you forward — Save, Apply, Update — and never
+                 goes on the one that cancels. Dropping it is a markup
+                 decision: omit the <x-ds.px> and nothing else changes, since
+                 arrow.css only animates a .px that is actually there.
+
+                 Note what the label colours do here. On the coral button the
+                 label is the only thing left, and it is the Graphite at
+                 4.24:1 — the stronger half of the pair, which is why the
+                 button survives losing its mark. The graphite button keeps
+                 its Light Beige at 10.96:1. --}}
+            <x-ds.sub-box label="Without an icon">
+                <div class="mt-5 flex flex-wrap items-center gap-3">
+                    <flux:button variant="primary" class="btn-activate">Save</flux:button>
+                    <flux:button variant="outline" class="btn-outline">Apply</flux:button>
+                    <flux:button variant="filled" class="btn-filled">Update</flux:button>
+                    <flux:button variant="ghost" class="btn-ghost">Cancel</flux:button>
+                    <flux:button variant="danger">Delete</flux:button>
+                </div>
+                <p class="mt-4 max-w-2xl text-xs text-ink-subtle">
+                    Same five variants, same rules. The mark is gone because none of these
+                    moves you forward &mdash; and the one that cancels would never carry it.
+                </p>
+            </x-ds.sub-box>
+
             <x-ds.sub-box label="Sizes, icons and states">
                 <div class="mt-5 flex flex-wrap items-center gap-3">
                     <flux:button size="xs" variant="filled" class="btn-filled">
