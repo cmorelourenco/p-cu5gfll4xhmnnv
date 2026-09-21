@@ -35,7 +35,12 @@
   .enh-rail {
     display: block;
   }
-  body {
+  /* Only make room when a rail is actually there. This used to offset every
+     body, which is fine on the one page that has a rail and wrong on every
+     other page that loads this stylesheet for its tiles and icon plates —
+     they were all pushed 15rem to the right on any screen above 1200px. The
+     rail is a direct child of body in the layout that uses it. */
+  body:has(> [data-enh-rail]) {
     padding-left: 15rem;
   }
 }
