@@ -850,3 +850,23 @@ span.card-mark b:nth-child(2) {
   font-size: 1rem;
   line-height: 1.6;
 }
+
+/* --- A quiet button on the inverted surface -----------------------------
+   Flux's ghost variant is `text-zinc-800`, which the sand ramp maps to
+   #50504e. On the graphite band that is about 1.3:1 — the button is there,
+   focusable and clickable, and effectively invisible.
+
+   The system said what headings, eyebrows, icon plates and rules do on
+   .surface-invert but never what a button does, so the CTA band could only
+   carry the primary one. This says it: a ghost button inverts with the
+   surface, and its hover is the same white wash at 15% that Flux already
+   uses in dark mode.
+
+   Unlayered on purpose — the rule it has to outrank is a Tailwind utility,
+   and @layer components loses to those by design. */
+.surface-invert [data-flux-button].bg-transparent {
+  color: var(--color-ink-invert);
+}
+.surface-invert [data-flux-button].bg-transparent:hover {
+  background-color: color-mix(in oklab, var(--color-off-white) 15%, transparent);
+}

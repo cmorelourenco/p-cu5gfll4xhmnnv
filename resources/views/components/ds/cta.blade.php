@@ -4,7 +4,11 @@
         @if($eyebrow)
             <x-ds.eyebrow class="justify-center">{{ $eyebrow }}</x-ds.eyebrow>
         @endif
-        <x-ds.display size="xl" class="mt-5">{{ $heading }}</x-ds.display>
+        {{-- Stepped down on small screens. The display scale is fixed-size, so
+             xl stays 68px on a 375px phone: the heading swallows the viewport
+             and pushes the buttons — the only reason this band exists — below
+             the fold. It reaches the full size from `sm` up. --}}
+        <x-ds.display size="lg" class="mt-5 sm:text-display-xl">{{ $heading }}</x-ds.display>
         @if($body)
             <p class="text-lead mt-6 mx-auto text-mid-blue">{{ $body }}</p>
         @endif

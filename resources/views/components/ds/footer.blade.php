@@ -1,12 +1,13 @@
-@props(['groups' => []])
+@props(['groups' => [], 'blurb' => null])
 <footer class="surface-invert border-t border-line-invert">
     <div class="container-site py-16">
         <div class="grid gap-12 md:grid-cols-[1.5fr_repeat(3,1fr)]">
             <div>
                 <x-ds.brand size="lg" />
                 <p class="mt-4 max-w-xs text-sm text-mid-blue">
-                    Placeholder footer copy. The product positioning goes here once
-                    the brief lands.
+                    {{-- The placeholder stands until a page passes its own line, so
+                         the design system page still shows the slot is there. --}}
+                    {{ $blurb ?? 'Placeholder footer copy. The product positioning goes here once the brief lands.' }}
                 </p>
             </div>
 
