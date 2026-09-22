@@ -827,8 +827,15 @@ span.card-mark b:nth-child(2) {
   background-color: var(--color-graphite);
   color: var(--color-activation);
 }
-/* nothing here is clickable, so nothing here is filled */
-.tile:not(.tile-interactive) .icon-plate {
+/* nothing here is clickable, so nothing here is filled.
+
+   Not on an activated tile, though. This selector is .tile plus a :not(),
+   which outranks the .tile-activate .icon-plate above it, so a static
+   activated tile was getting the outlined plate instead of the dark square:
+   a mid-blue rule and an ink-muted icon on the coral, which measures 3.48:1
+   and is not the treatment this file spends four comments specifying. The
+   second :not() puts the activated tile back under its own rule. */
+.tile:not(.tile-interactive):not(.tile-activate) .icon-plate {
   background-color: transparent;
   border-color: var(--color-line-strong);
   color: var(--color-ink-muted);
